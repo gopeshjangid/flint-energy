@@ -30,7 +30,7 @@ class MyDocument extends Document {
          <GA/>
        
           </Head>
-        <body>z
+        <body>
           <Main />
           <NextScript />
         </body>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {DropdownMenu} from  "../semantic-ui/index";
+import { DropdownMenu } from "../semantic-ui/index";
 export class Navigation extends Component {
   render() {
     return (
@@ -19,7 +19,7 @@ export class Navigation extends Component {
               <span className="icon-bar"></span>{" "}
             </button>
             <a className="navbar-brand page-scroll" href="#page-top">
-              WebDocTool
+              Flint Energy
             </a>{" "}
           </div>
 
@@ -29,23 +29,18 @@ export class Navigation extends Component {
           >
             <ul className="nav navbar-nav navbar-right">
               <li>
-              <DropdownMenu />
-              </li>
-              <li>
-                <a href="#services" className="page-scroll">
-                  Services
-                </a>
-              </li>
-              <li>
                 <a href="#aboutme" className="page-scroll">
                   About me
                 </a>
               </li>
-              
-             
               <li>
                 <a href="#contact" className="page-scroll">
                   Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="page-scroll">
+                  Login
                 </a>
               </li>
             </ul>

@@ -27,15 +27,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <Navigation />
-        <Portfolio data={JsonData.Portfolio} />
-        <Features data={this.state.landingPageData.Features} />
-        <About data={this.state.landingPageData.About} />
-        <Services data={this.state.landingPageData.Services} />
-        {/* <Testimonials data={this.state.landingPageData.Testimonials} /> */}
-        {/* <Team data={this.state.landingPageData.Team} /> */}
-        
-        <Contact data={this.state.landingPageData.Contact} />
+        <Navigation />     
       </div>
     )
   }

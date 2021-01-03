@@ -1,29 +1,57 @@
 {
     "Header": {
-
         "title": "We are a Landing Page",
         "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sed commodo nibh ante facilisis bibendum."
-
     },
-    "Portfolio" : {
-     "name" : "Gopesh Kumar Jangid",   
-     "title" : "I am working as a MERN stack developer and having 8 years experience.",
-     "skills" :{
-      "lang" : "Javascript | React | Redux | NextJs | NodeJs | SocketIo | Immutable Js | Typescript",
-      "db"  : " Mysql | MongoDb | Postgresql",
-      "cloud" : " AWS -  S3| Codepipeline | ECS | Farget | Deploy | Load Balancing | Amplify | AutoScaling | Code commit | ",
-      "frontEnd" :  " HTML 5 | CSS3" ,
-      "projects" : [
-          {"name": "Club Mahindra", "type": "Ecommerce" ,"url" : "NA" ,"detail" : "This was a resort preactivity booking internal module, developed in react/redux libraries."} ,
-          {"type":"Health" ,"url" : "www.webpt.com" ,"name" : "Webpt- BMS Practice Solution" ,"detail" : ""} ,
-          {"type":"Health" ,"url" : "www.centivo.com" ,"name" : "Centivo" ,"detail" : ""} ,
-          {"type": "Document Management" ,"url" : "www.klearnow.com" ,"name" : "Klearnow A custom clearance system" ,"detail" : ""} ,
-          {"type":"Social Media" ,"url" : "www.taavel.com" ,"name" : "Taavel - Social media App", "detail" : ""}
+    "Portfolio": {
+        "name": "Gopesh Kumar Jangid",
+        "title": "I am working as a MERN stack developer and having 8 years experience.",
+        "skills": {
+            "lang": "Javascript | React | Redux | NextJs | NodeJs | SocketIo | Immutable Js | Typescript",
+            "db": " Mysql | MongoDb | Postgresql",
+            "cloud": " AWS -  S3| Codepipeline | ECS | Farget | Deploy | Load Balancing | Amplify | AutoScaling | Code commit | ",
+            "frontEnd": " HTML 5 | CSS3",
+            "projects": [
+                {
+                    "name": "Club Mahindra",
+                    "type": "Ecommerce",
+                    "url": "NA",
+                    "detail": "This was a resort preactivity booking internal module, developed in react/redux libraries."
+                },
+                {
+                    "type": "Health",
+                    "url": "www.webpt.com",
+                    "name": "Webpt- BMS Practice Solution",
+                    "detail": ""
+                },
+                {
+                    "type": "Health",
+                    "url": "www.centivo.com",
+                    "name": "Centivo",
+                    "detail": ""
+                },
+                {
+                    "type": "Document Management",
+                    "url": "www.klearnow.com",
+                    "name": "Klearnow A custom clearance system",
+                    "detail": ""
+                },
+                {
+                    "type": "Social Media",
+                    "url": "www.taavel.com",
+                    "name": "Taavel - Social media App",
+                    "detail": ""
+                }
+            ]
+        },
+        "linkedinUrl": "https://www.linkedin.com/in/gopesh-jangid-52374756/",
+        "githubUrl": "www.github.com/gopeshjangid",
+        "projectUrls": [
+            "www.webpt.com",
+            "www.klearnow.com",
+            "www.centivo.com",
+            "www.taavel.com"
         ]
-     },
-     "linkedinUrl" : "https://www.linkedin.com/in/gopesh-jangid-52374756/",
-     "githubUrl" : "www.github.com/gopeshjangid",
-     "projectUrls" :["www.webpt.com" ,"www.klearnow.com" ,"www.centivo.com" ,"www.taavel.com"] 
     },
     "About": {
         "paragraph": "WebDocTool is a free plateform where you can use various tools. WebDocTool has weather, geolocation, image processing tools like convertor, editor. We provide the all the tools free. You don't have to get registered anywhere, just use it.",
@@ -38,7 +66,8 @@
             "Can save information for future use."
         ]
     },
-    "Services": [{
+    "Services": [
+        {
             "icon": "fas fa-image",
             "name": "Image Convertor",
             "text": "Convert image from jpg/jpeg/png to other image type. You can resize and optimize images."
@@ -73,10 +102,9 @@
             "name": "Consectetur adipiscing",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
         }
-
-
     ],
-    "Testimonials": [{
+    "Testimonials": [
+        {
             "img": "/images/file-edit.jpg",
             "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
             "name": "John Doe"
@@ -107,7 +135,8 @@
             "name": "Johnathan Doe"
         }
     ],
-    "Team": [{
+    "Team": [
+        {
             "img": "img/team/01.jpg",
             "name": "John Doe",
             "job": "Director"
@@ -116,7 +145,8 @@
             "img": "img/team/02.jpg",
             "name": "Mike Doe",
             "job": "Senior Designer"
-        }, {
+        },
+        {
             "img": "img/team/03.jpg",
             "name": "Jane Doe",
             "job": "Senior Designer"
@@ -135,7 +165,8 @@
         "twitter": "twitter.com/webdoctool",
         "youtube": "youtube.com/webdoctool"
     },
-    "Features": [{
+    "Features": [
+        {
             "icon": "fa fa-comments-o",
             "title": "Manage Invoice & Bills",
             "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
@@ -155,5 +186,86 @@
             "title": "Data Service Testing",
             "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
         }
-    ]
+    ],
+    "form1": {
+        "radiosbuttons": [
+            {
+                "title": "System Size :",
+                "radioGroup": [
+                    {
+                        "value": "X.X.X",
+                        "label": "X.X.X"
+                    },
+                    {
+                        "value": "X.X",
+                        "label": "X.X"
+                    },
+                    {
+                        "value": "X",
+                        "label": "X"
+                    }
+                ]
+            },
+            {
+                "title": "Structure :",
+                "radioGroup": [
+                    {
+                        "value": "Standard",
+                        "label": "Standard"
+                    },
+                    {
+                        "value": "Elevated",
+                        "label": "Elevated"
+                    },
+                    {
+                        "value": "Customized",
+                        "label": "Customized"
+                    }
+                ]
+            },
+            {
+                "title": "Solar Panel Module:",
+                "radioGroup": [
+                    {
+                        "value": "A.C",
+                        "label": "A.C"
+                    },
+                    {
+                        "value": "D.C",
+                        "label": "D.C"
+                    }
+                ]
+            },
+            {
+                "title": "Extended Warranty :",
+                "radioGroup": [
+                    {
+                        "value": "1 year",
+                        "label": "1 year"
+                    },
+                    {
+                        "value": "3 year",
+                        "label": "3 year"
+                    },
+                    {
+                        "value": "5 year",
+                        "label": "5 year"
+                    }
+                ]
+            },
+            {
+                "title": "Extended Warranty :",
+                "radioGroup": [
+                    {
+                        "value": "Yes",
+                        "label": "No"
+                    },
+                    {
+                        "value": "Yes",
+                        "label": "No"
+                    }
+                ]
+            }
+        ]
+    }
 }

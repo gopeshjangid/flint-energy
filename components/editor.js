@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SunEditor from 'suneditor-react';
+//import SunEditor from 'suneditor-react';
 
 class Editor extends React.PureComponent {
 

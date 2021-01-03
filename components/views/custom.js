@@ -24,11 +24,11 @@ import  {PageSkeleton} from  "../skeleton";
 import Divider from '@material-ui/core/Divider';
 import Whatshot from  "@material-ui/icons/Whatshot";
 import { Typography } from '@material-ui/core';
-import {
+/* import {
   FacebookIcon,
   InstapaperIcon,
   TwitterIcon
-} from "react-share";
+} from "react-share"; */
 const options = process.env.category;
 const user = process.browser ? JSON.parse(localStorage.getItem("user")) : '' ;
 const useStyles = makeStyles((theme) => ({
@@ -338,7 +338,7 @@ export const FollowUs = React.memo(function followUs(props){
  
      return  (<Paper className={classes.shareBox}>
                 Follow us on  <br/>
-                <div className={classes.social}><FacebookIcon size="30px" round={true} /> <TwitterIcon size="30px" round={true}/> <InstapaperIcon size="30px" round={true} /></div>
+                {/* <div className={classes.social}><FacebookIcon size="30px" round={true} /> <TwitterIcon size="30px" round={true}/> <InstapaperIcon size="30px" round={true} /></div> */}
              </Paper>);
 
 });

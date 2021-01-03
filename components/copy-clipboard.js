@@ -1,5 +1,5 @@
 import React from 'react';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+//import {CopyToClipboard} from 'react-copy-to-clipboard';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -25,10 +25,10 @@ export default class Copy extends React.Component {
   render() {
     return (
       <div>
-        <CopyToClipboard text={this.props.value}
+      {/*   <CopyToClipboard text={this.props.value}
           onCopy={() => this.setState({copied: true ,show : true})}>
           <FileCopyOutlinedIcon />
-        </CopyToClipboard>
+        </CopyToClipboard> */}
         <Snackbar open={this.state.show} autoHideDuration={6000} onClose={this.handleClose}>
         <Alert onClose={this.handleClose} severity="info">
           Copied to clipboard!

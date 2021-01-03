@@ -4,7 +4,7 @@ import Dynamic  from  "next/dynamic";
 import axios from  "axios";
 import Typography from '@material-ui/core/Typography';
 const RelatedPage =  Dynamic(()=>import("./page/related_post"),{loading :()=><p>Loading...</p> }) ;
-import {
+/* import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
@@ -13,7 +13,7 @@ import {
   WhatsappIcon,
   LinkedinIcon,
   TwitterIcon
-} from "react-share";
+} from "react-share"; */
 let url = process.env.host_url;
 
 import { withStyles } from "@material-ui/core/styles";
@@ -95,7 +95,7 @@ getContent = (data)=>{
                       <Typography variant="h6" component="h1" >
                       {data ? data.title : ""}
               </Typography>
-                      <div  className={this.props.classes.socialBox}>
+                    {/*   <div  className={this.props.classes.socialBox}>
                         <span className={this.props.classes.views}>Views: { this.props.data.views_count}</span>
                         <div><h5>Share with:</h5></div>
                         <FacebookShareButton
@@ -127,7 +127,7 @@ getContent = (data)=>{
                             >
                             <TwitterIcon size={42} round />
                        </TwitterShareButton>
-                       </div>  
+                       </div>  */} 
                    </div>
                   <div className="mt-5">
                     {this.getImages(data.images ,data.title)}<br/>
