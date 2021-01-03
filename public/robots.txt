@@ -1,0 +1,9 @@
+Sitemap: https://thepostviews.com/sitemap.xml
+User-agent: *
+Allow: /*
+
+Disallow: /api/*
+Disallow: /create-post/
+Disallow: /*.jpg
+Disallow: /*.png
+Disallow: /*.jpg

@@ -1,0 +1,159 @@
+{
+    "Header": {
+
+        "title": "We are a Landing Page",
+        "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sed commodo nibh ante facilisis bibendum."
+
+    },
+    "Portfolio" : {
+     "name" : "Gopesh Kumar Jangid",   
+     "title" : "I am working as a MERN stack developer and having 8 years experience.",
+     "skills" :{
+      "lang" : "Javascript | React | Redux | NextJs | NodeJs | SocketIo | Immutable Js | Typescript",
+      "db"  : " Mysql | MongoDb | Postgresql",
+      "cloud" : " AWS -  S3| Codepipeline | ECS | Farget | Deploy | Load Balancing | Amplify | AutoScaling | Code commit | ",
+      "frontEnd" :  " HTML 5 | CSS3" ,
+      "projects" : [
+          {"name": "Club Mahindra", "type": "Ecommerce" ,"url" : "NA" ,"detail" : "This was a resort preactivity booking internal module, developed in react/redux libraries."} ,
+          {"type":"Health" ,"url" : "www.webpt.com" ,"name" : "Webpt- BMS Practice Solution" ,"detail" : ""} ,
+          {"type":"Health" ,"url" : "www.centivo.com" ,"name" : "Centivo" ,"detail" : ""} ,
+          {"type": "Document Management" ,"url" : "www.klearnow.com" ,"name" : "Klearnow A custom clearance system" ,"detail" : ""} ,
+          {"type":"Social Media" ,"url" : "www.taavel.com" ,"name" : "Taavel - Social media App", "detail" : ""}
+        ]
+     },
+     "linkedinUrl" : "https://www.linkedin.com/in/gopesh-jangid-52374756/",
+     "githubUrl" : "www.github.com/gopeshjangid",
+     "projectUrls" :["www.webpt.com" ,"www.klearnow.com" ,"www.centivo.com" ,"www.taavel.com"] 
+    },
+    "About": {
+        "paragraph": "WebDocTool is a free plateform where you can use various tools. WebDocTool has weather, geolocation, image processing tools like convertor, editor. We provide the all the tools free. You don't have to get registered anywhere, just use it.",
+        "Why": [
+            "It is free",
+            "Simple and Easy to use",
+            "Not required additional knowledge to use the tools"
+        ],
+        "Why2": [
+            "Tools have various features",
+            "All features are enabled and ready for use.",
+            "Can save information for future use."
+        ]
+    },
+    "Services": [{
+            "icon": "fas fa-image",
+            "name": "Image Convertor",
+            "text": "Convert image from jpg/jpeg/png to other image type. You can resize and optimize images."
+        },
+        {
+            "icon": "fa fa-file",
+            "name": "File Editor",
+            "text": "You can edit files, text in supported editor."
+        },
+        {
+            "icon": "fa fa-map",
+            "name": "Find Geohraphic information between places",
+            "text": "Find distance, travelling time, all geographic information between places."
+        },
+        {
+            "icon": "fa fa-map",
+            "name": "Software Testing",
+            "text": "Test softwares, api load testing with ananlytics data."
+        },
+        {
+            "icon": "fa fa-language",
+            "name": "Consectetur adipiscing",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+        },
+        {
+            "icon": "fa fa-plane",
+            "name": "Lorem ipsum dolor",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+        },
+        {
+            "icon": "fa fa-pie-chart",
+            "name": "Consectetur adipiscing",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+        }
+
+
+    ],
+    "Testimonials": [{
+            "img": "/images/file-edit.jpg",
+            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+            "name": "John Doe"
+        },
+        {
+            "img": "img/testimonials/02.jpg",
+            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+            "name": "Johnathan Doe"
+        },
+        {
+            "img": "img/testimonials/03.jpg",
+            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+            "name": "John Doe"
+        },
+        {
+            "img": "img/testimonials/04.jpg",
+            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+            "name": "Johnathan Doe"
+        },
+        {
+            "img": "img/testimonials/05.jpg",
+            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+            "name": "John Doe"
+        },
+        {
+            "img": "img/testimonials/06.jpg",
+            "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+            "name": "Johnathan Doe"
+        }
+    ],
+    "Team": [{
+            "img": "img/team/01.jpg",
+            "name": "John Doe",
+            "job": "Director"
+        },
+        {
+            "img": "img/team/02.jpg",
+            "name": "Mike Doe",
+            "job": "Senior Designer"
+        }, {
+            "img": "img/team/03.jpg",
+            "name": "Jane Doe",
+            "job": "Senior Designer"
+        },
+        {
+            "img": "img/team/04.jpg",
+            "name": "Karen Doe",
+            "job": "Project Manager"
+        }
+    ],
+    "Contact": {
+        "address": "Noida 201301",
+        "phone": "+918766296805",
+        "email": "webdoctool@gmail.com",
+        "facebook": "facebook.com/webdoctool",
+        "twitter": "twitter.com/webdoctool",
+        "youtube": "youtube.com/webdoctool"
+    },
+    "Features": [{
+            "icon": "fa fa-comments-o",
+            "title": "Manage Invoice & Bills",
+            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+        },
+        {
+            "icon": "fa fa-bullhorn",
+            "title": "Geographic Tools ",
+            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+        },
+        {
+            "icon": "fa fa-group",
+            "title": "Web Free Tools",
+            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+        },
+        {
+            "icon": "fa fa-magic",
+            "title": "Data Service Testing",
+            "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+        }
+    ]
+}
