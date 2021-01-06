@@ -7,7 +7,6 @@ import {withRouter} from "next/router";
 import { makeStyles ,useTheme  } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import {getMeta} from  "../pages/api/utils";
 import styles from "../assets/homeHeaderStyle.js";
 import Hidden from '@material-ui/core/Hidden';
 import ListIcon from '@material-ui/icons/List';
@@ -98,7 +97,7 @@ const Header =(props)=>{
     setOpen(false);
   };
   let router  = useRouter();
-  let metaTags = getMeta({image : '' ,title : props.title});
+  let metaTags = {};
   const meta = {...metaTags};
   const selectOption =(page)=>{
     router.push(page);
