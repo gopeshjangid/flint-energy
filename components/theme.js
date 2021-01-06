@@ -5,46 +5,56 @@ import { red } from '@material-ui/core/colors';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#fff',
+      main: '#18897f',
     },
     secondary: {
-      main: '#355a4b',
+      main: '#18897f',
     },
     error: {
       main: red.A400,
     },
+    border : '#c1d7d5',
     background: {
       default: '#fff',
     },
     color : '#355a4b',
-    link : {
-      color : '#000',
-      textDecoration : 'none',
-      fontWeight : '400',
-      fontSize :'14px',
-      fontFamily: "Roboto,Helvetica,Arial,sans-serif",
-      textAlign : 'center',
-      '&:hover' : {
-         borderBottom : '3px solid #4d8191',
-         padding :'5px',
-        }
+  },
+  typography: {
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontSize: 14,
+    display4: {
+      fontSize: 14,
     },
-    linkText : {
-      color : '#355a4b',
-      textDecoration : 'none',
-      fontFamily: "Roboto,Helvetica,Arial,sans-serif",
-      fontWeight : '400',
-      fontSize :'14px',
+    display3: {
+      fontSize: 14,
     },
-    linkSelect : {
-      color : '#226c82',
-      textDecoration : 'none',
-      borderBottom : '3px solid #226c82',
-      fontFamily: "Roboto,Helvetica,Arial,sans-serif",
-      padding :'5px',
-      whiteSpace: 'nowrap',
-      fontWeight : '600',
-    }
+    display2: {
+      fontSize: 14,
+    },
+    display1: {
+      fontSize: 14,
+    },
+    headline: {
+      fontSize: 13,
+    },
+    title: {
+      fontSize: 13,
+    },
+    subheading: {
+      fontSize: 13,
+    },
+    body2: {
+      fontSize: 13,
+    },
+    body1: {
+      fontSize: 13,
+    },
+    caption: {
+      fontSize: 14,
+    },
+    button: {
+      fontSize: 14,
+    },
   },
 });
 
