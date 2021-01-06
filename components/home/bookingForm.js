@@ -92,7 +92,9 @@ console.log(router)
             <Grid xs={12} item  sm={12} md={12}  >
               <TextField id="outlined-search"
               className={classes.search}
-               label="Amount" size="medium" type="search" variant="outlined" />
+              variant="outlined"
+               fullWidth
+               label="Amount"  type="number" variant="outlined" />
             </Grid>
             <Grid item xs={12} sm={12} md={12}  >
                     <FormControl variant="outlined" className={classes.formControl}>

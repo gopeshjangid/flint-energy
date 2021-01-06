@@ -1,19 +1,34 @@
 import React, { Component } from "react";
 import Footer from "../common/footer";
-export class Contact extends Component {
-  render() {
+import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+const useStyles = makeStyles((theme) => ({
+  divider: {
+    width : '100%',
+    marginBottom : '20px',
+    marginTop : '20px'
+  },
+  container : {
+    marginTop : '30px',
+    marginBottom : '30px',
+  }
+
+}));
+function Contact (props) {
+  const classes = useStyles();
     return (
       <div>
         <div id="contact">
           <div className="container">
-            <div className="col-md-8">
+            <div className="col-md-12">
               <div className="row">
                 <div className="section-title">
-                  <h2>Get In Touch</h2>
-                  <p>
+                   <Typography  component="h2" >Get In Touch </Typography>
+                  <Typography component="p">
                     Please fill out the form below to send us an email and we
                     will get back to you as soon as possible.
-                  </p>
+                  </Typography>
                 </div>
                 <form name="sentMessage" id="contactForm" noValidate>
                   <div className="row">
@@ -26,7 +41,7 @@ export class Contact extends Component {
                           placeholder="Name"
                           required="required"
                         />
-                        <p className="help-block text-danger"></p>
+                        <Typography ></Typography>
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -38,7 +53,7 @@ export class Contact extends Component {
                           placeholder="Email"
                           required="required"
                         />
-                        <p className="help-block text-danger"></p>
+                        <Typography ></Typography>
                       </div>
                     </div>
                   </div>
@@ -51,7 +66,7 @@ export class Contact extends Component {
                       placeholder="Message"
                       required
                     ></textarea>
-                    <p className="help-block text-danger"></p>
+                    <Typography ></Typography>
                   </div>
                   <div id="success"></div>
                   <button type="submit" className="btn btn-custom btn-lg">
@@ -62,29 +77,29 @@ export class Contact extends Component {
             </div>
             <div className="col-md-3 col-md-offset-1 contact-info">
               <div className="contact-item">
-                <h3>Contact Info</h3>
-                <p>
+                 <Typography component="h3">Contact Info</Typography>
+                <Typography component="p">
                   <span>
                     <i className="fa fa-map-marker"></i> Address
                   </span>
-                  {this.props.data ? this.props.data.address : "loading"}
-                </p>
+                  {props.data ? props.data.address : "loading"}
+                </Typography>
               </div>
               <div className="contact-item">
-                <p>
+                <Typography component="p">
                   <span>
                     <i className="fa fa-phone"></i> Phone
                   </span>{" "}
-                  {this.props.data ? this.props.data.phone : "loading"}
-                </p>
+                  {props.data ? props.data.phone : "loading"}
+                </Typography>
               </div>
               <div className="contact-item">
-                <p>
+                <Typography component="p">
                   <span>
                     <i className="fa fa-envelope-o"></i> Email
                   </span>{" "}
-                  {this.props.data ? this.props.data.email : "loading"}
-                </p>
+                  {props.data ? props.data.email : "loading"}
+                </Typography>
               </div>
             </div>
             <div className="col-md-12">
@@ -93,18 +108,18 @@ export class Contact extends Component {
                   <ul>
                     <li>
                       <a
-                        href={this.props.data ? this.props.data.facebook : "/"}
+                        href={props.data ? props.data.facebook : "/"}
                       >
                         <i className="fa fa-facebook"></i>
                       </a>
                     </li>
                     <li>
-                      <a href={this.props.data ? this.props.data.twitter : "/"}>
+                      <a href={props.data ? props.data.twitter : "/"}>
                         <i className="fa fa-twitter"></i>
                       </a>
                     </li>
                     <li>
-                      <a href={this.props.data ? this.props.data.youtube : "/"}>
+                      <a href={props.data ? props.data.youtube : "/"}>
                         <i className="fa fa-youtube"></i>
                       </a>
                     </li>
@@ -115,21 +130,12 @@ export class Contact extends Component {
           </div>
         </div>
         <div id="footer">
-          <div className="container text-center">
-            <p>
-              &copy; 2020{' '} 
-              <a href="https://www.webdoctool.com" rel="nofollow">
-              WebDocTool
-              </a>
-             
-            </p>
-          </div>
+          
           <Footer/>
           
         </div>
       </div>
     );
-  }
 }
 
 export default Contact;

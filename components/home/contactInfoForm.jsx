@@ -1,5 +1,5 @@
 import React  from 'react';
-
+import Image from  "next/image";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,8 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/VerifiedUser';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-
+import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -33,6 +32,27 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  divider : {
+    width : '100%',
+    marginBottom : '20px',
+    marginTop : '20px'
+  },
+  container : {
+    marginBottom : '20px',
+  },
+  header : {
+    marginTop : '30px',
+    marginBottom : '30px',
+  },
+  box : {
+    border : '1px solid '+theme.palette.border,
+    minHeight : '170px',
+    padding : '20px',
+    display : 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    borderRadius: '23px'
+  },
 }));
 
 export default function SignUp() {
@@ -41,15 +61,25 @@ export default function SignUp() {
 
   
   return (
-    <div id="verifcation">
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <div id="verification">
+    <Container className={classes.container}  maxWidth="md">
       <div className={classes.paper}>
+        <div className={classes.header}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Verification
+        </Typography>
+        </div>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+        <Image src="/sasksolar.gif" height={300} width={400} />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Box className={classes.box}>
+          <Typography align="center" component="h3" variant="h4">
+            Design your System Now !
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -116,9 +146,13 @@ export default function SignUp() {
           </Button>
          
         </form>
+        </Box>
+       </Grid>
+       </Grid>
       </div>
      
     </Container>
+    <Divider className={classes.divider}/>
     </div>
   );
 }
