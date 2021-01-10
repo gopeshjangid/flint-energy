@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -11,6 +11,7 @@ import CustomDesign from './customizeDesign';
 import InfoDetails from  "./infoDetails";
 import SystemFinance from  "./systemFinance";
 import SystemSummary from  "./systemSummary";
+import {postSystemDetails} from "../service/services";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -49,11 +50,42 @@ function getStepContent(step) {
       return '';
   }
 }
+
+const checkObject = (obj) => {
+  for(let key in obj){
+    if(!obj[key]) return false;
+  }
+  return true;
+}
+
 export default function HorizontalLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
+  
+  const [systemDesign, setSystemDesign] = useState({
+    systemSize: '',
+    structure: '',
+    solar: '',
+    avgbill: ''
+  });
+  const [personalDetails, setPersonalDetails] = useState({
+    firstName : '',
+    lastName : '',
+    email : '',
+    address : '',
+    pincode : '',
+    electricityProvider : '',
+    state: '',
+    district: ''
+  });
+  const [financeDetails, setFinanceDetails] = useState({
+    payment: '',
+    panNo: '',
+    dob: ''
+  });
+
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -69,6 +101,25 @@ export default function HorizontalLinearStepper() {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+
+    // API Inovking
+    const apiHandler = async () => {
+      try{
+        if(activeStep === 0){
+          const res = await postSystemDetails(activeStep, systemDesign)
+        }else if(activeStep === 1){
+          const res = await postSystemDetails(activeStep, personalDetails)
+        }else if(activeStep === 2){
+          const res = await postSystemDetails(activeStep, financeDetails)
+        }else{
+          // const res = await
+        }
+      }catch (err) {
+
+      }
+    }
+
+    apiHandler()
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -126,7 +177,12 @@ export default function HorizontalLinearStepper() {
         ) : (
           <Grid container spacing={4} className={classes.container} direction="column">
             <Grid xs={12} item  sm={12} md={12} className={classes.stepContent} >
-                 <Box className={classes.box} m={1}>{getStepContent(activeStep)}</Box>
+                 <Box className={classes.box} m={1}>
+                   {activeStep === 0 && <CustomDesign handler={(obj) => setSystemDesign(obj)} />}
+                   {activeStep === 1 && <InfoDetails handler={(obj) => setPersonalDetails(obj)} />}
+                   {activeStep === 2 && <SystemFinance handler={(obj) => setFinanceDetails(obj)} />}
+                   {activeStep === 3 && <SystemSummary />}
+                 </Box>
               </Grid>
               <Grid xs={12} item  sm={12} md={12} className={classes.stepBtnContainer} >
               <div>
@@ -136,6 +192,11 @@ export default function HorizontalLinearStepper() {
                   
                    {activeStep < steps.length-1  &&
                     <Button
+                        disabled={
+                          !((activeStep === 0 && checkObject(systemDesign) ) ||
+                          (activeStep === 1 && checkObject(personalDetails)) ||
+                          (activeStep === 2 && checkObject(financeDetails)))
+                        }
                       variant="contained"
                       color="primary"
                       onClick={handleNext}

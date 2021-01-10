@@ -1,11 +1,42 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import _ from "lodash";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 
-export default function AddressForm() {
+export default function AddressForm(props) {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
+  const [state, setState] = useState('')
+  const [district, setDistrict] = useState('')
+  const [pincode, setPincode] = useState('')
+  const [electricityProvider, setElectricityProvider] = useState('');
+
+  const providersList = ["UGVCL", "PGVCL", "MGVCL", "DGVCL", "Torrent Power Ahmedabad", "Torrent Power Surat"];
+  const districtList = ["dummy_district1", "dummy_district2"];
+  useEffect(() => {
+    const obj = {
+      firstName,
+      lastName,
+      email,
+      address,
+      pincode,
+      electricityProvider,
+      state,
+      district
+    }
+    props.handler(obj);
+  }, [firstName, lastName, email, address, pincode, electricityProvider, state, district]);
+
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -19,7 +50,11 @@ export default function AddressForm() {
             name="firstName"
             label="First name"
             variant="outlined"
+            type="text"
+            inputProps={{maxLength: 50}}
             fullWidth
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             autoComplete="given-name"
           />
         </Grid>
@@ -30,8 +65,26 @@ export default function AddressForm() {
             name="lastName"
             label="Last name"
             variant="outlined"
+            type="text"
+            inputProps={{maxLength: 50}}
             fullWidth
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             autoComplete="family-name"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+              id="address"
+              name="address"
+              label="Address"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={2}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              autoComplete="shipping address-line2"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -43,16 +96,8 @@ export default function AddressForm() {
             type="email"
             label="Email"
             fullWidth
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address"
-            variant="outlined"
-            fullWidth
-            autoComplete="shipping address-line2"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -63,16 +108,66 @@ export default function AddressForm() {
             type="tel"
             name="pincode"
             label="PinCode"
+            inputProps={{maxLength: 6}}
             fullWidth
+            value={pincode}
+            onChange={(e) => setPincode(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField variant="outlined" id="provider" name="provider" label="Electricity Provider" fullWidth />
+          <FormControl required variant="outlined" fullWidth={true}>
+            <InputLabel htmlFor="provider">Electricity Provider</InputLabel>
+            <Select
+                variant="outlined"
+                id="provider"
+                name="provider"
+                label="Electricity Provider"
+                fullWidth
+                value={electricityProvider}
+                onChange={(e) => setElectricityProvider(e.target.value)}
+            >
+              {_.map(providersList, (cat) =>
+                  <MenuItem value={cat}>{cat}</MenuItem>)}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl required variant="outlined" fullWidth={true}>
+            <InputLabel htmlFor="state">State</InputLabel>
+            <Select
+                variant="outlined"
+                id="state"
+                name="state"
+                label="State"
+                fullWidth
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+            >
+              <MenuItem value={"Gujarat"}>{"Gujarat"}</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl required variant="outlined" fullWidth={true}>
+            <InputLabel htmlFor="district">District</InputLabel>
+            <Select
+                variant="outlined"
+                id="district"
+                name="district"
+                label="District"
+                fullWidth
+                value={district}
+                onChange={(e) => setDistrict(e.target.value)}
+            >
+              {_.map(districtList, (cat) =>
+                  <MenuItem value={cat}>{cat}</MenuItem>)}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Enter your personal details"
+            label="I have read Flint Energy Privacy Policy"
           />
         </Grid>
       </Grid>
