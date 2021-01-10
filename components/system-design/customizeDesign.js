@@ -1,21 +1,28 @@
-import React ,{useState , useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import InputLabel from '@material-ui/core/InputLabel';
-import Image from  "next/image";
-import { Typography ,MenuItem } from '@material-ui/core';
-import _ from  "lodash";
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormLabel from "@material-ui/core/FormLabel";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Image from "next/image";
+import { Typography } from "@material-ui/core";
+import _ from "lodash";
+
+import { getCategories } from "../service/services";
+
 const useStyles = makeStyles((theme) => ({
   root: {
-  },
+    [theme.breakpoints.up('sm')]: {}
+    },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
