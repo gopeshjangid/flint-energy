@@ -2,7 +2,6 @@ import React from 'react';
 import Dynamic from  "next/dynamic";
 import Head from  "next/head";
 import {withRouter} from  "next/router";
-const Editor = Dynamic(()=>import('../components/editor'),{loading : ()=><p>Loading...</p>,ssr:false});
 const Layout = Dynamic(()=>import('../components/layout'),{loading : ()=><p>Loading...</p>,ssr:true});
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';

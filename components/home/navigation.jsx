@@ -3,14 +3,12 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Image from  "next/image";
+import {useRouter}  from "next/router";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -83,13 +81,17 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const  router = useRouter();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const redirect = (page)=>{
+    router.push("/"+page)
+  }
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -132,13 +134,13 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Button color="primary">About Us</Button>
+        <Button color="primary" onClick={()=>redirect("#aboutus")}>About Us</Button>
       </MenuItem>
       <MenuItem>
-        <Button color="primary">Contact Us</Button>
+        <Button color="primary" onClick={()=>redirect("#contactus")}>Contact Us</Button>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-         <Button color="primary">Login</Button>
+         <Button color="primary" onClick={()=>redirect("#login")}>Login</Button>
       </MenuItem>
     </Menu>
   );
@@ -158,8 +160,8 @@ export default function PrimarySearchAppBar() {
         
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-              <Button color="inherit">About Us</Button>
-              <Button color="inherit">Contact Us</Button>
+              <Button color="inherit" onClick={()=>redirect("#aboutus")}>About Us</Button>
+              <Button color="inherit" onClick={()=>redirect("#contactus")}>Contact Us</Button>
               <Button color="inherit">Login</Button>
           </div>
           <div className={classes.sectionMobile}>

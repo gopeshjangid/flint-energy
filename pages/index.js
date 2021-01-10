@@ -9,20 +9,21 @@ import LandingPage from "../components/home/LandingPage";
 import Layout from "../components/layout";
 import BookingForm from "../components/home/bookingForm";
 import ContactInfoForm from "../components/home/contactInfoForm";
-
+import Footer from "../components/common/footer";
 const HomePage = () => {
   return (
     <>
       <link rel="stylesheet" href="/static/css/bootstrap.css" />
-      <link rel="stylesheet" href="/static/css/style.css" />
       <Header />
       <Layout>
         <BookingForm />
         <ContactInfoForm />
-      </Layout>
-      <Header />
+    
+     
       <About data={JsonData.About} />
       <Contact data={JsonData.Contact} />
+      <Footer />
+      </Layout>
     </>
   );
 };

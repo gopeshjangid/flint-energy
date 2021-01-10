@@ -1,12 +1,10 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/LocationOnOutlined';
-import DirectionsIcon from '@material-ui/icons/Directions';
+import Modal from "./Forms";
 import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
 import FormHelperText from '@material-ui/core/FormHelperText';
 const useStyles = makeStyles((theme) => ({
@@ -28,14 +26,25 @@ const useStyles = makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
+  helper : {
+    paddingLeft: '20px',
+    paddingTop: '4px'
+  }
 }));
 
 export default function CustomizedInputBase() {
   const classes = useStyles();
-
+  const [open , setOpen]  = useState (false);
+  const [city , setCity]  = useState ("Select City");
+  const selectCity = (city)=>{
+    setCity(city)
+  }
+  const modalHandler = (stat) =>{
+      setOpen(stat)
+  }
   return (
     <><Paper component="form" elevation={0} className={classes.root}>
-     
+      <Modal city={city} modalHandler={modalHandler} open={open} selectCity={selectCity} />
       <InputBase
         className={classes.input}
         autoFocus
@@ -46,11 +55,11 @@ export default function CustomizedInputBase() {
       />
       
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton color="primary" className={classes.iconButton} aria-label="directions"> Jaipur &nbsp;
+      <IconButton onClick={()=>setOpen(!open)} color="primary" className={classes.iconButton} aria-label="directions"> {city} &nbsp;
         <ArrowDropDownOutlinedIcon />
       </IconButton>
     </Paper>
-    <FormHelperText margin="">Enter your Bill Amount to Estimate Energy Saving</FormHelperText>
+    <FormHelperText className={classes.helper}>Enter your Bill Amount to Estimate Energy Saving</FormHelperText>
     </>
   );
 }

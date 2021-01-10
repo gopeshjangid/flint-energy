@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../components/home_header'
-import Footer from '../components/views/partials/footer';
+import Header from '../components/home/navigation'
+import Footer from '../components/common/footer';
 import Layout from  "../components/layout";
 class Privacy extends React.Component {
 
@@ -8,7 +8,7 @@ class Privacy extends React.Component {
     return (
         <>
         <Header  />
-        <Layout fullWidth={true}>
+        <Layout >
         <h2 class="mt-5">Privacy Policy</h2>
     <div class="container mt-4" >
         All Flintech® products are owned and operated by Flint Energy (“Flintech”) and will be referred to as "we", "our" and "us" in this Privacy Policy. By using Flintech® products which

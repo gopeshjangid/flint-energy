@@ -1,152 +1,134 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
+import React ,{useEffect} from 'react';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { Grid } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Form1 from './FirstForm'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputBase from '@material-ui/core/InputBase';
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  button: {
-    marginRight: theme.spacing(1),
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+  margin: {
+    margin: theme.spacing(1),
   },
 }));
-
-function getSteps() {
-  return ['Customize Solar System', 'Personal Details', 'Payment Mode', 'Bank System'];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Form1 />
-    case 1:
-      return 'Personal Details';
-    case 2:
-      return 'Payment Mode';
-    case 3:
-      return 'Bank System';
-    default:
-      return 'Unknown step';
-  }
-}
-
-export default function HorizontalLinearStepper() {
+export default function AlertDialog(props) {
+  const [open, setOpen] = React.useState(false);
+  const [city, setCity] = React.useState(props.city || "");
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-  const steps = getSteps();
 
-  const isStepOptional = (step) => {
-    return step === 1;
+  const onCityChange = (e) => {
+   setCity(e.target.value)
   };
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
+  const [age, setAge] = React.useState('');
+  const handleChange = (event) => {
+    setAge(event.target.value);
   };
 
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
+  useEffect(()=>{
+    setOpen(props.open);
+  },[props.open])
+  
+  const selectCity = () =>{ 
+    props.selectCity(city);
+    props.modalHandler(false)
+    setOpen(false);
+  }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
+  const handleClose = () => {
+    props.modalHandler(false)
+    setOpen(false);
   };
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      
-      <Container maxWidth="md" component="main" className={classes.heroContent}>
-        <Grid item maxWidth="xs">
-          <div className={classes.root}>
-            <Stepper activeStep={activeStep}>
-              {steps.map((label, index) => {
-                const stepProps = {};
-                const labelProps = {};
-                if (isStepOptional(index)) {
-                  labelProps.optional = <Typography variant="caption">Optional</Typography>;
-                }
-                if (isStepSkipped(index)) {
-                  stepProps.completed = false;
-                }
-                return (
-                  <Step key={label} {...stepProps}>
-                    <StepLabel {...labelProps}>{label}</StepLabel>
-                  </Step>
-                );
-              })}
-            </Stepper>
-            <div>
-              {activeStep === steps.length ? (
-                <div>
-                  <Typography className={classes.instructions}>
-                    All steps completed - you&apos;re finished
-            </Typography>
-                  <Button onClick={handleReset} className={classes.button}>
-                    Reset
-            </Button>
-                </div>
-              ) : (
-                  <Grid container>
-                    <Grid item xs>
-                      <Typography align="center" color="textSecondary" component="p">{getStepContent(activeStep)}</Typography>
-
-                      <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                        Back</Button>
-
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                      </Button>
-                    </Grid>
-                  </Grid>
-                )}
-            </div>
-          </div>
-        </Grid>
-      </Container>
-    </React.Fragment>
+    
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          
+      <FormControl className={classes.margin}>
+        <InputLabel id="demo-customized-select-label">State</InputLabel>
+        <Select
+          labelId="demo-customized-select-label"
+          value="Gujrat"
+          onChange={handleChange}
+          input={<BootstrapInput />}
+        >
+          <option value="Gujrat">Gujrat</option>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.margin}>
+        <InputLabel htmlFor="demo-customized-select-native">City</InputLabel>
+        <NativeSelect
+          id="demo-customized-select-native"
+          value={city}
+          onChange={onCityChange}
+          input={<BootstrapInput />}
+        >
+           <option value="">Select City</option>
+          <option value="Ahamdabad">Ahamdabad</option>
+          <option value="Rajkot">Rajkot</option>
+          <option value="Baroda">Baroda</option>
+        </NativeSelect>
+      </FormControl>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+          <Button onClick={selectCity} color="primary" autoFocus>
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+   
   );
 }

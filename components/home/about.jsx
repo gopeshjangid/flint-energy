@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
+
 const useStyles = makeStyles((theme) => ({
   divider: {
     width : '100%',
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   const classes = useStyles();
     return (
       <>
-        <div id="aboutme">
+        <div id="aboutus">
           <div className={classes.container}>
             <div className="col-md-12">
               <div className="row">
