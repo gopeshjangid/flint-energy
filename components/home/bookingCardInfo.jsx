@@ -10,6 +10,12 @@ const useStyles = makeStyles((theme) => ({
  },
  root : {
    margin : '20px'
+ },
+ cardContent : {
+  [theme.breakpoints.up('sm')]: {
+    borderRight : `4px solid ${theme.palette.primary.main}`
+  },
+   
  }
 }));
 
@@ -17,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
 export default ()=> {
   const classes = useStyles();
     return (
-        <><Grid spacing={4} className={classes.root}  container justify="center">
+        <><Grid spacing={2} className={classes.root}  container justify="center">
         <Grid item  sm={3} md={3} xs={10}  >
           <Card className={classes.card}>
-          <CardContent>
+          <CardContent className={classes.cardContent}>
           <Typography variant="h4" component="h2">
               3.3 KWp
             </Typography>
@@ -35,7 +41,7 @@ export default ()=> {
        
         <Grid item  sm={3} md={3} xs={10}  >
           <Card className={classes.card}>
-          <CardContent>
+          <CardContent className={classes.cardContent}>
           <Typography variant="h4" component="h2">
               Rs 5000
             </Typography>
@@ -52,7 +58,7 @@ export default ()=> {
        
         <Grid item  sm={3} md={3} xs={10}  >
           <Card className={classes.card}>
-          <CardContent>
+          <CardContent className={classes.cardContent} >
           <Typography variant="h4" component="h2">
               RS.  5000
             </Typography>

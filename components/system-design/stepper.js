@@ -15,6 +15,7 @@ import {postSystemDetails} from "../service/services";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+     
   },
   button: {
     marginRight: theme.spacing(1),
@@ -29,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
   stepBtnContainer : {
     textAlign : 'center'
+  },
+  steperRoot : {
+    [theme.breakpoints.up('sm')]: {
+      border : '1px solid #c0cecd',
+      borderRadius : '13px',
+      padding : '16px 16px 30px 16px',
+    }
   }
 }));
 
@@ -164,7 +172,7 @@ export default function HorizontalLinearStepper() {
           );
         })}
       </Stepper>
-      <div>
+      <div className={classes.steperRoot}>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>

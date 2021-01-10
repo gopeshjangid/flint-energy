@@ -1,67 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core/Select";
-
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormLabel from "@material-ui/core/FormLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Image from "next/image";
-import { Typography } from "@material-ui/core";
-import _ from "lodash";
-
-import { getCategories } from "../service/services";
-
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Image from  "next/image";
+import { Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+  },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  sizeLogoBox: {
-    minHeight: "100px",
-    padding: "12px",
+  sizeLogoBox : {
+    minHeight : '100px',
+    padding : '12px'
   },
-  box: {
-    border: "1px solid " + theme.palette.border,
-    minHeight: "170px",
-    padding: "20px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    borderRadius: "23px",
+  box : {
+    border : '1px solid '+theme.palette.border,
+    minHeight : '170px',
+    padding : '20px',
+    display : 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    borderRadius: '23px'
   },
-  radioGroup: {
-    flexDirection: "row",
+  radioGroup : {
+    flexDirection : 'row'
   },
-  label: {
-    textAlign: "left",
-    borderBottom: "0px",
+  label : {
+    textAlign : 'left',
+    borderBottom : '0px'
   },
-  leftBottomBox: {
-    display: "flex",
+  leftBottomBox : {
+    display : 'flex',
+
   },
-  infoBox: {
-    borderRight: "3px solid " + theme.palette.primary.main,
-    padding: "12px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
+  infoBox : {
+    borderRight : '3px solid '+theme.palette.primary.main,
+    padding : '12px',
+    display : 'flex',
+    flexDirection : 'column',
+    justifyContent : 'space-around'
   },
-  lastBox: {
-    padding: "12px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-  },
+  lastBox : {
+    padding : '12px',
+    display : 'flex',
+    flexDirection : 'column',
+    justifyContent : 'space-around'
+  }
 }));
 
 export default function CenteredGrid(props) {
@@ -102,35 +97,26 @@ export default function CenteredGrid(props) {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={7} md={7}>
-          <Grid container spacing={3} direction="column">
-            <Box className={classes.sizeLogoBox}>
-              <Image src="/sasksolar.gif" height={300} width={400} />
-            </Box>
-            <Box
-              className={classes.leftBottomBox}
-              alignContent="center"
-              justifyContent="space-around"
-            >
-              <Box className={classes.infoBox}>
-                <Typography variant="h3" component="h3">
-                  350 SF
-                </Typography>
-                <Typography component="h4">Rooftop Area</Typography>
+            <Grid container spacing={3} direction="column">
+              <Box className={classes.sizeLogoBox}>
+                <Image src="/sasksolar.gif" height={300} width={400} />
               </Box>
-              <Box className={classes.infoBox}>
-                <Typography variant="h3" component="h3">
-                  Rs. 5000
-                </Typography>
-                <Typography component="h4">System Cost</Typography>
+              <Box className={classes.leftBottomBox} alignContent="center" justifyContent="space-around">
+                 <Box className={classes.infoBox} > 
+                     <Typography variant="h3" component="h3">350 SF</Typography>
+                     <Typography  component="h4">Rooftop Area</Typography>
+                  </Box>
+                 <Box className={classes.infoBox}>
+                    <Typography variant="h3" component="h3">Rs. 5000</Typography>
+                     <Typography component="h4">System Cost</Typography>
+                 </Box>
+                 <Box className={classes.lastBox}>
+                    <Typography variant="h3" component="h3">Rs. 5000</Typography>
+                     <Typography component="h4">EMI starts at</Typography>
+                 </Box>
+                   
               </Box>
-              <Box className={classes.lastBox}>
-                <Typography variant="h3" component="h3">
-                  Rs. 5000
-                </Typography>
-                <Typography component="h4">EMI starts at</Typography>
-              </Box>
-            </Box>
-          </Grid>
+            </Grid>
         </Grid>
         <Grid item xs={12} sm={5} md={5}>
           <Grid container spacing={3}>
@@ -229,8 +215,8 @@ export default function CenteredGrid(props) {
                   </Grid>
 
                 </Grid>
-              </Box>
-            </Grid>
+            </Box>
+          </Grid>
           </Grid>
         </Grid>
       </Grid>

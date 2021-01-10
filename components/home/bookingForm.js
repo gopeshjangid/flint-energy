@@ -15,13 +15,16 @@ import Cards from  "./bookingCardInfo";
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { useRouter } from 'next/router'
+import Location from "./location";
 const useStyles = makeStyles((theme) => ({
     root: {
         textAlign : 'center',
         [theme.breakpoints.up('sm')]: {
-            padding : '30px',
+            padding : '50px 10px',
+           // border : '1px solid #c0cecd',
+            borderRadius : '13px',
           },
-        minHeight : '450px'
+        minHeight : '400px'
     },
     search  :{
         margin: theme.spacing(1),
@@ -58,9 +61,9 @@ const useStyles = makeStyles((theme) => ({
       },
       container : {
         justifyContent : 'space-around',
+        paddingBottom : '45px',
         [theme.breakpoints.up('sm')]: {
-            paddingLeft : '30%',
-            paddingRight : '30%'
+           
           },
           [theme.breakpoints.down('xs')]: {
           },
@@ -68,6 +71,11 @@ const useStyles = makeStyles((theme) => ({
       bookNow : {
           padding : '16px 65px',
           fontSize : '14px'
+      },
+      title : {
+          padding : '17px',
+          paddingBottom  :'40px',
+          lineHeight : '25px'
       }
 }));
 
@@ -78,7 +86,6 @@ export default function BookingForm() {
         city : ''
     })
     const router = useRouter();
-console.log(router)
     const BookNowHandler = ()=>{
         router.push("/#verification");
       }
@@ -88,53 +95,21 @@ console.log(router)
     }
     return (
         <Box className={classes.root}>
-        <Grid container spacing={4} className={classes.container} direction="column">
-            <Grid xs={12} item  sm={12} md={12}  >
+            <Typography className={classes.title} variant="h4" component="h4">
+            Concerned about your electricity Bill?
+             Install Solar to Enjoy Free energy for 25 Years!
+            </Typography>
+        <Grid container spacing={2} className={classes.container} direction="row">
+            {/* <Grid xs={12} item  sm={8} md={8}  >
               <TextField id="outlined-search"
               className={classes.search}
               variant="outlined"
                fullWidth
                label="Amount"  type="number" variant="outlined" />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12}  >
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="outlined-age-native-simple">State</InputLabel>
-                        <Select
-                        native
-                        onChange={handleChange}
-                        label="State"
-                        inputProps={{
-                            name: 'state',
-                            id: 'outlined-age-native-simple',
-                        }}
-                        >
-                        <option aria-label="None" value="" />
-                        <option value={10}>Ten</option>
-                        <option value={20}>Twenty</option>
-                        <option value={30}>Thirty</option>
-                        </Select>
-                    </FormControl>
+            </Grid> */}
+            <Grid item xs={12} sm={4} md={4}  >
+                   <Location />
                </Grid>
-               <Grid item xs={12} sm={12} md={12} >
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="outlined-age-native-simple">City</InputLabel>
-                        <Select
-                        native
-                        onChange={handleChange}
-                        label="City"
-                        inputProps={{
-                            name: 'city',
-                            id: 'outlined-age-native-simple',
-                        }}
-                        >
-                        <option aria-label="None" value="" />
-                        <option value={10}>Ten</option>
-                        <option value={20}>Twenty</option>
-                        <option value={30}>Thirty</option>
-                        </Select>
-                    </FormControl>
-               </Grid>
-               
             </Grid>
           <Cards />
           <Grid container spacing={8}  >

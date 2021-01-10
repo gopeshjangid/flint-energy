@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-
+import Link from 'next/link';
+import Grid from '@material-ui/core/Grid';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://flint-energy.com/">
-        flint-energy.com
+      <Link  href="https://flintech.co">
+        flintech.co
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -24,22 +24,27 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: theme.spacing(8),
     padding: theme.spacing(6, 0),
   },
+  link : {
+    color: theme.palette.primary.main
+  }
 }));
 
 export default function Footer(props) {
   const classes = useStyles();
-  const { description, title } = props;
-
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          {description}
-        </Typography>
-        <Copyright />
+        <Grid container spacing={2}>
+         <Grid item xs={12} sm={4} style={{textAlign : 'center'}} >
+           <Link className={classes.link} href="/privacy-policy">Privacy Policy</Link>
+         </Grid>
+         <Grid item xs={12} sm={4} style={{textAlign : 'center'}} >
+             <Copyright/>
+          </Grid>
+        <Grid item xs={12} sm={4} style={{textAlign : 'center'}} >
+            <Link className={classes.link} href="/terms-and-condition">Terms and Conditions</Link>
+        </Grid> 
+      </Grid>
       </Container>
     </footer>
   );
