@@ -1,12 +1,9 @@
-import React  from 'react';
+import React ,{useState}  from 'react';
 import Image from  "next/image";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/VerifiedUser';
@@ -14,6 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import StarIcon from '@material-ui/icons/Star';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -46,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   box : {
     border : '1px solid '+theme.palette.border,
-    minHeight : '170px',
+    height : '340px',
     padding : '20px',
     display : 'flex',
     flexDirection: 'column',
@@ -57,12 +59,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  
+  const [verify , setVerify] = useState(false);
+  const [submit , setSubmit] = useState(false)
 
   
   return (
     <div id="verification">
-    <Container className={classes.container}  maxWidth="md">
+    <Container className={classes.container}  maxWidth="lg">
       <div className={classes.paper}>
         <div className={classes.header}>
         <Avatar className={classes.avatar}>
@@ -73,8 +76,28 @@ export default function SignUp() {
         </Typography>
         </div>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-        <Image src="/sasksolar.gif" height={300} width={400} />
+        <Grid item xs={12} sm={6} style={{textAlign : 'center'}} >
+        <Image src="/sasksolar.gif" height={215} width={500} />
+        <List component="nav" className={classes.root} aria-label="contacts">
+      <ListItem button>
+        <ListItemIcon>
+          <StarIcon />
+        </ListItemIcon>
+        <ListItemText primary="Generate Electricity using solar panel." />
+      </ListItem>
+      <ListItem button>
+      <ListItemIcon>
+          <StarIcon />
+        </ListItemIcon>
+         <ListItemText  primary="Feed the extra Electricity into grid." />
+      </ListItem>
+      <ListItem button>
+      <ListItemIcon>
+          <StarIcon />
+        </ListItemIcon>
+        <ListItemText  primary="Enjoy free electricity with Net Meter." />
+      </ListItem>
+    </List>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box className={classes.box}>
@@ -83,7 +106,7 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            {!submit ? <><Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -116,8 +139,8 @@ export default function SignUp() {
                 name="mobile"
                 autoComplete="mobile"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Grid></>
+           : <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -128,6 +151,7 @@ export default function SignUp() {
                 id="otp"
               />
             </Grid>
+           }
             {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -136,13 +160,14 @@ export default function SignUp() {
             </Grid> */}
           </Grid>
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
+            onClick={() => setSubmit(true)}
             className={classes.submit}
           >
-            Verify OTP
+            {!submit ? "Get OTP" : "Verify OTP"} 
           </Button>
          
         </form>

@@ -14,6 +14,8 @@ import Image from  "next/image";
 import { Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
+    [theme.breakpoints.up('sm')]: {
+    },
   },
   paper: {
     padding: theme.spacing(2),
