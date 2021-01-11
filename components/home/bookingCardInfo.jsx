@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { Card, CardContent, Typography, Grid } from '@material-ui/core';
+
 const useStyles = makeStyles((theme) => ({
  card : {
    width : '80%'
@@ -20,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default ()=> {
+export default function BookingCardInfo(props) {
   const classes = useStyles();
     return (
         <><Grid spacing={2} className={classes.root}  container justify="center">
@@ -28,7 +26,7 @@ export default ()=> {
           <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
           <Typography variant="h4" component="h2">
-              3.3 KWp
+              {props.cardInfo.suggestedSystem} KWp
             </Typography>
             <Typography variant="h4" component="h2">
             </Typography>
@@ -43,7 +41,7 @@ export default ()=> {
           <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
           <Typography variant="h4" component="h2">
-              Rs 5000
+              Rs {props.cardInfo.monthlySaving}
             </Typography>
             <Typography variant="h4" component="h2">
             </Typography>
@@ -60,7 +58,7 @@ export default ()=> {
           <Card className={classes.card}>
           <CardContent className={classes.cardContent} >
           <Typography variant="h4" component="h2">
-              RS.  5000
+              RS. {props.cardInfo.emiStarts}
             </Typography>
             <Typography variant="h4" component="h2">
             </Typography>

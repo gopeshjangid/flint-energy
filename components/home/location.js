@@ -1,12 +1,10 @@
-import React ,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Modal from "./Forms";
+import { Paper, InputBase, Divider, IconButton, FormHelperText} from '@material-ui/core';
 import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
+import Modal from "./Forms";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: '2px 4px',
@@ -32,25 +30,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CustomizedInputBase() {
+export default function Location(props) {
   const classes = useStyles();
   const [open , setOpen]  = useState (false);
   const [city , setCity]  = useState ("Select City");
-  const selectCity = (city)=>{
-    setCity(city)
-  }
-  const modalHandler = (stat) =>{
-      setOpen(stat)
-  }
+  const [bill, setBill] = useState('');
+
+  useEffect(() => {
+    props.onChangeHandler({bill, city});
+  }, [city, bill])
+
   return (
     <><Paper component="form" elevation={0} className={classes.root}>
-      <Modal city={city} modalHandler={modalHandler} open={open} selectCity={selectCity} />
+      <Modal city={city} modalHandler={(stat) => setOpen(stat)} open={open} selectCity={(city) => setCity(city)} />
       <InputBase
         className={classes.input}
         autoFocus
         type="number"
         color="primary"
         placeholder="Amount"
+        value={bill}
+        onChange={(e) => setBill(e.target.value)}
         inputProps={{ 'aria-label': 'booking amount' }}
       />
       

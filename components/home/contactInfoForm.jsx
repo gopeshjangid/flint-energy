@@ -1,21 +1,10 @@
-import React ,{useState}  from 'react';
+import React ,{useState, useEffect}  from 'react';
 import Image from  "next/image";
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import {Typography, Container, Avatar, Button, TextField, Grid, Box, Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
 import LockOutlinedIcon from '@material-ui/icons/VerifiedUser';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import StarIcon from '@material-ui/icons/Star';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -57,12 +46,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function ContactInfoForm(props) {
   const classes = useStyles();
-  const [verify , setVerify] = useState(false);
-  const [submit , setSubmit] = useState(false)
 
-  
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+
+  const [verify , setVerify] = useState(false);
+  const [submit , setSubmit] = useState(false);
+
   return (
     <div id="verification">
     <Container className={classes.container}  maxWidth="lg">
@@ -113,6 +106,8 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 id="firstName"
                 label="First Name"
                 autoFocus
@@ -123,6 +118,8 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 id="lastName"
                 label="Last Name"
                 name="lastName"
@@ -134,8 +131,12 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
+                type="tel"
+                value={mobileNo}
+                onChange={(e) => setMobileNo(e.target.value)}
                 id="mobile"
                 label="Mobile No"
+                placeholder={"988-XXX-XXXX"}
                 name="mobile"
                 autoComplete="mobile"
               />
@@ -164,7 +165,7 @@ export default function SignUp() {
             fullWidth
             variant="contained"
             color="primary"
-            onClick={() => setSubmit(true)}
+            onClick={() => props.handler({firstName, lastName, mobileNo})}
             className={classes.submit}
           >
             {!submit ? "Get OTP" : "Verify OTP"} 

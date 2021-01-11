@@ -1,21 +1,11 @@
 import React ,{useState} from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import JsonData from './data/data.json';
-import RadioButtons from '../common/radiobuton';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Cards from  "./bookingCardInfo";
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
+import {Typography, Button, Grid, Box} from '@material-ui/core'
 import { useRouter } from 'next/router'
+import Cards from  "./bookingCardInfo";
 import Location from "./location";
+import CALC_VARIABLES from "../../app.config"
+
 const useStyles = makeStyles((theme) => ({
     root: {
         textAlign : 'center',
@@ -82,17 +72,37 @@ const useStyles = makeStyles((theme) => ({
 export default function BookingForm() {
     const classes = useStyles();
     const [form ,setForm] = useState({
-        amount : 0,
+        bill : 0,
         city : ''
+    });
+    const [cardInfo, setCardInfo] = useState({
+        monthlySaving: 0,
+        suggestedSystem: 0,
+        emiStarts: 0
     })
     const router = useRouter();
     const BookNowHandler = ()=>{
-        router.push("/#verification");
-      }
+        // router.push("/#verification");
 
-    const handleChange = ()=>{
+        // --- CALCULATION ---
+        const suggestedSystemSize = form.bill/(720 * 2);
+        
+        const  meterCharge = suggestedSystemSize > 6000 ?
+            (form.city.toLowerCase() === "torrentahmedabad" || form.city.toLowerCase() === "torrentsurat" ? 16835.74 : 15166.51) :
+            (form.city.toLowerCase() === "torrentahmedabad" || form.city.toLowerCase() === "torrentsurat" ? 5396.86 : 4045.08) ;
+
+        const {SYSTEM_COST, SUBSIDY, STRUCTURE_COST} = CALC_VARIABLES
+        const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+        const downPayment = netCost * 0.30;
+        
+        setCardInfo({
+            monthlySaving: (suggestedSystemSize * 720).toFixed(2),
+            suggestedSystem: (suggestedSystemSize).toFixed(2),
+            emiStarts: ((netCost - downPayment) * 1.18 / 18).toFixed(2)
+        })
 
     }
+
     return (
         <Box className={classes.root}>
             <Typography className={classes.title} variant="h4" component="h4">
@@ -108,10 +118,10 @@ export default function BookingForm() {
                label="Amount"  type="number" variant="outlined" />
             </Grid> */}
             <Grid item xs={12} sm={4} md={4}  >
-                   <Location />
+                   <Location onChangeHandler={(obj) => setForm(obj)} />
                </Grid>
             </Grid>
-          <Cards />
+          <Cards cardInfo={cardInfo} />
           <Grid container spacing={8}  >
             <Grid xs={12} item  sm={12} md={12}  >
             <Button className={classes.bookNow}

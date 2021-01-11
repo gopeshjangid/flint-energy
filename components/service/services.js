@@ -1,8 +1,20 @@
-import { axios } from "axios";
+import axios  from "axios";
+
+const BASE_URI = "https://www.unitgrid.in/v1/";
 
 export const getCategories = async () => {
-  const res = await axios.get("URL" + "/v1/systemlist");
-  return res;
+  // const res = await axios.get();
+}
+
+export const referral = async (a, b) => {
+    const res = await axios.get(BASE_URI + "ch",{
+      params: {
+        a,
+        b
+      }
+    });
+    console.log(res);
+    return res;
 };
 
 export const postSystemDetails = async (activeStep, obj) => {
@@ -28,9 +40,31 @@ export const postSystemDetails = async (activeStep, obj) => {
 
   const res = await axios.post("URL_API", {
     body: {
+      "sessionid": "", // handle later
       "form_part": activeStep,
       "payload": payload
     }
   });
   return res;
+}
+
+export const submitLeadDetails = async (obj) => {
+  const {firstName: first_name, lastName: last_name, mobileNo: mobile, ...rest} = obj;
+  const payload = {first_name, last_name, mobile, ...rest, resend: true};
+
+  const res = await axios.post(url+"", {
+    body: payload
+  });
+
+  return res;
+
+}
+
+export const otpVerify = async ({obj: payload}) => {
+  const res = await axios.post(url+"", {
+    body: payload
+  });
+
+  return res;
+
 }

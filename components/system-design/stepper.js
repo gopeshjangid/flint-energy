@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import StepLabel from '@material-ui/core/StepLabel';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { Stepper, Step, Button, Typography, StepLabel, Grid, Box } from '@material-ui/core';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import CustomDesign from './customizeDesign';
 import InfoDetails from  "./infoDetails";
 import SystemFinance from  "./systemFinance";
 import SystemSummary from  "./systemSummary";
 import {postSystemDetails} from "../service/services";
+import messages from "../../messages";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -103,31 +102,39 @@ export default function HorizontalLinearStepper() {
     return skipped.has(step);
   };
 
-  const handleNext = () => {
+  // API Inovking
+  const apiHandler = async () => {
+    toast.info(messages.FORM_SUBMITING)
+    try{
+      let res;
+      if(activeStep === 0){
+        res = await postSystemDetails(activeStep, systemDesign)
+      }else if(activeStep === 1){
+        res = await postSystemDetails(activeStep, personalDetails)
+      }else if(activeStep === 2){
+        res = await postSystemDetails(activeStep, financeDetails)
+      }else{
+        // res = await
+      }
+      if(res.stauts === 200) toast.done(messages.FORM_SUBMIT_SUCCESS);
+    }catch (err) {
+      toast.error(messages.FORM_SUBMIT_UNSUCCESS);
+      throw err;
+    }
+  }
+
+  const handleNext = async () => {
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
 
-    // API Inovking
-    const apiHandler = async () => {
-      try{
-        if(activeStep === 0){
-          const res = await postSystemDetails(activeStep, systemDesign)
-        }else if(activeStep === 1){
-          const res = await postSystemDetails(activeStep, personalDetails)
-        }else if(activeStep === 2){
-          const res = await postSystemDetails(activeStep, financeDetails)
-        }else{
-          // const res = await
-        }
-      }catch (err) {
-
-      }
+    try{
+      await apiHandler();
+    }catch (err) {
+      return;
     }
-
-    apiHandler()
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -158,6 +165,7 @@ export default function HorizontalLinearStepper() {
 
   return (
     <div className={classes.root}>
+      <ToastContainer />
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
