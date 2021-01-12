@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme)=>({
     background : '#fff',
     paddingTop : '92px',
     minHeight : '100vh',
+    width : '100%',
     [theme.breakpoints.up('sm')]: {
       paddingLeft: '1%',
       paddingRight: '1%',
@@ -29,7 +30,7 @@ const Layout = React.memo (function Layout  (props)  {
 
   return (
     
-         <Container px={4}  className={classes.container} >
+         <Container px={1}  className={classes.container} >
             {props.children}
          </Container>
          

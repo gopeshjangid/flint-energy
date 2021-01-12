@@ -41,15 +41,13 @@ export default function BookingCardInfo(props) {
           <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
           <Typography variant="h4" component="h2">
-              Rs {props.cardInfo.monthlySaving}
+              &#x20B9; {props.cardInfo.monthlySaving}
             </Typography>
             <Typography variant="h4" component="h2">
             </Typography>
             <Typography variant="h5" component="h4">
               Monthly Savings
             </Typography>
-           
-           
           </CardContent>
           </Card>
         </Grid>
@@ -58,12 +56,12 @@ export default function BookingCardInfo(props) {
           <Card className={classes.card}>
           <CardContent className={classes.cardContent} >
           <Typography variant="h4" component="h2">
-              RS. {props.cardInfo.emiStarts}
+             &#x20B9; {props.cardInfo.emiStarts}
             </Typography>
             <Typography variant="h4" component="h2">
             </Typography>
             <Typography variant="h5" component="h4">
-              EMI Starts at
+              Starting EMI
             </Typography>
            
           </CardContent>

@@ -1,5 +1,6 @@
 import React ,{useEffect} from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Cities from "../data/district.json";
 import {
   Button,
   Dialog,
@@ -59,7 +60,8 @@ export default function Forms(props) {
   const classes = useStyles();
 
   const onCityChange = (e) => {
-   setCity(e.target.value)
+    const district = Cities.districts.filter(city => city.id == e.target.value);
+    setCity({id: e.target.value ,city : district.length ? district[0].city : ''})
   };
 
   const [age, setAge] = React.useState('');
@@ -109,14 +111,14 @@ export default function Forms(props) {
         <InputLabel htmlFor="demo-customized-select-native">City</InputLabel>
         <NativeSelect
           id="demo-customized-select-native"
-          value={city}
+          value={city.id}
           onChange={onCityChange}
           input={<BootstrapInput />}
         >
            <option value="">Select City</option>
-          <option value="Ahamdabad">Ahamdabad</option>
-          <option value="Rajkot">Rajkot</option>
-          <option value="Baroda">Baroda</option>
+           {
+             Cities.districts.map( (city ,index) => <option key={"city"+index} value={city.id}>{city.city}</option>)
+           }
         </NativeSelect>
       </FormControl>
           </DialogContentText>
