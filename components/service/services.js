@@ -14,7 +14,7 @@ export const referral = async (a, b) => {
       }
     });
     console.log(res);
-    return res;
+    return res.data;
 };
 
 export const postSystemDetails = async (activeStep, obj) => {
@@ -49,22 +49,26 @@ export const postSystemDetails = async (activeStep, obj) => {
 }
 
 export const submitLeadDetails = async (obj) => {
-  const {firstName: first_name, lastName: last_name, mobileNo: mobile, ...rest} = obj;
-  const payload = {first_name, last_name, mobile, ...rest, resend: true};
+  const {firstName: first_name, lastName: last_name, mobile, aParam: a_param, bParam: b_param} = obj;
+  const payload = {first_name, last_name, a_param, b_param, mobile: Number(mobile), resend: true};
 
-  const res = await axios.post(url+"", {
+  const res = await axios.post(BASE_URI+"lp/lead", {
     body: payload
   });
 
-  return res;
+  return res.data;
 
 }
 
-export const otpVerify = async ({obj: payload}) => {
-  const res = await axios.post(url+"", {
+export const verifyOtp = async (obj) => {
+  const payload = {
+    "mobile": Number(obj.mobileNo),
+    "otp": Number(obj.otp)
+  }
+  const res = await axios.post(BASE_URI+"lp/verify", {
     body: payload
   });
 
-  return res;
+  return res.data;
 
 }

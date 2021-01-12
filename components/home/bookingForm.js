@@ -82,11 +82,13 @@ export default function BookingForm() {
     })
     const router = useRouter();
     const BookNowHandler = ()=>{
-        // router.push("/#verification");
+        router.push("/#verification");
+    }
 
+    const onChangeHandler = () => {
         // --- CALCULATION ---
         const suggestedSystemSize = form.bill/(720 * 2);
-        
+
         const  meterCharge = suggestedSystemSize > 6000 ?
             (form.city.toLowerCase() === "torrentahmedabad" || form.city.toLowerCase() === "torrentsurat" ? 16835.74 : 15166.51) :
             (form.city.toLowerCase() === "torrentahmedabad" || form.city.toLowerCase() === "torrentsurat" ? 5396.86 : 4045.08) ;
@@ -94,13 +96,12 @@ export default function BookingForm() {
         const {SYSTEM_COST, SUBSIDY, STRUCTURE_COST} = CALC_VARIABLES
         const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
         const downPayment = netCost * 0.30;
-        
+
         setCardInfo({
             monthlySaving: (suggestedSystemSize * 720).toFixed(2),
             suggestedSystem: (suggestedSystemSize).toFixed(2),
             emiStarts: ((netCost - downPayment) * 1.18 / 18).toFixed(2)
         })
-
     }
 
     return (
@@ -118,7 +119,7 @@ export default function BookingForm() {
                label="Amount"  type="number" variant="outlined" />
             </Grid> */}
             <Grid item xs={12} sm={4} md={4}  >
-                   <Location onChangeHandler={(obj) => setForm(obj)} />
+                   <Location onChangeHandler={onChangeHandler} onValChangeHandler={(obj) => setForm(obj)} />
                </Grid>
             </Grid>
           <Cards cardInfo={cardInfo} />

@@ -11,12 +11,22 @@ import ContactInfoForm from "../components/home/contactInfoForm";
 import Footer from "../components/common/footer";
 import {referral} from "../components/service/services";
 import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import messages from "../messages";
+import {submitLeadDetails, verifyOtp} from "../components/service/services";
 
 const HomePage = () => {
     const [aParam, setaParam] = useState('');
     const [bParam, setbParam] = useState('');
+    const [sessionId, setSessionId] = useState('');
 
+    const [leadDetails, setLeadDetails] = useState({
+        firstName: '',
+        lastName: '',
+        mobile: '',
+        otp: ''
+    })
 
     useEffect(() => {
         const str = window?.location.href?.split("?")[1];
@@ -33,19 +43,46 @@ const HomePage = () => {
         }
     }, [])
 
-    const leadHandler = async (obj) => {
+    const leadSubmitHandler = async () => {
         toast.info(messages.FORM_SUBMITING);
         try {
-            obj["a_param"] = aParam;
-            obj["b_param"] = bParam;
+            const obj = {
+                firstName : leadDetails.firstName,
+                lastName : leadDetails.lastName,
+                mobile : leadDetails.mobile,
+                aParam,
+                bParam
+            }
             const res = await submitLeadDetails(obj);
-
+            console.log(res);
             if(res["all_ok"]) toast.done(messages.OTP_SENT)
+            else throw new Error(res["error_msg"])
         }catch (err) {
             toast.error(messages.FORM_SUBMIT_UNSUCCESS)
             console.log(err);
         }
     }
+
+    const verifyOtpHandler = async () => {
+        toast.info(messages.FORM_SUBMITING);
+        try {
+            const obj = {
+                mobile : leadDetails.mobile,
+                otp : leadDetails.otp
+            }
+            const res = await verifyOtp(obj);
+            console.log(res);
+            if(res["all_ok"]) {
+                toast.done(messages.OTP_VERIFIED);
+                setSessionId(res.sessionid)
+            }
+            else throw new Error(res["error_msg"])
+        }catch (err) {
+            toast.error(messages.WRONG_OTP)
+            console.log(err);
+        }
+    }
+
   return (
     <>
       <link rel="stylesheet" href="/static/css/bootstrap.css" />
@@ -53,7 +90,11 @@ const HomePage = () => {
       <Layout>
           <ToastContainer />
         <BookingForm />
-        <ContactInfoForm handler={(obj) => leadHandler(obj)} />
+        <ContactInfoForm
+            leadChangeHandler={(obj) => setLeadDetails(obj)}
+            leadSubmitHandler={() => leadSubmitHandler()}
+            verifyOtpHandler={() => verifyOtpHandler()}
+        />
     
      
       <About data={JsonData.About} />

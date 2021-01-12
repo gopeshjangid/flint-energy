@@ -1,6 +1,6 @@
 import React ,{useState, useEffect}  from 'react';
 import Image from  "next/image";
-import {Typography, Container, Avatar, Button, TextField, Grid, Box, Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import {Link, Typography, Container, Avatar, Button, TextField, Grid, Box, Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import LockOutlinedIcon from '@material-ui/icons/VerifiedUser';
 import StarIcon from '@material-ui/icons/Star';
@@ -51,10 +51,21 @@ export default function ContactInfoForm(props) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [otp, setOtp] = useState('');
+  const [isOtpSent, setIsOtpSent] = useState(false);
 
   const [verify , setVerify] = useState(false);
   const [submit , setSubmit] = useState(false);
+
+  useEffect(() => {
+    props.leadChangeHandler({
+      firstName,
+      lastName,
+      mobile,
+      otp
+    })
+  }, [])
 
   return (
     <div id="verification">
@@ -99,58 +110,69 @@ export default function ContactInfoForm(props) {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {!submit ? <><Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                type="tel"
-                value={mobileNo}
-                onChange={(e) => setMobileNo(e.target.value)}
-                id="mobile"
-                label="Mobile No"
-                placeholder={"988-XXX-XXXX"}
-                name="mobile"
-                autoComplete="mobile"
-              />
-            </Grid></>
-           : <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="otp"
-                label="6 Digit OTP"
-                type="tel"
-                id="otp"
-              />
+            {!isOtpSent &&
+            <>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="lname"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  type="tel"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  id="mobile"
+                  label="Mobile No"
+                  placeholder={"988-XXX-XXXX"}
+                  name="mobile"
+                  autoComplete="mobile"
+                />
+              </Grid>
+            </>
+            }
+            {
+              isOtpSent &&
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="otp"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  label="6 Digit OTP"
+                  type="tel"
+                  id="otp"
+                />
+                <Link onClick={props.leadSubmitHandler}>
+                  Resend OTP
+                </Link>
             </Grid>
            }
             {/* <Grid item xs={12}>
@@ -165,10 +187,10 @@ export default function ContactInfoForm(props) {
             fullWidth
             variant="contained"
             color="primary"
-            onClick={() => props.handler({firstName, lastName, mobileNo})}
+            onClick={ !isOtpSent ? () => {props.leadSubmitHandler(); setIsOtpSent(true) } : props.verifyOtpHandler}
             className={classes.submit}
           >
-            {!submit ? "Get OTP" : "Verify OTP"} 
+            {!isOtpSent ? "Get OTP" : "Verify OTP"}
           </Button>
          
         </form>

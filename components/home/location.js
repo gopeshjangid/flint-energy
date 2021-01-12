@@ -37,8 +37,11 @@ export default function Location(props) {
   const [bill, setBill] = useState('');
 
   useEffect(() => {
-    props.onChangeHandler({bill, city});
-  }, [city, bill])
+    props.onValChangeHandler({bill, city});
+  }, [city, bill]);
+  useEffect(() => {
+    props.onChangeHandler();
+  }, [bill])
 
   return (
     <><Paper component="form" elevation={0} className={classes.root}>
