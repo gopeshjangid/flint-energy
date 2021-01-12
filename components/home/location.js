@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper, InputBase, Divider, IconButton, FormHelperText} from '@material-ui/core';
 import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
 
-import Modal from "./Forms";
+import Modal from "./cityModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,12 +34,11 @@ export default function Location(props) {
   const classes = useStyles();
   const [open , setOpen]  = useState (false);
   const [city , setCity]  = useState ("Select City");
-  const [bill, setBill] = useState('');
-
+  const [bill, setBill] = useState(3500);
+  const  defaultValue = 3500;
   useEffect(() => {
     props.onChangeHandler({bill, city});
   }, [city, bill])
-
   return (
     <><Paper component="form" elevation={0} className={classes.root}>
       <Modal city={city} modalHandler={(stat) => setOpen(stat)} open={open} selectCity={(city) => setCity(city)} />
@@ -48,14 +47,15 @@ export default function Location(props) {
         autoFocus
         type="number"
         color="primary"
+        min="0"
         placeholder="Amount"
         value={bill}
-        onChange={(e) => setBill(e.target.value)}
+        onChange={(e) => setBill(e.target.value < 0 ? 0 : e.target.value)}
         inputProps={{ 'aria-label': 'booking amount' }}
       />
       
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton onClick={()=>setOpen(!open)} color="primary" className={classes.iconButton} aria-label="directions"> {city} &nbsp;
+      <IconButton onClick={()=>setOpen(!open)} color="primary" className={classes.iconButton} aria-label="directions"> {city.city} &nbsp;
         <ArrowDropDownOutlinedIcon />
       </IconButton>
     </Paper>

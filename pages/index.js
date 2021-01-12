@@ -57,7 +57,7 @@ const HomePage = () => {
     
      
       <About data={JsonData.About} />
-      <Contact data={JsonData.Contact} />
+      
       <Footer />
       </Layout>
     </>

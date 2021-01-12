@@ -136,9 +136,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <Button color="primary" onClick={()=>redirect("#aboutus")}>About Us</Button>
       </MenuItem>
-      <MenuItem>
-        <Button color="primary" onClick={()=>redirect("#contactus")}>Contact Us</Button>
-      </MenuItem>
+    
       <MenuItem onClick={handleProfileMenuOpen}>
          <Button color="primary" onClick={()=>redirect("#login")}>Login</Button>
       </MenuItem>
@@ -153,6 +151,7 @@ export default function PrimarySearchAppBar() {
             edge="start"
             className={classes.menuButton}
             color="inherit"
+            onClick={()=>redirect("")}
             aria-label="open drawer"
           >
             <Image src="/logo.png"  width="220" height="50" />
@@ -161,7 +160,6 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
               <Button color="inherit" onClick={()=>redirect("#aboutus")}>About Us</Button>
-              <Button color="inherit" onClick={()=>redirect("#contactus")}>Contact Us</Button>
               <Button color="inherit">Login</Button>
           </div>
           <div className={classes.sectionMobile}>

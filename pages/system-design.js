@@ -14,7 +14,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import {AutoSave ,createDraft ,deleteDraft} from  "../components/service/PostService";
 import CONSTANTS from '../components/constants';
 import Header from "../components/common/header";
-import Stepper from  "../components/system-design/stepper";
+import Stepper from  "../components/system-design/stepper2";
 
 class SystemDesign extends React.Component {
 

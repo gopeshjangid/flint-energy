@@ -1,0 +1,136 @@
+{
+    "districts": [
+        {
+            "id": 1,
+            "city": "Ahmedabad"
+        },
+        {
+            "id": 2,
+            "city": "Amreli"
+        },
+        {
+            "id": 3,
+            "city": "Anand"
+        },
+        {
+            "id": 4,
+            "city": "Arvalli"
+        },
+        {
+            "id": 5,
+            "city": "Banas kantha"
+        },
+        {
+            "id": 6,
+            "city": "Bharuch"
+        },
+        {
+            "id": 7,
+            "city": "Bhavnagar"
+        },
+        {
+            "id": 8,
+            "city": "Botad"
+        },
+        {
+            "id": 9,
+            "city": "Chhotaudepur"
+        },
+        {
+            "id": 10,
+            "city": "Dahod"
+        },
+        {
+            "id": 11,
+            "city": "Dang"
+        },
+        {
+            "id": 12,
+            "city": "Devbhoomi Dwarka"
+        },
+        {
+            "id": 13,
+            "city": "Gandhinagar"
+        },
+        {
+            "id": 14,
+            "city": "Gir Somnath"
+        },
+        {
+            "id": 15,
+            "city": "Jamnagar"
+        },
+        {
+            "id": 16,
+            "city": "Junagadh"
+        },
+        {
+            "id": 17,
+            "city": "Kachchh"
+        },
+        {
+            "id": 18,
+            "city": "Kheda"
+        },
+        {
+            "id": 19,
+            "city": "Mahisagar"
+        },
+        {
+            "id": 20,
+            "city": "Mahesana"
+        },
+        {
+            "id": 21,
+            "city": "Morbi"
+        },
+        {
+            "id": 22,
+            "city": "Narmada"
+        },
+        {
+            "id": 23,
+            "city": "Navsari"
+        },
+        {
+            "id": 24,
+            "city": "Panch mahals"
+        },
+        {
+            "id": 25,
+            "city": "Patan"
+        },
+        {
+            "id": 26,
+            "city": "Porbandar"
+        },
+        {
+            "id": 27,
+            "city": "Rajkot"
+        },
+        {
+            "id": 28,
+            "city": "Sabar kantha"
+        },
+        {
+            "id": 29,
+            "city": "Surat"
+        },
+        {
+            "id": 30,
+            "city": "Surendranagar"
+        },
+        {
+            "id": 31,
+            "city": "Tapi"
+        },
+        {
+            "id": 32,
+            "city": "Vadodara"
+        },
+        {
+            "id": 33,
+            "city": "Valsad"
+        }
+    ]
+}

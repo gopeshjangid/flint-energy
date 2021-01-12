@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
       },
       bookNow : {
           padding : '16px 65px',
-          fontSize : '14px'
+          fontSize : '14px',
       },
       title : {
           padding : '17px',

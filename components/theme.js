@@ -55,6 +55,7 @@ const theme = createMuiTheme({
     button: {
       fontSize: 14,
     },
+    buttonColor :'#ff3e97'
   },
 });
 

@@ -15,6 +15,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Image from "next/image";
 import { Typography } from "@material-ui/core";
+
 import _ from "lodash";
 
 import { getCategories } from "../service/services";
@@ -115,12 +116,12 @@ export default function CenteredGrid(props) {
                      <Typography  component="h4">Rooftop Area</Typography>
                   </Box>
                  <Box className={classes.infoBox}>
-                    <Typography variant="h3" component="h3">Rs. 5000</Typography>
+                    <Typography variant="h3" component="h3">&#x20B9; 5000</Typography>
                      <Typography component="h4">System Cost</Typography>
                  </Box>
                  <Box className={classes.lastBox}>
-                    <Typography variant="h3" component="h3">Rs. 5000</Typography>
-                     <Typography component="h4">EMI starts at</Typography>
+                    <Typography variant="h3" component="h3">&#x20B9; 5000</Typography>
+                     <Typography component="h4">Starting EMI</Typography>
                  </Box>
                    
               </Box>
@@ -148,13 +149,13 @@ export default function CenteredGrid(props) {
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl required variant="outlined" fullWidth={true}>
-                      <InputLabel htmlFor="systemSize">System Size (in Wp)</InputLabel>
+                      <InputLabel htmlFor="systemSize">Suggested System Size (in KWp)</InputLabel>
                       <Select
                         id="systemSize"
                         fullWidth={true}
                         value={systemSize}
                         onChange={(e) => setSystemSize(e.target.value)}
-                        label="System Size (in Wp)"
+                        label="Suggested System Size (in KWp)"
                         variant="outlined"
                       >
                         {_.map(systemSizeLIst, (cat) =>
