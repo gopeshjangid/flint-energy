@@ -82,11 +82,11 @@ export default function CenteredGrid(props) {
   useEffect(() => {
     const getSystemSizeList = async () => {
       const res = await getCategories();
-      setSystemSizeList(res);
+      setSystemSizeList(res["syslist"]);
     }
 
     // ---- Uncomment whem API is working ----
-    // getSystemSizeList();
+    getSystemSizeList();
 
   }, []);
 

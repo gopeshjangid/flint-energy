@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -38,8 +38,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Review() {
+export default function Review(props) {
   const classes = useStyles();
+
+  const [paymentId, setPaymentId] = useState('');
+  const [invoiceId, setInvoiceId] = useState('');
+  const [invoiceStatus, setInvoiceStatus] = useState('');
+  const [invoiceReceipt, setInvoiceReceipt] = useState('');
+  const [signature, setSignature] = useState('');
+
+  useEffect(() => {
+      props.handler({
+          paymentId,
+          invoiceId,
+          invoiceStatus,
+          invoiceReceipt,
+          signature
+      })
+  }, [paymentId, invoiceId, invoiceStatus, invoiceReceipt, signature])
 
   return (
     <React.Fragment>

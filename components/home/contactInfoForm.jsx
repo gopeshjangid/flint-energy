@@ -65,7 +65,7 @@ export default function ContactInfoForm(props) {
       mobile,
       otp
     })
-  }, [])
+  }, [firstName, lastName, mobile, otp]);
 
   return (
     <div id="verification">
@@ -149,7 +149,7 @@ export default function ContactInfoForm(props) {
                   onChange={(e) => setMobile(e.target.value)}
                   id="mobile"
                   label="Mobile No"
-                  placeholder={"988-XXX-XXXX"}
+                  placeholder={"988XXXXXXX"}
                   name="mobile"
                   autoComplete="mobile"
                 />

@@ -95,7 +95,7 @@ export default function HorizontalLinearStepper() {
 
 
   const isStepOptional = (step) => {
-    return step === 1;
+    return step === 0;
   };
 
   const isStepSkipped = (step) => {
@@ -104,6 +104,7 @@ export default function HorizontalLinearStepper() {
 
   // API Inovking
   const apiHandler = async () => {
+    console.log("requested")
     toast.info(messages.FORM_SUBMITING)
     try{
       let res;
@@ -116,6 +117,7 @@ export default function HorizontalLinearStepper() {
       }else{
         // res = await
       }
+      console.log(activeStep + " " + res);
       if(res.stauts === 200) toast.done(messages.FORM_SUBMIT_SUCCESS);
     }catch (err) {
       toast.error(messages.FORM_SUBMIT_UNSUCCESS);
@@ -124,6 +126,7 @@ export default function HorizontalLinearStepper() {
   }
 
   const handleNext = async () => {
+    console.log("in handleNext")
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -131,6 +134,7 @@ export default function HorizontalLinearStepper() {
     }
 
     try{
+      console.log("calling apiHandler")
       await apiHandler();
     }catch (err) {
       return;
@@ -208,11 +212,11 @@ export default function HorizontalLinearStepper() {
                   
                    {activeStep < steps.length-1  &&
                     <Button
-                        disabled={
-                          !((activeStep === 0 && checkObject(systemDesign) ) ||
-                          (activeStep === 1 && checkObject(personalDetails)) ||
-                          (activeStep === 2 && checkObject(financeDetails)))
-                        }
+                        // disabled={
+                          // !((activeStep === 0 && checkObject(systemDesign) ) ||
+                          // (activeStep === 1 && checkObject(personalDetails)) ||
+                          // (activeStep === 2 && checkObject(financeDetails)))
+                        // }
                       variant="contained"
                       color="primary"
                       onClick={handleNext}

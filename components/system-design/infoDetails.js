@@ -19,6 +19,7 @@ export default function AddressForm(props) {
   const [district, setDistrict] = useState('')
   const [pincode, setPincode] = useState('')
   const [electricityProvider, setElectricityProvider] = useState('');
+  const [consent, setConsent] = useState(false);
 
   const providersList = ["UGVCL", "PGVCL", "MGVCL", "DGVCL", "Torrent Power Ahmedabad", "Torrent Power Surat"];
   const districtList = ["dummy_district1", "dummy_district2"];
@@ -31,10 +32,12 @@ export default function AddressForm(props) {
       pincode,
       electricityProvider,
       state,
-      district
+      district,
+      consent
     }
     props.handler(obj);
-  }, [firstName, lastName, email, address, pincode, electricityProvider, state, district]);
+  }, [firstName, lastName, email, address, pincode, electricityProvider, state, district, consent]);
+
 
 
   return (
@@ -166,7 +169,7 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            control={<Checkbox checked={consent} onChange={(e) => setConsent(e.target.checked)} color="secondary" name="saveAddress" value="yes" />}
             label="I have read Flint Energy Privacy Policy"
           />
         </Grid>

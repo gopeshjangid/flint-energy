@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BookingForm() {
     const classes = useStyles();
     const [form ,setForm] = useState({
-        bill : 0,
+        bill : 3500,
         city : ''
     });
     const [cardInfo, setCardInfo] = useState({

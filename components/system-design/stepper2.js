@@ -231,7 +231,7 @@ const checkObject = (obj) => {
 
 export default function CustomizedSteppers() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const [systemDesign, setSystemDesign] = useState({
     systemSize: '',
@@ -247,14 +247,43 @@ export default function CustomizedSteppers() {
     pincode : '',
     electricityProvider : '',
     state: '',
-    district: ''
+    district: '',
+    consent: false
   });
   const [financeDetails, setFinanceDetails] = useState({
     payment: '',
     panNo: '',
     dob: ''
   });
+  const [razorpayDetails, setRazorpayDetails] = useState({
+    paymentId: '',
+    invoiceId: '',
+    invoiceStatus: '',
+    invoiceReceipt: '',
+    signature: ''
+  });
 
+  const apiHandler = async () => {
+    toast.info(messages.FORM_SUBMITING)
+    try{
+      let res;
+      if(activeStep === 0){
+        res = await postSystemDetails(activeStep, systemDesign)
+      }else if(activeStep === 1){
+        res = await postSystemDetails(activeStep, personalDetails)
+      }else if(activeStep === 2){
+        res = await postSystemDetails(activeStep, financeDetails)
+      }else{
+        // res = await
+      }
+      console.log(res);
+      if(res["all_ok"]) toast.done(messages.FORM_SUBMIT_SUCCESS);
+    }catch (err) {
+      toast.error(messages.FORM_SUBMIT_UNSUCCESS);
+      console.log(err)
+      throw err;
+    }
+  }
 
   const handleNext = async () => {
     try{
@@ -275,30 +304,10 @@ export default function CustomizedSteppers() {
     setActiveStep(0);
   };
 
-  
-  // API Inovking
-  const apiHandler = async () => {
-    toast.info(messages.FORM_SUBMITING)
-    try{
-      let res;
-      if(activeStep === 0){
-        res = await postSystemDetails(activeStep, systemDesign)
-      }else if(activeStep === 1){
-        res = await postSystemDetails(activeStep, personalDetails)
-      }else if(activeStep === 2){
-        res = await postSystemDetails(activeStep, financeDetails)
-      }else{
-        // res = await
-      }
-      if(res.stauts === 200) toast.done(messages.FORM_SUBMIT_SUCCESS);
-    }catch (err) {
-      toast.error(messages.FORM_SUBMIT_UNSUCCESS);
-      throw err;
-    }
-  }
 
   return (
     <div className={classes.root}>
+      <ToastContainer />
       <Stepper
         alternativeLabel
         activeStep={activeStep}
@@ -326,7 +335,7 @@ export default function CustomizedSteppers() {
                {activeStep === 0 && <CustomDesign handler={(obj) => setSystemDesign(obj)} />}
                {activeStep === 1 && <InfoDetails handler={(obj) => setPersonalDetails(obj)} />}
                {activeStep === 2 && <SystemFinance handler={(obj) => setFinanceDetails(obj)} />}
-               {activeStep === 3 && <SystemSummary />}
+               {activeStep === 3 && <SystemSummary handler={(obj) => setRazorpayDetails(obj)} />}
              </Box>
           </Grid>
           <Grid xs={12} item  sm={12} md={12} className={classes.stepBtnContainer} >
@@ -337,11 +346,11 @@ export default function CustomizedSteppers() {
               
                {activeStep < steps.length-1  &&
                 <Button
-                    disabled={
-                      !((activeStep === 0 && checkObject(systemDesign) ) ||
-                      (activeStep === 1 && checkObject(personalDetails)) ||
-                      (activeStep === 2 && checkObject(financeDetails)))
-                    }
+                    // disabled={
+                    //   !((activeStep === 0 && checkObject(systemDesign) ) ||
+                    //   (activeStep === 1 && checkObject(personalDetails)) ||
+                    //   (activeStep === 2 && checkObject(financeDetails)))
+                    // }
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
