@@ -55,9 +55,8 @@ export const postSystemDetails = async (activeStep, obj) => {
   });
   return res.data;
 }
-export co    ,
 
-nst submitLeadDetails = async (obj) => {
+export const submitLeadDetails = async (obj) => {
   const {firstName: first_name, lastName: last_name, mobile, aParam: a_param, bParam: b_param} = obj;
   const payload = {first_name, last_name, "mobile": Number(mobile), a_param, b_param};
 
