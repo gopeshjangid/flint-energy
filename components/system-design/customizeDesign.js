@@ -18,6 +18,10 @@ import { Typography } from "@material-ui/core";
 
 import _ from "lodash";
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 import { getCategories } from "../service/services";
 
 const useStyles = makeStyles((theme) => ({
@@ -116,11 +120,11 @@ export default function CenteredGrid(props) {
                      <Typography  component="h4">Rooftop Area</Typography>
                   </Box>
                  <Box className={classes.infoBox}>
-                    <Typography variant="h3" component="h3">&#x20B9; 5000</Typography>
+                    <Typography variant="h3" component="h3">&#x20B9; 5,000</Typography>
                      <Typography component="h4">System Cost</Typography>
                  </Box>
                  <Box className={classes.lastBox}>
-                    <Typography variant="h3" component="h3">&#x20B9; 5000</Typography>
+                    <Typography variant="h3" component="h3">&#x20B9; 5,000</Typography>
                      <Typography component="h4">Starting EMI</Typography>
                  </Box>
                    

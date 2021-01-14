@@ -1,5 +1,6 @@
 import React ,{useEffect} from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 import Cities from "../data/district.json";
 import {
   Button,
@@ -52,7 +53,11 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
+    width : '100%'
   },
+  select : {
+    width :'100%'
+  }
 }));
 export default function Forms(props) {
   const [open, setOpen] = React.useState(false);
@@ -94,24 +99,29 @@ export default function Forms(props) {
       >
         <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-          
-      <FormControl className={classes.margin}>
+         
+      <Grid container >   
+       <Grid item xs={12} sm={12} > 
+      <FormControl variant="filled" className={classes.margin}>
         <InputLabel id="demo-customized-select-label">State</InputLabel>
         <Select
           labelId="demo-customized-select-label"
           value="Gujrat"
           onChange={handleChange}
+          className={classes.select}
           input={<BootstrapInput />}
         >
           <option value="Gujrat">Gujrat</option>
         </Select>
       </FormControl>
-      <FormControl className={classes.margin}>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+      <FormControl variant="filled" className={classes.margin}>
         <InputLabel htmlFor="demo-customized-select-native">City</InputLabel>
         <NativeSelect
           id="demo-customized-select-native"
           value={city.id}
+          className={classes.select}
           onChange={onCityChange}
           input={<BootstrapInput />}
         >
@@ -121,7 +131,8 @@ export default function Forms(props) {
            }
         </NativeSelect>
       </FormControl>
-          </DialogContentText>
+        </Grid>
+        </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

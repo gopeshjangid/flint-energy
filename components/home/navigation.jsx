@@ -154,7 +154,7 @@ export default function PrimarySearchAppBar() {
             onClick={()=>redirect("")}
             aria-label="open drawer"
           >
-            <Image src="/logo.png"  width="220" height="50" />
+            <Image src="/logo.png"  width="150" height="40" />
           </IconButton>
         
           <div className={classes.grow} />

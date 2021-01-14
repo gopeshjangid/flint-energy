@@ -9,13 +9,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: '2px 4px',
     display: 'flex',
-    border: '1px solid '+theme.palette.primary.main ,
+    border: '1px solid '+theme.palette.border ,
     alignItems: 'center',
     borderRadius: '35px'
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
+    paddingLeft  :'20px'
   },
   iconButton: {
     padding: 10,
@@ -26,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
   helper : {
     paddingLeft: '20px',
-    paddingTop: '4px'
+    paddingTop: '4px',
+    fontSize : '12px',
+    fontWeight : 600
   }
 }));
 

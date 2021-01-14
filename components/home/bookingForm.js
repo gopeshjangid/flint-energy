@@ -1,11 +1,11 @@
 import React ,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Typography, Button, Grid, Box} from '@material-ui/core'
+import {Typography, Button, Grid, Box ,Card , CardContent} from '@material-ui/core'
 import { useRouter } from 'next/router'
 import Cards from  "./bookingCardInfo";
 import Location from "./location";
 import CALC_VARIABLES from "../../app.config"
-
+import PanelBlock from  "../common/panelBlock";
 const useStyles = makeStyles((theme) => ({
     root: {
         textAlign : 'center',
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
            // border : '1px solid #c0cecd',
             borderRadius : '13px',
           },
-        minHeight : '400px'
+        minHeight : '400px',
     },
     search  :{
         margin: theme.spacing(1),
@@ -105,7 +105,7 @@ export default function BookingForm() {
     }
 
     return (
-        <Box className={classes.root}>
+      <PanelBlock>
             <Typography className={classes.title} variant="h4" component="h4">
             Concerned about your electricity Bill?
              Install Solar to Enjoy Free energy for 25 Years!
@@ -132,6 +132,5 @@ export default function BookingForm() {
              </Button>
             </Grid>
             </Grid>
-        </Box>
-    );
+            </PanelBlock>)
 }

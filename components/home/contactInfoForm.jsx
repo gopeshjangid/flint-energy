@@ -1,10 +1,10 @@
 import React ,{useState, useEffect}  from 'react';
 import Image from  "next/image";
-import {Link, Typography, Container, Avatar, Button, TextField, Grid, Box, Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import {Link, Typography,FormControlLabel, Checkbox, Container, Avatar, Button, TextField, Grid, Box, Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import LockOutlinedIcon from '@material-ui/icons/VerifiedUser';
 import StarIcon from '@material-ui/icons/Star';
-
+import PanelBlock from  "../common/panelBlock";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -57,6 +57,7 @@ export default function ContactInfoForm(props) {
 
   const [verify , setVerify] = useState(false);
   const [submit , setSubmit] = useState(false);
+  const [checked , setCheckbox] = useState(false);
 
   useEffect(() => {
     props.leadChangeHandler({
@@ -79,6 +80,7 @@ export default function ContactInfoForm(props) {
           Verification
         </Typography>
         </div>
+        <PanelBlock> 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} style={{textAlign : 'center'}} >
         <Image src="/sasksolar.gif" height={215} width={500} />
@@ -154,6 +156,12 @@ export default function ContactInfoForm(props) {
                   autoComplete="mobile"
                 />
               </Grid>
+              <Grid item xs={12}>
+          <FormControlLabel
+            control={<Checkbox color="secondary" onChange={()=> setCheckbox (!checked)} checked={checked} name="saveAddress" value="yes" />}
+            label="I have read Flint Energy Privacy Policy"
+          />
+        </Grid>
             </>
             }
             {
@@ -169,7 +177,7 @@ export default function ContactInfoForm(props) {
                   label="6 Digit OTP"
                   type="tel"
                   id="otp"
-                />
+                />&nbsp;&nbsp;
                 <Link onClick={props.leadSubmitHandler}>
                   Resend OTP
                 </Link>
@@ -196,7 +204,9 @@ export default function ContactInfoForm(props) {
         </form>
         </Box>
        </Grid>
+      
        </Grid>
+       </PanelBlock>
       </div>
      
     </Container>

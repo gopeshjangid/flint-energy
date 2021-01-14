@@ -55,18 +55,14 @@ export const postSystemDetails = async (activeStep, obj) => {
   });
   return res.data;
 }
-export co    ,
 
-nst submitLeadDetails = async (obj) => {
+export const submitLeadDetails = async (obj) => {
   const {firstName: first_name, lastName: last_name, mobile, aParam: a_param, bParam: b_param} = obj;
-  const payload = {first_name, last_name, "mobile": Number(mobile), a_param, b_param};
+  const payload = {first_name, last_name, mobile: Number(mobile), a_param, b_param};
 
   console.log(payload)
-  const res = await axios.post(BASE_URI+"lp/lead", {
-    body: payload
-  },{
+  const res = await axios.post(BASE_URI+"lp/lead",payload,{
     headers: {
-      // Overwrite Axios's automatically set Content-Type
       'Content-Type': 'application/json'
     }
   });
@@ -77,11 +73,13 @@ nst submitLeadDetails = async (obj) => {
 
 export const verifyOtp = async (obj) => {
   const payload = {
-    "mobile": Number(obj.mobile),
-    "otp": Number(obj.otp)
+    mobile: Number(obj.mobile),
+    otp: Number(obj.otp)
   }
-  const res = await axios.post(BASE_URI+"lp/verify", {
-    body: payload
+  const res = await axios.post(BASE_URI+"lp/verify",payload ,{
+    headers: {
+      'Content-Type': 'application/json'
+    }
   });
   return res.data;
 }
