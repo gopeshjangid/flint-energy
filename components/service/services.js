@@ -2,7 +2,7 @@ import axios  from "axios";
 
 const BASE_URI = "https://www.unitgrid.in/v1/";
 
-const sessionId = "g4M5354pmsyLNG3xVbUf"
+const sessionId = "rsUChRJLxZYTEuV50cPF"
 
 export const getCategories = async () => {
   const res = await axios.get(BASE_URI + "/systemlist");
@@ -19,7 +19,7 @@ export const referral = async (a, b) => {
     console.log(res);
     return res.data;
 };
-export const postSystemDetails = async (activeStep, obj) => {
+export const postSystemDetails = async (activeStep, obj, sessionId) => {
 
   let payload = {};
 
@@ -38,20 +38,19 @@ export const postSystemDetails = async (activeStep, obj) => {
     payload = {first_name, last_name, electricity_provider, ...rest};
 
   }else if(activeStep === 2){
-    const {payment: payment_mode, panNo: pan_number} = obj;
-    payload = {payment_mode, pan_number};
-    payload["dob"] = obj.dob.valueOf();
+    const {payment, panNo: pan_number} = obj;
+    payload = {"payment_mode" : payment === "directonlinepayments", pan_number};
+    payload["dob"] = obj.dob.getTime();
   }else{
 
   }
 
+  console.log(sessionId + " " + activeStep)
   console.log(payload)
   const res = await axios.post(BASE_URI + "lp/submit", {
-    body: {
       "sessionid": sessionId, // handle later
       "form_part": activeStep,
       "payload": payload
-    }
   });
   return res.data;
 }
@@ -76,6 +75,7 @@ export const verifyOtp = async (obj) => {
     mobile: Number(obj.mobile),
     otp: Number(obj.otp)
   }
+  console.log(payload)
   const res = await axios.post(BASE_URI+"lp/verify",payload ,{
     headers: {
       'Content-Type': 'application/json'
@@ -92,8 +92,7 @@ export const finalSubmission = async (obj) => {
     "razorpay_invoice_receipt": Number(obj.invoiceReceipt),
     "razorpay_signature": Number(obj.signature)
   }
-  const res = await axios.post(BASE_URI+"lp/paycheck", {
-    body: payload
-  });
+  console.log(payload)
+  const res = await axios.post(BASE_URI+"lp/paycheck", payload);
   return res.data;
 }

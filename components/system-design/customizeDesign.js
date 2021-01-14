@@ -79,9 +79,9 @@ export default function CenteredGrid(props) {
   const [systemSize, setSystemSize] = useState("");
   const [structure, setStructure] = useState("");
   const [solar, setSolar] = useState("");
-  const [avgbill, setAvgbill] = useState(1);
+  const [avgbill, setAvgbill] = useState(0);
 
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   useEffect(() => {
     const getSystemSizeList = async () => {
@@ -146,7 +146,6 @@ export default function CenteredGrid(props) {
                         label="Average Bill"
                         fullWidth
                         InputProps={{inputProps : {min: 1}}}
-                        defaultValue={1}
                         value={avgbill}
                         onChange={(e) => setAvgbill(e.target.value)}
                     />
@@ -202,7 +201,7 @@ export default function CenteredGrid(props) {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
-                    <FormControl fullWidth={true} required>
+                    <FormControl fullWidth={true}>
                       <FormLabel component="h3" className={classes.label}>
                         Solar Panel
                       </FormLabel>

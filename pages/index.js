@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dynamic from "next/dynamic";
+import cookie from "js-cookie";
 import Header from "../components/common/header";
 import About from "../components/home/about";
 import Contact from "../components/home/contact";
@@ -19,7 +20,6 @@ import {submitLeadDetails, verifyOtp} from "../components/service/services";
 const HomePage = () => {
     const [aParam, setaParam] = useState('');
     const [bParam, setbParam] = useState('');
-    const [sessionId, setSessionId] = useState('');
 
     const [leadDetails, setLeadDetails] = useState({
         firstName: '',
@@ -55,10 +55,13 @@ const HomePage = () => {
             }
             const res = await submitLeadDetails(obj);
             console.log(res);
-            if(res["all_ok"]) toast.done(messages.OTP_SENT)
-            else throw new Error(res["error_msg"])
+            if(res["all_ok"]) {
+                toast.success(messages.OTP_SENT);
+            }else{
+                toast.error(res["error_msg"]);
+            }
         }catch (err) {
-            toast.error(messages.FORM_SUBMIT_UNSUCCESS)
+            toast.error(err)
             console.log(err);
         }
     }
@@ -73,12 +76,14 @@ const HomePage = () => {
             const res = await verifyOtp(obj);
             console.log(res);
             if(res["all_ok"]) {
-                toast.done(messages.OTP_VERIFIED);
-                setSessionId(res.sessionid)
+                toast.success(messages.OTP_VERIFIED);
+                cookie.set('sessionId', res.sessionid);
+            }else{
+                toast.error(res["error_msg"]);
             }
-            else throw new Error(res["error_msg"])
+            // console.log(cookie.getJSON('sessionId'))
         }catch (err) {
-            toast.error(messages.WRONG_OTP)
+            toast.error(err)
             console.log(err);
         }
     }

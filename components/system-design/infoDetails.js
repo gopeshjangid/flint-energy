@@ -78,6 +78,7 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+              required
               id="address"
               name="address"
               label="Address"
@@ -92,7 +93,6 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="email"
             name="email"
             variant="outlined"
@@ -169,7 +169,7 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox checked={consent} onChange={(e) => setConsent(e.target.checked)} color="secondary" name="saveAddress" value="yes" />}
+            control={<Checkbox required checked={consent} onChange={(e) => setConsent(e.target.checked)} color="secondary" name="saveAddress" value="yes" />}
             label="I have read Flint Energy Privacy Policy"
           />
         </Grid>

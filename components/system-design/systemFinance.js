@@ -101,14 +101,13 @@ export default function Review(props) {
                           label="Payment mode"
                           variant="outlined"
                       >
-                          <MenuItem value="Direct Online Payments">{"Direct Online Payments"}</MenuItem>)}
-                          <MenuItem value="Easy EMI(s)">{"Easy EMI(s)"}</MenuItem>)}
+                          <MenuItem value="directonlinepayments">{"Direct Online Payments"}</MenuItem>)}
+                          <MenuItem value="easyemi">{"Easy EMI(s)"}</MenuItem>)}
                       </Select>
                   </FormControl>
               </Grid>
               <Grid item xs={12}>
                   <TextField
-                      required
                       id="panNo"
                       name="panNo"
                       label="PAN No"
@@ -122,6 +121,7 @@ export default function Review(props) {
               <Grid item xs={12}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <DatePicker
+                          required
                           disableFuture
                           fullWidth={true}
                           variant="inline"

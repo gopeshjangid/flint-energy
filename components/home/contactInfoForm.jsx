@@ -55,8 +55,6 @@ export default function ContactInfoForm(props) {
   const [otp, setOtp] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
 
-  const [verify , setVerify] = useState(false);
-  const [submit , setSubmit] = useState(false);
   const [checked , setCheckbox] = useState(false);
 
   useEffect(() => {
@@ -67,6 +65,16 @@ export default function ContactInfoForm(props) {
       otp
     })
   }, [firstName, lastName, mobile, otp]);
+
+  const isValidLeadForm = () => {
+    if(mobile.length >= 10 && checked) return true;
+    return false;
+  }
+
+  const isValidOtp = () => {
+    if(mobile.length >= 10 && otp.length === 6) return true;
+    return false;
+  }
 
   return (
     <div id="verification">
@@ -158,7 +166,7 @@ export default function ContactInfoForm(props) {
               </Grid>
               <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" onChange={()=> setCheckbox (!checked)} checked={checked} name="saveAddress" value="yes" />}
+            control={<Checkbox required color="secondary" onChange={()=> setCheckbox (!checked)} checked={checked} name="saveAddress" value="yes" />}
             label="I have read Flint Energy Privacy Policy"
           />
         </Grid>
@@ -197,6 +205,9 @@ export default function ContactInfoForm(props) {
             color="primary"
             onClick={ !isOtpSent ? () => {props.leadSubmitHandler(); setIsOtpSent(true) } : props.verifyOtpHandler}
             className={classes.submit}
+            disabled={
+              !((!isOtpSent && isValidLeadForm()) || ( isOtpSent && isValidOtp()))
+            }
           >
             {!isOtpSent ? "Get OTP" : "Verify OTP"}
           </Button>
