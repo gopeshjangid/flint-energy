@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dynamic from "next/dynamic";
+import cookie from "js-cookie";
 import Header from "../components/common/header";
 import About from "../components/home/about";
 import JsonData from "../components/home/data/data.json";
@@ -77,10 +78,13 @@ const HomePage = () => {
             }
             const res = await submitLeadDetails(obj);
             console.log(res);
-            if(res["all_ok"]) toast.done(messages.OTP_SENT)
-            else throw new Error(res["error_msg"])
+            if(res["all_ok"]) {
+                toast.success(messages.OTP_SENT);
+            }else{
+                toast.error(res["error_msg"]);
+            }
         }catch (err) {
-            toast.error(messages.FORM_SUBMIT_UNSUCCESS)
+            toast.error(err)
             console.log(err);
         }
     }
@@ -94,13 +98,15 @@ const HomePage = () => {
             }
             const res = await verifyOtp(obj);
             if(res["all_ok"]) {
-                toast.done(messages.OTP_VERIFIED);
+                toast.success(messages.OTP_VERIFIED);
+                cookie.set('sessionId', res.sessionid);
                 router.push("/system-design");
-                setSessionId(res.sessionid)
+            }else{
+                toast.error(res["error_msg"]);
             }
-            else throw new Error(res["error_msg"])
+            // console.log(cookie.getJSON('sessionId'))
         }catch (err) {
-            toast.error(messages.WRONG_OTP)
+            toast.error(err)
             console.log(err);
         }
     }

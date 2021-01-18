@@ -2,6 +2,7 @@ import React , {useState} from "react";
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import cookie from "js-cookie";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -207,25 +208,18 @@ function getSteps() {
   return ['Customize your Design', 'Enter Your Details', 'Choose Your Finance' , 'System Summary'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <CustomDesign />;
-    case 1:
-      return <InfoDetails/>;
-    case 2:
-      return <SystemFinance/>;
-      case 3:
-      return <SystemSummary/>;
-    default:
-      return '';
-  }
+const isValidSystemDesign = (obj) => {
+  if(!obj["systemSize"] || !obj["structure"] || (obj["avgbill"] === 0)) return false;
+  return true;
 }
 
-const checkObject = (obj) => {
-  for(let key in obj){
-    if(!obj[key]) return false;
-  }
+const isValidPersonalDetails = (obj) => {
+  if(!obj["firstName"] || !obj["lastName"] || !obj["address"] || (obj["pincode"].length < 6) || !obj["electricityProvider"] || !obj["state"] || !obj["district"] || !obj["consent"]) return false;
+  return true;
+}
+
+const isValidFinancialDetails = (obj) => {
+  if(!obj["payment"] || !obj["dob"]) return false;
   return true;
 }
 
@@ -262,35 +256,56 @@ export default function CustomizedSteppers() {
     invoiceReceipt: '',
     signature: ''
   });
+  const sessionId = cookie.getJSON('sessionId');
 
   const apiHandler = async () => {
     toast.info(messages.FORM_SUBMITING)
     try{
       let res;
       if(activeStep === 0){
-        res = await postSystemDetails(activeStep, systemDesign)
+        res = await postSystemDetails(activeStep, systemDesign, sessionId)
       }else if(activeStep === 1){
-        res = await postSystemDetails(activeStep, personalDetails)
+        res = await postSystemDetails(activeStep, personalDetails, sessionId)
       }else if(activeStep === 2){
-        res = await postSystemDetails(activeStep, financeDetails)
+        res = await postSystemDetails(activeStep, financeDetails, sessionId)
       }else{
         // res = await
       }
       console.log(res);
-      if(res["all_ok"]) toast.done(messages.FORM_SUBMIT_SUCCESS);
+      if(res["all_ok"]) {
+        toast.success(messages.FORM_SUBMIT_SUCCESS);
+      }else{
+        toast.error(res["error_msg"]);
+      }
     }catch (err) {
-      toast.error(messages.FORM_SUBMIT_UNSUCCESS);
       console.log(err)
       throw err;
     }
   }
 
   const handleNext = async () => {
+    toast.info(messages.FORM_SUBMITING)
     try{
-      await apiHandler();
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      let res;
+      if(activeStep === 0){
+        res = await postSystemDetails(activeStep, systemDesign, sessionId)
+      }else if(activeStep === 1){
+        res = await postSystemDetails(activeStep, personalDetails, sessionId)
+      }else if(activeStep === 2){
+        res = await postSystemDetails(activeStep, financeDetails, sessionId)
+      }else{
+        // res = await
+      }
+      console.log(res);
+      if(res["all_ok"]) {
+        toast.success(messages.FORM_SUBMIT_SUCCESS);
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }else{
+        toast.error(res["error_msg"]);
+      }
     }catch (err) {
-      return;
+      console.log(err)
+      throw err;
     }
 
     
@@ -303,6 +318,10 @@ export default function CustomizedSteppers() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  // if(!sessionId){
+  //   return
+  // }
 
 
   return (
@@ -346,11 +365,11 @@ export default function CustomizedSteppers() {
               
                {activeStep < steps.length-1  &&
                 <Button
-                    // disabled={
-                    //   !((activeStep === 0 && checkObject(systemDesign) ) ||
-                    //   (activeStep === 1 && checkObject(personalDetails)) ||
-                    //   (activeStep === 2 && checkObject(financeDetails)))
-                    // }
+                    disabled={
+                      !((activeStep === 0 && isValidSystemDesign(systemDesign) ) ||
+                      (activeStep === 1 && isValidPersonalDetails(personalDetails)) ||
+                      (activeStep === 2 && isValidFinancialDetails(financeDetails)))
+                    }
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
