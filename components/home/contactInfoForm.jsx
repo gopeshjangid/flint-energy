@@ -70,7 +70,7 @@ export default function ContactInfoForm(props) {
 
   return (
     <div id="verification">
-    <Container className={classes.container}  maxWidth="lg">
+    <div className={classes.container} >
       <div className={classes.paper}>
         <div className={classes.header}>
         <Avatar className={classes.avatar}>
@@ -148,7 +148,8 @@ export default function ContactInfoForm(props) {
                   fullWidth
                   type="tel"
                   value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
+                  
+                  onChange={(e) => e.target.value.length <= 10 ?  setMobile(e.target.value) :''}
                   id="mobile"
                   label="Mobile No"
                   placeholder={"988XXXXXXX"}
@@ -209,7 +210,7 @@ export default function ContactInfoForm(props) {
        </PanelBlock>
       </div>
      
-    </Container>
+    </div>
     <Divider className={classes.divider}/>
     </div>
   );

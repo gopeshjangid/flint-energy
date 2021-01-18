@@ -15,10 +15,8 @@ const useStyles = makeStyles((theme)=>({
     paddingTop : '92px',
     minHeight : '100vh',
     width : '100%',
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: '1%',
-      paddingRight: '1%',
-      paddingTop : '125px',
+    [theme.breakpoints.down('xs')]: {
+     
 
     },
   }

@@ -55,8 +55,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
            
           },
-          [theme.breakpoints.down('xs')]: {
-          },
+         
       },
       bookNow : {
           padding : '16px 65px',
