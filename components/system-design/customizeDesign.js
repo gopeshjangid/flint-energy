@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-
+import {useRouter} from  "next/router";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -75,14 +74,15 @@ const useStyles = makeStyles((theme) => ({
 export default function CenteredGrid(props) {
   const classes = useStyles();
   const [systemSizeLIst, setSystemSizeList] = useState(["dummy1", "dummy2"]);
-
+  const router = useRouter();
   const [systemSize, setSystemSize] = useState("");
   const [structure, setStructure] = useState("");
   const [solar, setSolar] = useState("");
-  const [avgbill, setAvgbill] = useState(0);
-
-  // const [error, setError] = useState("");
-
+  const  bill = router.query ? router.query.bill : 0;
+  const [avgbill, setAvgbill] = useState(bill);
+  useEffect(() => {
+    setAvgbill(bill)
+  },[]);
   useEffect(() => {
     const getSystemSizeList = async () => {
       const res = await getCategories();
@@ -161,45 +161,30 @@ export default function CenteredGrid(props) {
                         label="Suggested System Size (in KWp)"
                         variant="outlined"
                       >
-                        {_.map(systemSizeLIst, (cat) =>
-                            <MenuItem value={cat}>{cat}</MenuItem>)}
+                        {_.map(systemSizeLIst, (cat,index) =>
+                            <MenuItem key={index} value={cat}>{cat}</MenuItem>)}
                       </Select>
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
-                    <FormControl fullWidth={true} required>
-                      <FormLabel
-                        component="h3"
-                        variant="h4"
-                        className={classes.label}
-                      >
-                        Structure Type
-                      </FormLabel>
-                      <RadioGroup
-                        aria-label="gender"
-                        name="type"
+
+                  <FormControl required variant="outlined" fullWidth={true}>
+                      <InputLabel htmlFor="systemSize">Structure Type</InputLabel>
+                      <Select
+                        id="systemSize"
+                        fullWidth={true}
                         value={structure}
                         onChange={(e) => setStructure(e.target.value)}
-                        className={classes.radioGroup}
+                        label="Structure Type"
+                        variant="outlined"
                       >
-                        <FormControlLabel
-                          value="0"
-                          control={<Radio />}
-                          label="Standard"
-                        />
-                        <FormControlLabel
-                          value="1"
-                          control={<Radio />}
-                          label="Elevated"
-                        />
-                        <FormControlLabel
-                          value="2"
-                          control={<Radio />}
-                          label="Customize"
-                        />
-                      </RadioGroup>
+                        <option value="">Choose Structure Type </option>
+                       <option value="Standard">Standard</option>
+                       <option value="Elevated">Elevated</option>
+                       <option value="Customize">Customize</option>
+                      </Select>
                     </FormControl>
-                  </Grid>
+                    </Grid>
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl fullWidth={true}>
                       <FormLabel component="h3" className={classes.label}>

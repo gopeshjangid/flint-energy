@@ -9,7 +9,7 @@ import Select from "@material-ui/core/Select";
 import _ from "lodash";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-
+import Cities from "../data/district.json";
 export default function AddressForm(props) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -39,10 +39,9 @@ export default function AddressForm(props) {
   }, [firstName, lastName, email, address, pincode, electricityProvider, state, district, consent]);
 
 
-
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h5" gutterBottom={6}>
         Personal Details
       </Typography>
       <Grid container spacing={3}>
@@ -162,8 +161,10 @@ export default function AddressForm(props) {
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
             >
-              {_.map(districtList, (cat) =>
-                  <MenuItem value={cat}>{cat}</MenuItem>)}
+            <option value="">Select District</option>
+           {
+             Cities.districts.map( (city ,index) => <option key={"city"+index} value={city.city}>{city.city}</option>)
+           }
             </Select>
           </FormControl>
         </Grid>

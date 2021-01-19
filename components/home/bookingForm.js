@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useState , useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Typography, Button, Grid, Box ,Card , CardContent} from '@material-ui/core'
 import { useRouter } from 'next/router'
@@ -6,6 +6,7 @@ import Cards from  "./bookingCardInfo";
 import Location from "./location";
 import CALC_VARIABLES from "../../app.config"
 import PanelBlock from  "../common/panelBlock";
+import { SettingsBluetoothOutlined } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
     root: {
         textAlign : 'center',
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
       }
 }));
 
-export default function BookingForm() {
+export default function BookingForm(props) {
     const classes = useStyles();
     const [form ,setForm] = useState({
         bill : 3500,
@@ -83,6 +84,14 @@ export default function BookingForm() {
     const BookNowHandler = ()=>{
         router.push("/#verification");
     }
+
+  useEffect(()=>{
+   props.setBill(form.bill);
+  },[form])
+
+  useEffect(()=>{
+    props.setBill(form.bill);
+   },[])
 
     const onChangeHandler = () => {
         // --- CALCULATION ---

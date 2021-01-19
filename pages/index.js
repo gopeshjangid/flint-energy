@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Dynamic from "next/dynamic";
 import cookie from "js-cookie";
 import Header from "../components/common/header";
 import About from "../components/home/about";
@@ -10,9 +9,7 @@ import ContactInfoForm from "../components/home/contactInfoForm";
 import Footer from "../components/common/footer";
 import {referral} from "../components/service/services";
 import {useRouter} from "next/router";
-import Image from "next/image";
 import {toast, ToastContainer} from "react-toastify";
-import Panel from "../components/common/panelBlock";
 import 'react-toastify/dist/ReactToastify.css';
 import { makeStyles } from '@material-ui/core/styles';
 import messages from "../messages";
@@ -42,6 +39,7 @@ const HomePage = () => {
     const classes = useStyles();
     const [aParam, setaParam] = useState('');
     const [bParam, setbParam] = useState('');
+    const [bill, setBill] = useState('');
     const [sessionId, setSessionId] = useState('');
     const router  =  useRouter();
     const [leadDetails, setLeadDetails] = useState({
@@ -100,7 +98,7 @@ const HomePage = () => {
             if(res["all_ok"]) {
                 toast.success(messages.OTP_VERIFIED);
                 cookie.set('sessionId', res.sessionid);
-                router.push("/system-design");
+                router.push("/system-design?bill="+bill);
             }else{
                 toast.error(res["error_msg"]);
             }
@@ -113,15 +111,14 @@ const HomePage = () => {
 
   return (
     <>
-      <link rel="stylesheet" href="/static/css/bootstrap.css" />
       <Header />
       <div className={classes.container}>
         <ToastContainer />
         <div className={classes.introduction}>
-
         </div>
-        <BookingForm />
+        <BookingForm setBill={setBill} />
         <ContactInfoForm
+        
             leadChangeHandler={(obj) => setLeadDetails(obj)}
             leadSubmitHandler={() => leadSubmitHandler()}
             verifyOtpHandler={() => verifyOtpHandler()}

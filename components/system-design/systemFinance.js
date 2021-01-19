@@ -1,16 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import _ from "lodash";
@@ -19,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import { DatePicker } from '@material-ui/pickers';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
+import  {Card, CardContent} from "@material-ui/core";
 const products = [
   { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
   { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
@@ -77,20 +70,30 @@ export default function Review(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Choose your finance
       </Typography>
       
       <Grid container spacing={2}>
          <Grid container spacing={2} alignItems='center' justify="center" xs={12} sm={6}>
-             <Grid  item xs={12}>
-                 <Typography variant="h5" component="h2">Total System Cost</Typography>
-                 <Typography variant="h5" component="h2">Rs. 5,00,000</Typography>
-                 <Typography variant="h5" component="h2">EMI 12 ***** | EMI 18 *****</Typography>
+             <Grid  item xs={12} >
+                      <Box m={3} p={4}> 
+                        <Typography variant="h4" component="h3">
+                           Total System Cost
+                        </Typography>
+                        <Typography variant="h4" component="h2"></Typography>
+                        <Typography variant="h4" component="h2">
+                            &nbsp;  &#x20B9; 50,000
+                        </Typography>
+                        <Typography variant="h4" component="h2"></Typography>
+                        <Typography variant="h5" component="h4">
+                           EMI 12 ***** | EMI 18 *****
+                        </Typography>
+                     </Box>   
              </Grid>
          </Grid>
           <Grid container spacing={2}  xs={12} sm={6}>
-              <Grid item xs={12}>
+              <Grid item xs={12} p={4}>
                   <FormControl required variant="outlined" fullWidth={true}>
                       <InputLabel htmlFor="payment mode">Payment Mode</InputLabel>
                       <Select
@@ -101,8 +104,8 @@ export default function Review(props) {
                           label="Payment mode"
                           variant="outlined"
                       >
-                          <MenuItem value="directonlinepayments">{"Direct Online Payments"}</MenuItem>)}
-                          <MenuItem value="easyemi">{"Easy EMI(s)"}</MenuItem>)}
+                          <MenuItem value="directonlinepayments">{"Direct Online Payments"}</MenuItem>
+                          <MenuItem value="easyemi">{"Easy EMI(s)"}</MenuItem>
                       </Select>
                   </FormControl>
               </Grid>
@@ -118,7 +121,7 @@ export default function Review(props) {
                       autoComplete="family-name"
                   />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} p={4}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <DatePicker
                           required

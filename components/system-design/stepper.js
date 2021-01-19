@@ -14,7 +14,6 @@ import messages from "../../messages";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-     
   },
   button: {
     marginRight: theme.spacing(1),
@@ -36,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
       borderRadius : '13px',
       padding : '16px 16px 30px 16px',
     }
+  },
+  box : {
+    background : 'white'
   }
 }));
 
@@ -197,7 +199,7 @@ export default function HorizontalLinearStepper() {
         ) : (
           <Grid container spacing={4} className={classes.container} direction="column">
             <Grid xs={12} item  sm={12} md={12} className={classes.stepContent} >
-                 <Box className={classes.box} m={1}>
+                 <Box className={classes.box}>
                    {activeStep === 0 && <CustomDesign handler={(obj) => setSystemDesign(obj)} />}
                    {activeStep === 1 && <InfoDetails handler={(obj) => setPersonalDetails(obj)} />}
                    {activeStep === 2 && <SystemFinance handler={(obj) => setFinanceDetails(obj)} />}

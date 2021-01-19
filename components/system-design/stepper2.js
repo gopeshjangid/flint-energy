@@ -201,6 +201,14 @@ const useStyles = makeStyles((theme) => ({
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
+  },
+  box :  {
+    backgroundColor : 'white'
+  },
+  bottomBar : {
+    textAlign : 'right',
+    padding : '15px',
+    marginBottom : '10px'
   }
 }));
 
@@ -214,7 +222,7 @@ const isValidSystemDesign = (obj) => {
 }
 
 const isValidPersonalDetails = (obj) => {
-  if(!obj["firstName"] || !obj["lastName"] || !obj["address"] || (obj["pincode"].length < 6) || !obj["electricityProvider"] || !obj["state"] || !obj["district"] || !obj["consent"]) return false;
+  if(!obj["firstName"] || !obj["lastName"] || !obj["address"] || (obj["pincode"].length < 6) || !obj["electricityProvider"] || !obj["state"] || obj["district"] === "" || !obj["consent"]) return false;
   return true;
 }
 
@@ -332,8 +340,8 @@ export default function CustomizedSteppers() {
         activeStep={activeStep}
         connector={<ColorlibConnector />}
       >
-        {steps.map((label) => (
-          <Step key={label}>
+        {steps.map((label ,index) => (
+          <Step key={index}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
           </Step>
         ))}
@@ -350,7 +358,7 @@ export default function CustomizedSteppers() {
           </div>
         ) : ( <Grid container spacing={4} className={classes.container} direction="column">
         <Grid xs={12} item  sm={12} md={12} className={classes.stepContent} >
-             <Box className={classes.box} m={1}>
+             <Box className={classes.box} mt={2} p={2}>
                {activeStep === 0 && <CustomDesign handler={(obj) => setSystemDesign(obj)} />}
                {activeStep === 1 && <InfoDetails handler={(obj) => setPersonalDetails(obj)} />}
                {activeStep === 2 && <SystemFinance handler={(obj) => setFinanceDetails(obj)} />}
@@ -358,7 +366,7 @@ export default function CustomizedSteppers() {
              </Box>
           </Grid>
           <Grid xs={12} item  sm={12} md={12} className={classes.stepBtnContainer} >
-          <div>
+          <div className={classes.bottomBar}>
                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                   Back
                 </Button>
