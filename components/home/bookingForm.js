@@ -60,13 +60,11 @@ const useStyles = makeStyles((theme) => ({
       },
       bookNow : {
           padding : '16px 65px',
+          marginTop : '20px',
           fontSize : '14px',
       },
-      title : {
-          padding : '17px',
-          paddingBottom  :'40px',
-          lineHeight : '25px'
-      }
+     
+     
 }));
 
 export default function BookingForm(props) {
@@ -113,11 +111,8 @@ export default function BookingForm(props) {
     }
 
     return (
-      <PanelBlock>
-            <Typography className={classes.title} variant="h4" component="h4">
-            Concerned about your electricity Bill?
-             Install Solar to Enjoy Free energy for 25 Years!
-            </Typography>
+      <div>
+          
         <Grid container spacing={2} className={classes.container} direction="row">
             {/* <Grid xs={12} item  sm={8} md={8}  >
               <TextField id="outlined-search"
@@ -126,13 +121,13 @@ export default function BookingForm(props) {
                fullWidth
                label="Amount"  type="number" variant="outlined" />
             </Grid> */}
-            <Grid item xs={12} sm={4} md={4}  >
+            <Grid item xs={12} sm={6} md={6} textAlign="center" >
                    <Location onChangeHandler={onChangeHandler} onValChangeHandler={(obj) => setForm(obj)} />
                </Grid>
             </Grid>
           <Cards cardInfo={cardInfo} />
-          <Grid container spacing={8}  >
-            <Grid xs={12} item  sm={12} md={12}  >
+          <Grid container spacing={8} justifyContent="center" >
+            <Grid xs={12} item  sm={12} md={12} style={{textAlign : 'center'}} >
             <Button className={classes.bookNow}
               onClick={BookNowHandler}
               size="large" variant="contained" color="primary">
@@ -140,5 +135,6 @@ export default function BookingForm(props) {
              </Button>
             </Grid>
             </Grid>
-            </PanelBlock>)
+            </div>
+          )
 }

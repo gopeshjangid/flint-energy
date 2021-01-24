@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
   },
   box : {
     border : '1px solid '+theme.palette.border,
-    height : '340px',
     padding : '20px',
     display : 'flex',
     flexDirection: 'column',

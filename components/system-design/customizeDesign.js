@@ -33,8 +33,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   sizeLogoBox : {
-    minHeight : '100px',
-    padding : '12px'
+    minHeight : '300px',
+    textAlign : 'center',
+    padding : '20px'
   },
   box : {
     border : '1px solid '+theme.palette.border,
@@ -105,6 +106,21 @@ export default function CenteredGrid(props) {
     props.handler(obj);
   }, [systemSize, structure, solar, avgbill]);
 
+  const getImage = (type) =>{
+    switch (type) {
+      case 'Standard':
+        return '/standard.png'
+        break;
+      case 'Elevated':
+      case 'Customize':
+        return '/elevation.png'
+        break;  
+      default:
+        return '/no.png'
+        break;
+    }
+  }
+
 
   return (
     <div className={classes.root}>
@@ -112,7 +128,9 @@ export default function CenteredGrid(props) {
         <Grid item xs={12} sm={7} md={7}>
             <Grid container spacing={3} direction="column">
               <Box className={classes.sizeLogoBox}>
-                <Image src="/sasksolar.gif" height={300} width={400} />
+               {structure ?  <Image src={getImage(structure)} height={320} width={500} />
+                   : <Typography variant="h3" component="h3">Select System Size</Typography>
+                  }
               </Box>
               <Box className={classes.leftBottomBox} alignContent="center" justifyContent="space-around">
                  <Box className={classes.infoBox} > 
