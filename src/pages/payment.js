@@ -1,12 +1,8 @@
-import React from 'react';
-import { ThemeProvider } from 'theme-ui';
+import React ,{useState} from 'react';
+import { ThemeProvider ,Box , Container} from 'theme-ui';
 import theme from 'theme';
-import SEO from 'components/seo';
 import Layout from 'components/layout';
-import Stepper from  "../components/system-design/stepper2";
-import {  Box, Container} from 'theme-ui';
 import bannerBg from 'assets/images/banner-bg.png';
-
 const styles = {
   section: {
     '@media only screen and (min-width: 320px) and (max-width: 420px) ' : {
@@ -27,27 +23,22 @@ const styles = {
     width  :'100% !important'
   }
 };
-class SystemDesign extends React.Component {
 
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-          <Layout>
-            <SEO title="FlinTech" />
-            <Box as="section" id="systemDesign" sx={styles.section}>
+export default function Payment() {
+
+  const [payment , setPayment] = useState(0);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Box as="section" id="paymentPage" sx={styles.section}>
               <Container >
                  <Box sx={styles.contentWrapper}>
-                    <Stepper/>
+                    payment page start here
                  </Box>
                 </Container>
-             </Box>
-           
-         </Layout>
-        </ThemeProvider>
-    );
-  }
+         </Box>
+      </Layout>
+    </ThemeProvider>
+  );
 }
-
-
-
-export default SystemDesign ;

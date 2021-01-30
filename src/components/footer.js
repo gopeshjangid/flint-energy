@@ -1,34 +1,18 @@
 /** @jsx jsx */
 import { jsx, Box, Flex, Text, Container } from 'theme-ui';
 import { Link } from 'components/link';
-import Logo from 'components/logo';
 import { rgba } from 'polished';
 
 const navItems = [
   {
     id: 1,
-    link: '#!',
+    link: '/',
     title: 'Home',
-  },
-  {
-    id: 2,
-    link: '#!',
-    title: 'Advertise',
-  },
-  {
-    id: 3,
-    link: '#!',
-    title: 'Supports',
-  },
-  {
-    id: 4,
-    link: '#!',
-    title: 'Marketing',
   },
   {
     id: 5,
     link: '#!',
-    title: 'FAQ',
+    title: 'About Us',
   },
 ];
 
@@ -38,7 +22,6 @@ export default function Footer() {
       <Container sx={styles.container}>
         <Flex sx={styles.content}>
           <Flex sx={styles.copyright}>
-            <Logo white />
             <Text as="span">
               All right reserved  &amp; Flintech
             </Text>

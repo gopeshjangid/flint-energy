@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useState ,useEffect} from "react";
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -11,7 +11,6 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import VideoLabelIcon from "@material-ui/icons/VideoLabel";
 import StepConnector from "@material-ui/core/StepConnector";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { ToastContainer, toast } from 'react-toastify';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
@@ -22,9 +21,9 @@ import SystemSummary from  "./systemSummary";
 import {postSystemDetails} from "../service/services";
 import messages from "../../../messages";
 import { Grid } from '@material-ui/core';
-import {Box } from 'theme-ui';
+import {Box ,Radio ,Button } from 'theme-ui';
 
-const useQontoStepIconStyles = makeStyles({
+const useQontoStepIconStyles = makeStyles((theme)=>({
   root: {
     color: "#eaeaf0",
     display: "flex",
@@ -38,14 +37,14 @@ const useQontoStepIconStyles = makeStyles({
     width: 16,
     height: 8,
     borderRadius: "10%",
-    backgroundColor: "currentColor"
+    backgroundColor: theme.palette.primary
   },
   completed: {
     color: "#784af4",
     zIndex: 1,
     fontSize: 18
   }
-});
+}));
 
 function QontoStepIcon(props) {
   const classes = useQontoStepIconStyles();
@@ -212,21 +211,29 @@ const isValidFinancialDetails = (obj) => {
 const style = {
   box  : {
     background : "white",
-    height: '83vh',
-    marginBottom: '21px'
+  },
+  button : {
+    marginRight : '15px'
+  },
+  bottomBar : {
+    display : 'flex',
+    justifyContent : 'flex-end'
+  },
+  wrapper : {
+    width  :'100%'
   }
 
 }
 
 export default function CustomizedSteppers() {
   const classes = useStyles1();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
   const steps = getSteps();
   const [systemDesign, setSystemDesign] = useState({
     systemSize: '',
     structure: '',
     solar: '',
-    avgbill: ''
+    avgbill: 0
   });
   const [personalDetails, setPersonalDetails] = useState({
     firstName : '',
@@ -278,6 +285,12 @@ export default function CustomizedSteppers() {
     }
   }
 
+  useEffect(()=>{
+     if(localStorage && localStorage.getItem("bill")){
+       setSystemDesign({...systemDesign, avgbill : localStorage.getItem("bill")});
+     }
+  },[])
+
   const handleNext = async () => {
     toast.info(messages.FORM_SUBMITING)
     try{
@@ -320,7 +333,7 @@ export default function CustomizedSteppers() {
 
 
   return (
-    <Box as="div" id="systemDesign" sx={style.box}>
+    <Box as="div" id="systemDesign" sx={style.wrapper}>
       <Stepper
         alternativeLabel
         activeStep={activeStep}
@@ -332,7 +345,7 @@ export default function CustomizedSteppers() {
           </Step>
         ))}
       </Stepper>
-      <div>
+      <Box as="div" id="systemDesign" sx={style.box}>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
@@ -352,8 +365,8 @@ export default function CustomizedSteppers() {
              </Box>
           </Grid>
           <Grid xs={12} item  sm={12} md={12} className={classes.stepBtnContainer} >
-          <div className={classes.bottomBar}>
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+           <Box  sx={style.bottomBar}>
+                <Button variant='primary' disabled={activeStep === 0} onClick={handleBack} sx={style.button}>
                   Back
                 </Button>
               
@@ -364,20 +377,19 @@ export default function CustomizedSteppers() {
                       (activeStep === 1 && isValidPersonalDetails(personalDetails)) ||
                       (activeStep === 2 && isValidFinancialDetails(financeDetails)))
                     }
-                  variant="contained"
-                  color="primary"
+                  variant='primary'
                   onClick={handleNext}
-                  className={classes.button}
+                  sx={style.button}
                 >
                  Next
                 </Button>
               }
-        </div>
+        </Box>
         </Grid>
         </Grid>
        
         )}
-      </div>
+      </Box>
     </Box>
   );
 }

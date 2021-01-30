@@ -77,7 +77,9 @@ const BookNowHandler = ()=>{
              id="email"
              placeholder="Enter your Electricity Bill" />
             <Box sx={styles.cityWrapper}>
-              <Text as="h2" sx={styles.city}> Jodhpur - &nbsp; </Text><Text as="h2" sx={styles.city}> <Link color="primary" aria-setsize="small" styles={{display : 'block'}}  onClick={()=>setOpen(!open)}  href="#">Change Location</Link></Text> 
+              <Text as="h2" sx={styles.city}> {city.city || "Select City"} - &nbsp; </Text>
+              <Text as="h2" sx={styles.city}> 
+              <Link color="primary" aria-setsize="small" styles={{display : 'block'}}  onClick={()=>setOpen(!open)}  href="#">Change Location</Link></Text> 
             </Box>
             <Box sx={styles.featureWrapper}>
              
