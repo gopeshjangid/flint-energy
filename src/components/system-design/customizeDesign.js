@@ -159,7 +159,12 @@ export default function CenteredGrid(props) {
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl required variant="outlined" fullWidth={true}>
                       <Label htmlFor='Suggested System Size (in KWp)'>Suggested System Size (in KWP)</Label>
-                      <TSelect name='size' mb={3} mt={3}>
+                        <TSelect name='systemSize' mb={3} mt={3}
+                          id="systemSize"
+                          fullWidth={true}
+                          value={systemSize}
+                          onChange={(e) => setSystemSize(e.target.value)}
+                      >
                       <option>Select System Size</option>
                        {_.map(systemSizeLIst, (cat,index) => <option key={cat.id} value={cat}>{cat}</option> )}
                        
@@ -170,8 +175,8 @@ export default function CenteredGrid(props) {
 
                   <FormControl required variant="outlined" fullWidth={true}>
                       <Label htmlFor='Structure Type'>Structure Type</Label>
-                      <TSelect name='systemSize' mb={3} mt={3}
-                          id="systemSize"
+                      <TSelect name='structureType' mb={3} mt={3}
+                          id="structureType"
                           fullWidth={true}
                           value={structure}
                           onChange={(e) => setStructure(e.target.value)}

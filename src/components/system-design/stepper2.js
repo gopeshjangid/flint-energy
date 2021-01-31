@@ -194,7 +194,8 @@ function getSteps() {
 }
 
 const isValidSystemDesign = (obj) => {
-  if(!obj["systemSize"] || !obj["structure"] || (obj["avgbill"] === 0)) return false;
+  if(!obj["systemSize"] || !obj["structure"]) return false;
+  console.log(obj)
   return true;
 }
 
@@ -227,7 +228,7 @@ const style = {
 
 export default function CustomizedSteppers() {
   const classes = useStyles1();
-  const [activeStep, setActiveStep] = React.useState(2);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const [systemDesign, setSystemDesign] = useState({
     systemSize: '',
@@ -379,7 +380,6 @@ export default function CustomizedSteppers() {
                     }
                   variant='primary'
                   onClick={handleNext}
-                  sx={style.button}
                 >
                  Next
                 </Button>

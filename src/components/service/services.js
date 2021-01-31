@@ -32,7 +32,6 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
        "avg_bill": Number(avgbill),
     }
     payload["ac_module"] = solar === 'ac';
-
   }else if(activeStep === 1){
     const {firstName: first_name, lastName: last_name, electricityProvider: electricity_provider, ...rest} = obj
     payload = {first_name, last_name, electricity_provider, ...rest};
