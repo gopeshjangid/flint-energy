@@ -12,21 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import { DatePicker } from '@material-ui/pickers';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import  {Card, CardContent} from "@material-ui/core";
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
 
 const useStyles = makeStyles((theme) => ({
   
@@ -122,18 +107,21 @@ export default function Review(props) {
                   />
               </Grid>
               <Grid item xs={12} p={4}>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <DatePicker
-                          required
-                          disableFuture
-                          fullWidth={true}
-                          variant="inline"
-                          format="dd/MM/yyyy"
-                          label="Date of birth"
-                          onChange={(date) => setDob(date)}
-                          value={dob}
-                      />
-                  </MuiPickersUtilsProvider>
+
+              <TextField
+                  id="date"
+                  label="Birthday"
+                  type="date"
+                  value={dob}
+                  defaultValue={dob}
+                  format="dd/MM/yyyy"
+                  onChange={(date) => setDob(date)}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                 
               </Grid>
           </Grid>
 

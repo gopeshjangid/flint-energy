@@ -17,6 +17,7 @@ import { Typography } from "@material-ui/core";
 import StandardImage from  "../../assets/images/standard.png";
 import ElevationImage from  "../../assets/images/elevation.png";
 import _ from "lodash";
+import { Field ,Label, Select as TSelect } from 'theme-ui';
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -59,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 
   },
   infoBox : {
-    borderRight : '3px solid '+theme.palette.primary.main,
     padding : '12px',
     display : 'flex',
     flexDirection : 'column',
@@ -128,23 +128,23 @@ export default function CenteredGrid(props) {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={7} md={7}>
             <Grid container spacing={3} direction="column">
-              <Box className={classes.sizeLogoBox}>
-               {structure ?  <Image src={getImage(structure)} height={320} width={500} />
-                   : <Typography variant="h3" component="h3">Select System Size</Typography>
+              <Box className={classes.sizeLogoBox} m={4}>
+               {structure ?  <Image src={getImage(structure)} height={250} width={320} />
+                   : <Typography variant="h4" component="h4" align="center"  >Select System Size</Typography>
                   }
               </Box>
               <Box className={classes.leftBottomBox} alignContent="center" justifyContent="space-around">
                  <Box className={classes.infoBox} > 
-                     <Typography variant="h3" component="h3">350 SF</Typography>
-                     <Typography  component="h4">Rooftop Area</Typography>
+                     <Typography variant="h5" component="h3">350 SF</Typography>
+                     <Typography  component="h6">Rooftop Area</Typography>
                   </Box>
                  <Box className={classes.infoBox}>
-                    <Typography variant="h3" component="h3">&#x20B9; 5,000</Typography>
-                     <Typography component="h4">System Cost</Typography>
+                    <Typography variant="h5" component="h3">&#x20B9; 5,000</Typography>
+                     <Typography component="h6">System Cost</Typography>
                  </Box>
                  <Box className={classes.lastBox}>
-                    <Typography variant="h3" component="h3">&#x20B9; 5,000</Typography>
-                     <Typography component="h4">Starting EMI</Typography>
+                    <Typography variant="h5" component="h3">&#x20B9; 5,000</Typography>
+                     <Typography component="h6">Starting EMI</Typography>
                  </Box>
                    
               </Box>
@@ -155,60 +155,37 @@ export default function CenteredGrid(props) {
             <Grid item xs={12} sm={12} md={12}>
               <Box className={classes.box} m={2}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={12}>
-                    <TextField
-                        required
-                        id="avgbill"
-                        name="avgbill"
-                        variant="outlined"
-                        type="number"
-                        label="Average Bill"
-                        fullWidth
-                        InputProps={{inputProps : {min: 1}}}
-                        value={avgbill}
-                        onChange={(e) => setAvgbill(e.target.value)}
-                    />
-                  </Grid>
+                  
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl required variant="outlined" fullWidth={true}>
-                      <InputLabel htmlFor="systemSize">Suggested System Size (in KWp)</InputLabel>
-                      <Select
-                        id="systemSize"
-                        fullWidth={true}
-                        value={systemSize}
-                        onChange={(e) => setSystemSize(e.target.value)}
-                        label="Suggested System Size (in KWp)"
-                        variant="outlined"
-                      >
-                        {_.map(systemSizeLIst, (cat,index) =>
-                            <MenuItem key={index} value={cat}>{cat}</MenuItem>)}
-                      </Select>
+                      <Label htmlFor='Suggested System Size (in KWp)'>Suggested System Size (in KWP)</Label>
+                      <TSelect name='size' mb={3} mt={3}>
+                      <option>Select System Size</option>
+                       {_.map(systemSizeLIst, (cat,index) => <option key={cat.id} value={cat}>{cat}</option> )}
+                       
+                      </TSelect>
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
 
                   <FormControl required variant="outlined" fullWidth={true}>
-                      <InputLabel htmlFor="systemSize">Structure Type</InputLabel>
-                      <Select
-                        id="systemSize"
-                        fullWidth={true}
-                        value={structure}
-                        onChange={(e) => setStructure(e.target.value)}
-                        label="Structure Type"
-                        variant="outlined"
+                      <Label htmlFor='Structure Type'>Structure Type</Label>
+                      <TSelect name='systemSize' mb={3} mt={3}
+                          id="systemSize"
+                          fullWidth={true}
+                          value={structure}
+                          onChange={(e) => setStructure(e.target.value)}
                       >
-                        <option value="">Choose Structure Type </option>
-                       <option value="Standard">Standard</option>
-                       <option value="Elevated">Elevated</option>
-                       <option value="Customize">Customize</option>
-                      </Select>
+                       <option key="size-1" value="">Choose Structure Type </option>
+                       <option key="size-2" value="Standard">Standard</option>
+                       <option key="size-3" value="Elevated">Elevated</option>
+                       <option key="size-4" value="Customize">Customize</option>
+                      </TSelect>
                     </FormControl>
                     </Grid>
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl fullWidth={true}>
-                      <FormLabel component="h3" className={classes.label}>
-                        Solar Panel
-                      </FormLabel>
+                    <Label htmlFor='Solar Panel'>Solar Panel</Label>
                       <RadioGroup
                         aria-label="gender"
                         name="solar"
@@ -219,7 +196,7 @@ export default function CenteredGrid(props) {
                         <FormControlLabel
                           value="standard"
                           control={<Radio />}
-                          label="standard"
+                          label="Standard"
                         />
                         <FormControlLabel
                           value="ac"

@@ -1,10 +1,10 @@
 export default [
   {
-    path: 'home',
+    path: '/',
     label: 'Home',
   },
   {
-    path: 'about-us',
+    path: '/#about-us',
     label: 'About Us',
   }
 ];

@@ -97,7 +97,7 @@ export default function Forms(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Choose City"}</DialogTitle>
         <DialogContent>
          
       <Grid container >   

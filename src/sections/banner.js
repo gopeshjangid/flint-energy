@@ -17,7 +17,7 @@ export default function Banner(props) {
 
   const [open , setOpen]  = useState (false);
   const [bill , setBill]  = useState (3500);
-  const [city , setCity]  = useState ({ id: -1, city: "Vadodara"});
+  const [city , setCity]  = useState ("Select City");
   
   const  defaultValue = 3500;
   const [cardInfo, setCardInfo] = useState({
@@ -37,9 +37,8 @@ export default function Banner(props) {
     const suggestedSystemSize = bill/(720 * 2);
 
     const  meterCharge = suggestedSystemSize > 6000 ?
-        (city.city.toLowerCase() === "torrentahmedabad" || city.city.toLowerCase() === "torrentsurat" ? 16835.74 : 15166.51) :
-        (city.city.toLowerCase() === "torrentahmedabad" || city.city.toLowerCase() === "torrentsurat" ? 5396.86 : 4045.08) ;
-
+        (city.toLowerCase() === "torrentahmedabad" || city.toLowerCase() === "torrentsurat" ? 16835.74 : 15166.51) :
+        (city.toLowerCase() === "torrentahmedabad" || city.toLowerCase() === "torrentsurat" ? 5396.86 : 4045.08) ;
 
     const {SYSTEM_COST, SUBSIDY, STRUCTURE_COST} = CALC_VARIABLES
     const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
@@ -78,7 +77,9 @@ const BookNowHandler = ()=>{
              id="email"
              placeholder="Enter your Electricity Bill" />
             <Box sx={styles.cityWrapper}>
-              <Text as="h2" sx={styles.city}> {city.city} - &nbsp; </Text><Text as="h2" sx={styles.city}> <Link color="primary" aria-setsize="small" styles={{display : 'block'}}  onClick={()=>setOpen(!open)}  href="#">Change Location</Link></Text> 
+              <Text as="h2" sx={styles.city}> {city.city || "Select City"} - &nbsp; </Text>
+              <Text as="h2" sx={styles.city}> 
+              <Link color="primary" aria-setsize="small" styles={{display : 'block'}}  onClick={()=>setOpen(!open)}  href="#">Change Location</Link></Text> 
             </Box>
             <Box sx={styles.featureWrapper}>
              

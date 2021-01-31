@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Box, Button as TButton, Container, Image,Text,Field ,Label ,Checkbox } from 'theme-ui';
-import { Grid,Button, Box as MBox ,Divider, List, ListItem, ListItemIcon, ListItemText, Link , Typography, TextField } from '@material-ui/core';
+import { Grid,Button, Box as MBox , List, ListItem, ListItemIcon, ListItemText, Link , Typography, TextField } from '@material-ui/core';
 import React ,{useState, useEffect}  from 'react';
 import SectionHeading from 'components/section-heading';
 import { makeStyles } from '@material-ui/core/styles'
