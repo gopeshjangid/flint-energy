@@ -244,8 +244,8 @@ export default function CustomizedSteppers() {
     emiFor18:0
   });
   const [personalDetails, setPersonalDetails] = useState({
-    firstName : window.localStorage.getItem("firstName") ? window.localStorage.getItem("firstName") : '',
-    lastName : window.localStorage.getItem("lastName") ? window.localStorage.getItem("lastName") : '',
+    firstName : typeof window !== "undefined" && window.localStorage.getItem("firstName") ? window.localStorage.getItem("firstName") : '',
+    lastName : typeof window !== "undefined" && window.localStorage.getItem("lastName") ? window.localStorage.getItem("lastName") : '',
     email : '',
     address : '',
     pincode : '',
