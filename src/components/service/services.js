@@ -39,7 +39,8 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
   }else if(activeStep === 2){
     const {payment, panNo: pan_number} = obj;
     payload = {"payment_mode" : payment === "directonlinepayments", pan_number};
-    //payload["dob"] = 1612095613165;
+    // payload["dob"] = 1612095613165;
+    // payload["dob"] = obj.dob.getTime()
   }else{
 
   }

@@ -5,8 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Accordion  from "./systemSummaryAccordion";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
-  
+    root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
   title: {
     marginTop: theme.spacing(2),
     marginBottom : '20px'
@@ -36,6 +47,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   const [paymentId, setPaymentId] = useState('');
   const [invoiceId, setInvoiceId] = useState('');
@@ -67,13 +88,19 @@ export default function Review(props) {
         </Grid>
         <Grid item xs={12} sm={3}>
            <Box className={classes.Box}>
-           <Button
+          <div className={classes.root}>
+      <Button 
                       variant="contained"
                       color="primary"
-                      className={classes.button}
-                    >
-                     Submit
-                    </Button>
+                      className={classes.button} onClick={handleClick}>
+        Submit
+      </Button>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Details Successfully Submitted!!
+        </Alert>
+      </Snackbar>
+      </div>
                     </Box>
         </Grid>
        </Grid>

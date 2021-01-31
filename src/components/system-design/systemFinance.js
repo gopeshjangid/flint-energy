@@ -38,12 +38,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props) {
   const classes = useStyles();
-  const [payment, setPayment] = useState('');
-  const [panNo, setPanNo] = useState('');
-  const [dob, setDob] = useState(new Date())
+  const [payment, setPayment] = useState(props.financeDetails.payment);
+  const [panNo, setPanNo] = useState(props.financeDetails.panNo);
+  const [dob, setDob] = useState(new Date().toLocaleString())
   const [emiFor12,setemiFor12] = useState(props.systemFinanceDetails.emiFor12);
   const [emiFor18,setemiFor18] = useState(props.systemFinanceDetails.emiFor18);
   const [netCost,setnetCost] = useState(props.systemFinanceDetails.netCost)
+  console.log(dob)
 
     useEffect(() => {
         const obj = {

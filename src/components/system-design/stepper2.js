@@ -362,8 +362,8 @@ export default function CustomizedSteppers() {
              <Box className={classes.box} mt={2} p={2}>
                {activeStep === 0 && <CustomDesign systemDesign={systemDesign} handler={(obj) => setSystemDesign(obj)} />}
                {activeStep === 1 && <InfoDetails personalDetails={personalDetails} handler={(obj) => setPersonalDetails(obj)} />}
-               {activeStep === 2 && <SystemFinance systemFinanceDetails={systemDesign} handler={(obj) => setFinanceDetails(obj)} />}
-               {activeStep === 3 && <SystemSummary handler={(obj) => setRazorpayDetails(obj)} 
+               {activeStep === 2 && <SystemFinance systemFinanceDetails={systemDesign} financeDetails={financeDetails} handler={(obj) => setFinanceDetails(obj)} />}
+               {activeStep === 3 && <SystemSummary  handler={(obj) => setRazorpayDetails(obj)} 
                systemDesign={systemDesign} financeDetails={financeDetails} personalDetails={personalDetails} razorpayDetails={razorpayDetails} />}
              </Box>
           </Grid>
