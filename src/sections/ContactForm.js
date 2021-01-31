@@ -67,6 +67,7 @@ const ContactForm = (props) => {
   const [checked , setCheckbox] = useState(false);
   const [message , setMessage] = useState({open : false , message : "" ,type : "error"});
   const { bill } = props;
+  
   useEffect(() => {
    
   }, [firstName, lastName, mobile, otp]);
