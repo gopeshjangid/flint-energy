@@ -51,6 +51,7 @@ export default function Review(props) {
           invoiceReceipt,
           signature
       })
+      console.log(props);
   }, [paymentId, invoiceId, invoiceStatus, invoiceReceipt, signature])
 
   return (
@@ -62,7 +63,7 @@ export default function Review(props) {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={9}>
          <Box className={classes.infoBox}>
-           <Accordion />
+           <Accordion SystemSummary={props} />
          </Box>
         </Grid>
         <Grid item xs={12} sm={3}>

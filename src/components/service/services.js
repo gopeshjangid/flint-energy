@@ -39,19 +39,16 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
   }else if(activeStep === 2){
     const {payment, panNo: pan_number} = obj;
     payload = {"payment_mode" : payment === "directonlinepayments", pan_number};
-    payload["dob"] = obj.dob.getTime();
+    //payload["dob"] = 1612095613165;
   }else{
 
   }
-
-  console.log(sessionId + " " + activeStep)
-  console.log(payload)
   const res = await axios.post(BASE_URI + "lp/submit", {
       "sessionid": sessionId, // handle later
       "form_part": activeStep,
       "payload": payload
   });
-  return res.data;
+  return res;
 }
 
 export const submitLeadDetails = async (obj) => {

@@ -23,6 +23,7 @@ export default function AddressForm(props) {
 
   const providersList = ["UGVCL", "PGVCL", "MGVCL", "DGVCL", "Torrent Power Ahmedabad", "Torrent Power Surat"];
   const districtList = ["dummy_district1", "dummy_district2"];
+  
   useEffect(() => {
     const obj = {
       firstName,

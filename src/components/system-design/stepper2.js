@@ -305,13 +305,7 @@ export default function CustomizedSteppers() {
       }else{
         // res = await
       }
-      console.log(res);
-      if(res["all_ok"]) {
-        toast.success(messages.FORM_SUBMIT_SUCCESS);
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      }else{
-        toast.error(res["error_msg"]);
-      }
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }catch (err) {
       console.log(err)
       throw err;
@@ -362,7 +356,8 @@ export default function CustomizedSteppers() {
                {activeStep === 0 && <CustomDesign handler={(obj) => setSystemDesign(obj)} />}
                {activeStep === 1 && <InfoDetails handler={(obj) => setPersonalDetails(obj)} />}
                {activeStep === 2 && <SystemFinance handler={(obj) => setFinanceDetails(obj)} />}
-               {activeStep === 3 && <SystemSummary handler={(obj) => setRazorpayDetails(obj)} />}
+               {activeStep === 3 && <SystemSummary handler={(obj) => setRazorpayDetails(obj)} 
+               systemDesign={systemDesign} financeDetails={financeDetails} personalDetails={personalDetails} razorpayDetails={razorpayDetails} />}
              </Box>
           </Grid>
           <Grid xs={12} item  sm={12} md={12} className={classes.stepBtnContainer} >
