@@ -62,9 +62,10 @@ export default function CustomizedAccordions(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+            Name   : {personalDetails.firstName} {personalDetails.lastName}<br/>
+            Address: {personalDetails.address}, {personalDetails.district}, {personalDetails.pincode}, {personalDetails.state}<br/>
+            Electricity Provider: {personalDetails.electricityProvider}<br/>
+            Email Address: {personalDetails.email}
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -74,9 +75,8 @@ export default function CustomizedAccordions(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+            Solar System Size   : {systemDesign.systemSize}<br/>
+            System Structure    : {systemDesign.structure}<br/> 
           </Typography>
         </AccordionDetails>
       </Accordion>
