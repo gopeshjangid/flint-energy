@@ -106,7 +106,7 @@ export default function BookingForm(props) {
         setCardInfo({
             monthlySaving: (suggestedSystemSize * 720).toFixed(2),
             suggestedSystem: (suggestedSystemSize).toFixed(2),
-            emiStarts: ((netCost - downPayment) * 1.18 / 18).toFixed(2)
+            emiStarts: ((netCost - downPayment) * 1.12 / 12).toFixed(2)
         })
     }
 

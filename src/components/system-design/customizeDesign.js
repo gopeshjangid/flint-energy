@@ -8,6 +8,7 @@ import Select from "@material-ui/core/Select";
 import {useRouter} from  "next/router";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import CALC_VARIABLES from "../../../app.config"
 import InputLabel from "@material-ui/core/InputLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
@@ -77,14 +78,22 @@ export default function CenteredGrid(props) {
   const classes = useStyles();
   const [systemSizeLIst, setSystemSizeList] = useState(["dummy1", "dummy2"]);
   const router = useRouter();
-  const [systemSize, setSystemSize] = useState("");
-  const [structure, setStructure] = useState("");
-  const [solar, setSolar] = useState("");
+  const [systemSize, setSystemSize] = useState(props.systemDesign.systemSize);
+  const [structure, setStructure] = useState(props.systemDesign.structure);
+  const [solar, setSolar] = useState(props.systemDesign.solar);
   const  bill = router.query ? router.query.bill : 0;
+
   const [avgbill, setAvgbill] = useState(bill);
+  const [areaRequired,setareaRequired] = useState(0);
+  const [systemCost,setsystemCost] = useState(CALC_VARIABLES.SYSTEM_COST);
+  const [netCost,setnetCost] = useState(0);
+  const [emiFor12,setemiFor12] = useState(0);
+  const [emiFor18,setemiFor18] = useState(0);
+
   useEffect(() => {
     setAvgbill(bill)
   },[]);
+  
   useEffect(() => {
     const getSystemSizeList = async () => {
       const res = await getCategories();
@@ -102,7 +111,11 @@ export default function CenteredGrid(props) {
       systemSize,
       structure,
       solar,
-      avgbill
+      avgbill,
+      areaRequired,
+      netCost,
+      emiFor12,
+      emiFor18
     }
     props.handler(obj);
   }, [systemSize, structure, solar, avgbill]);
@@ -122,6 +135,17 @@ export default function CenteredGrid(props) {
     }
   }
 
+      const onChangeHandler = (e) => {
+      setSystemSize(e.target.value)
+      setareaRequired(e.target.value / 10 );
+      let  meterCharge = e.target.value > 6000 ? 15166.51 : 4045.08;
+      let {SYSTEM_COST, SUBSIDY, STRUCTURE_COST} = CALC_VARIABLES
+      setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
+      let cost = (SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
+      let downPayment = cost * 0.30;
+      setemiFor12(((cost - downPayment) * 1.12 / 12).toFixed(2))
+      setemiFor18(((cost - downPayment) * 1.18 / 18).toFixed(2))
+    }
 
   return (
     <div className={classes.root}>
@@ -135,16 +159,16 @@ export default function CenteredGrid(props) {
               </Box>
               <Box className={classes.leftBottomBox} alignContent="center" justifyContent="space-around">
                  <Box className={classes.infoBox} > 
-                     <Typography variant="h5" component="h3">350 SF</Typography>
+                     <Typography variant="h5" component="h3">{areaRequired} SF</Typography>
                      <Typography  component="h6">Rooftop Area</Typography>
                   </Box>
                  <Box className={classes.infoBox}>
-                    <Typography variant="h5" component="h3">&#x20B9; 5,000</Typography>
+                    <Typography variant="h5" component="h3">&#x20B9; {systemCost}</Typography>
                      <Typography component="h6">System Cost</Typography>
                  </Box>
                  <Box className={classes.lastBox}>
-                    <Typography variant="h5" component="h3">&#x20B9; 5,000</Typography>
-                     <Typography component="h6">Starting EMI</Typography>
+                    <Typography variant="h5" component="h3">&#x20B9; {netCost} </Typography>
+                     <Typography component="h6">Net Cost</Typography>
                  </Box>
                    
               </Box>
@@ -163,7 +187,7 @@ export default function CenteredGrid(props) {
                           id="systemSize"
                           fullWidth={true}
                           value={systemSize}
-                          onChange={(e) => setSystemSize(e.target.value)}
+                          onChange={onChangeHandler}
                       >
                       <option>Select System Size</option>
                        {_.map(systemSizeLIst, (cat,index) => <option key={cat.id} value={cat}>{cat}</option> )}

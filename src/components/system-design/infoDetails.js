@@ -11,15 +11,15 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Cities from "../data/district.json";
 export default function AddressForm(props) {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [address, setAddress] = useState('')
-  const [state, setState] = useState('')
-  const [district, setDistrict] = useState('')
-  const [pincode, setPincode] = useState('')
-  const [electricityProvider, setElectricityProvider] = useState('');
-  const [consent, setConsent] = useState(false);
+  const [firstName, setFirstName] = useState(props.personalDetails.firstName)
+  const [lastName, setLastName] = useState(props.personalDetails.lastName)
+  const [email, setEmail] = useState(props.personalDetails.email)
+  const [address, setAddress] = useState(props.personalDetails.address)
+  const [state, setState] = useState(props.personalDetails.state)
+  const [district, setDistrict] = useState(props.personalDetails.district)
+  const [pincode, setPincode] = useState(props.personalDetails.pincode)
+  const [electricityProvider, setElectricityProvider] = useState(props.personalDetails.electricityProvider);
+  const [consent, setConsent] = useState(props.personalDetails.consent);
 
   const providersList = ["UGVCL", "PGVCL", "MGVCL", "DGVCL", "Torrent Power Ahmedabad", "Torrent Power Surat"];
   const districtList = ["dummy_district1", "dummy_district2"];

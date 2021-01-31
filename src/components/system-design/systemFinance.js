@@ -38,11 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props) {
   const classes = useStyles();
-
   const [payment, setPayment] = useState('');
   const [panNo, setPanNo] = useState('');
   const [dob, setDob] = useState(new Date())
-
+  const [emiFor12,setemiFor12] = useState(props.systemFinanceDetails.emiFor12);
+  const [emiFor18,setemiFor18] = useState(props.systemFinanceDetails.emiFor18);
+  const [netCost,setnetCost] = useState(props.systemFinanceDetails.netCost)
 
     useEffect(() => {
         const obj = {
@@ -68,11 +69,11 @@ export default function Review(props) {
                         </Typography>
                         <Typography variant="h4" component="h2"></Typography>
                         <Typography variant="h4" component="h2">
-                            &nbsp;  &#x20B9; 50,000
+                            &nbsp;  &#x20B9; {netCost}
                         </Typography>
                         <Typography variant="h4" component="h2"></Typography>
                         <Typography variant="h5" component="h4">
-                           EMI 12 ***** | EMI 18 *****
+                           EMI @ 12 =  &nbsp;  &#x20B9; {emiFor12} | EMI @ 18 =  &nbsp;  &#x20B9; {emiFor18}
                         </Typography>
                      </Box>   
              </Grid>

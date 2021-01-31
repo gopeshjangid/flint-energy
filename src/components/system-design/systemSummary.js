@@ -51,7 +51,6 @@ export default function Review(props) {
           invoiceReceipt,
           signature
       })
-      console.log(props);
   }, [paymentId, invoiceId, invoiceStatus, invoiceReceipt, signature])
 
   return (

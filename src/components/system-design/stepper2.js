@@ -14,6 +14,7 @@ import StepConnector from "@material-ui/core/StepConnector";
 import Typography from "@material-ui/core/Typography";
 import { ToastContainer, toast } from 'react-toastify';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import CALC_VARIABLES from "../../../app.config"
 import CustomDesign from './customizeDesign';
 import InfoDetails from  "./infoDetails";
 import SystemFinance from  "./systemFinance";
@@ -195,7 +196,6 @@ function getSteps() {
 
 const isValidSystemDesign = (obj) => {
   if(!obj["systemSize"] || !obj["structure"]) return false;
-  console.log(obj)
   return true;
 }
 
@@ -234,11 +234,18 @@ export default function CustomizedSteppers() {
     systemSize: '',
     structure: '',
     solar: '',
-    avgbill: 0
+    avgbill: 0,
+    areaRequired:0,
+    systemCost:CALC_VARIABLES.SYSTEM_COST,
+    netCost:0,
+    monthlySaving: 0,
+    suggestedSystem: 0,
+    emiFor12: 0,
+    emiFor18:0
   });
   const [personalDetails, setPersonalDetails] = useState({
-    firstName : '',
-    lastName : '',
+    firstName : window.localStorage.getItem("firstName") ? window.localStorage.getItem("firstName") : '',
+    lastName : window.localStorage.getItem("lastName") ? window.localStorage.getItem("lastName") : '',
     email : '',
     address : '',
     pincode : '',
@@ -353,9 +360,9 @@ export default function CustomizedSteppers() {
         ) : ( <Grid container spacing={4} className={classes.container} direction="column">
         <Grid xs={12} item  sm={12} md={12} className={classes.stepContent} >
              <Box className={classes.box} mt={2} p={2}>
-               {activeStep === 0 && <CustomDesign handler={(obj) => setSystemDesign(obj)} />}
-               {activeStep === 1 && <InfoDetails handler={(obj) => setPersonalDetails(obj)} />}
-               {activeStep === 2 && <SystemFinance handler={(obj) => setFinanceDetails(obj)} />}
+               {activeStep === 0 && <CustomDesign systemDesign={systemDesign} handler={(obj) => setSystemDesign(obj)} />}
+               {activeStep === 1 && <InfoDetails personalDetails={personalDetails} handler={(obj) => setPersonalDetails(obj)} />}
+               {activeStep === 2 && <SystemFinance systemFinanceDetails={systemDesign} handler={(obj) => setFinanceDetails(obj)} />}
                {activeStep === 3 && <SystemSummary handler={(obj) => setRazorpayDetails(obj)} 
                systemDesign={systemDesign} financeDetails={financeDetails} personalDetails={personalDetails} razorpayDetails={razorpayDetails} />}
              </Box>

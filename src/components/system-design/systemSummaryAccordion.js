@@ -48,7 +48,6 @@ const AccordionDetails = withStyles((theme) => ({
 
 export default function CustomizedAccordions(props) {
   const [expanded, setExpanded] = React.useState('panel1');
-  console.log(props)
   const {personalDetails,financeDetails,systemDesign} = props.SystemSummary;
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -85,10 +84,13 @@ export default function CustomizedAccordions(props) {
           <Typography>Payment Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+         <Typography>
+            Solar System Size   : {systemDesign.systemSize}<br/>
+            System Area Required    : {systemDesign.areaRequired} Square Feet<br/> 
+            Net Cost : &nbsp;  &#x20B9; {systemDesign.netCost}<br/>
+            Down Payment for EMI : {(systemDesign.netCost * 0.30).toFixed(2) }<br/>
+            EMI @ 12 : &nbsp;  &#x20B9; {systemDesign.emiFor12}<br/>
+            EMI @ 18 : &nbsp;  &#x20B9; {systemDesign.emiFor18}<br/>
           </Typography>
         </AccordionDetails>
       </Accordion>

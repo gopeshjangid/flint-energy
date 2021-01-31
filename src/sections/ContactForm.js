@@ -134,6 +134,9 @@ const verifyOtpHandler = async () => {
             cookie.set('sessionId', res.sessionid);
             if(localStorage){
               localStorage.setItem("bill" ,bill);
+              localStorage.setItem("firstName" ,firstName);
+              localStorage.setItem("lastName" ,lastName);
+              localStorage.setItem("mobile",mobile);
             }
             router.push("/system-design");
         }else{
