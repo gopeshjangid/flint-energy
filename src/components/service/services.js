@@ -26,7 +26,6 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
   if (activeStep === 0) {
     // ----- make payload object according to format given for API------
     const { systemSize, structure, avgbill, solar } = obj;
-    console.log(obj);
     payload = {
       system_size: Number(systemSize),
       structure_type: structure,
@@ -70,8 +69,6 @@ export const submitLeadDetails = async (obj) => {
     a_param,
     b_param,
   };
-
-  console.log(payload);
   const res = await axios.post(BASE_URI + "lp/lead", payload, {
     headers: {
       "Content-Type": "application/json",
@@ -86,7 +83,6 @@ export const verifyOtp = async (obj) => {
     mobile: Number(obj.mobile),
     otp: Number(obj.otp),
   };
-  console.log(payload);
   const res = await axios.post(BASE_URI + "lp/verify", payload, {
     headers: {
       "Content-Type": "application/json",

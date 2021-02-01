@@ -16,7 +16,7 @@ export default function Banner(props) {
   };
 
   const [open, setOpen] = useState(false);
-  const [bill, setBill] = useState(0);
+  const [bill, setBill] = useState();
   const [city, setCity] = useState({ id: -1, city: "Ahmedabad" });
 
   const [cardInfo, setCardInfo] = useState({
@@ -108,17 +108,20 @@ export default function Banner(props) {
                   data={{
                     title: "Suggested System",
                     type: "h2",
-                    description: cardInfo.suggestedSystem + " KWP",
+                    description: `${
+                      isNaN(cardInfo.suggestedSystem)
+                        ? 0
+                        : cardInfo.suggestedSystem
+                    } KWP`,
                   }}
                 />
                 <Feature
                   data={{
                     title: "Monthly Savings",
                     type: "h2",
-                    description:
-                      String.fromCharCode("0x20b9") +
-                      " " +
-                      cardInfo.monthlySaving,
+                    description: `${String.fromCharCode("0x20b9")} ${
+                      isNaN(cardInfo.monthlySaving) ? 0 : cardInfo.monthlySaving
+                    }`,
                   }}
                 />
                 <Feature

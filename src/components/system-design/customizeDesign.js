@@ -85,6 +85,7 @@ export default function CenteredGrid(props) {
   const [areaRequired, setareaRequired] = useState(0);
   const [systemCost, setsystemCost] = useState(CALC_VARIABLES.SYSTEM_COST);
   const [netCost, setnetCost] = useState(0);
+  const [monthlySaving, setmonthlySaving] = useState(0);
   const [emiFor12, setemiFor12] = useState(0);
   const [emiFor18, setemiFor18] = useState(0);
 
@@ -134,6 +135,7 @@ export default function CenteredGrid(props) {
     let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = CALC_VARIABLES;
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+    setmonthlySaving(Number(e.target.value * 720).toFixed(2));
     let downPayment = cost * 0.3;
     setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
     setemiFor18((((cost - downPayment) * 1.18) / 18).toFixed(2));
@@ -172,9 +174,9 @@ export default function CenteredGrid(props) {
               </Box>
               <Box className={classes.lastBox}>
                 <Typography variant="h5" component="h3">
-                  &#x20B9; {netCost}{" "}
+                  &#x20B9; {monthlySaving}{" "}
                 </Typography>
-                <Typography component="h6">Net Cost</Typography>
+                <Typography component="h6">Monthly Saving</Typography>
               </Box>
             </Box>
           </Grid>
