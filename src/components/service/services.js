@@ -26,10 +26,11 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
   if (activeStep === 0) {
     // ----- make payload object according to format given for API------
     const { systemSize, structure, avgbill, solar } = obj;
+    console.log(obj);
     payload = {
       system_size: Number(systemSize),
-      structure_type: Number(structure),
-      avg_bill: Number(avgbill),
+      structure_type: structure,
+      avg_bill: avgbill,
     };
     payload["ac_module"] = solar === "ac";
   } else if (activeStep === 1) {

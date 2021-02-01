@@ -237,7 +237,7 @@ const ContactForm = (props) => {
               </Typography>
               <form className={classes.form} noValidate>
                 <Grid container spacing={2}>
-                  {!isOtpSent && (
+                  {
                     <>
                       <Grid item xs={12} sm={12}>
                         <Field
@@ -300,7 +300,7 @@ const ContactForm = (props) => {
                         </Label>
                       </Grid>
                     </>
-                  )}
+                  }
                   {isOtpSent && (
                     <Grid item xs={12}>
                       <TextField

@@ -15,7 +15,7 @@ export default function AddressForm(props) {
   const [lastName, setLastName] = useState(props.personalDetails.lastName);
   const [email, setEmail] = useState(props.personalDetails.email);
   const [address, setAddress] = useState(props.personalDetails.address);
-  const [state, setState] = useState(props.personalDetails.state);
+  const [state, setState] = useState("Gujarat");
   const [district, setDistrict] = useState(props.personalDetails.district);
   const [pincode, setPincode] = useState(props.personalDetails.pincode);
   const [electricityProvider, setElectricityProvider] = useState(
@@ -167,7 +167,9 @@ export default function AddressForm(props) {
               value={state}
               onChange={(e) => setState(e.target.value)}
             >
-              <MenuItem value={"Gujarat"}>{"Gujarat"}</MenuItem>
+              <MenuItem selected={1} value={"Gujarat"}>
+                {"Gujarat"}
+              </MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -191,21 +193,6 @@ export default function AddressForm(props) {
               ))}
             </Select>
           </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                required
-                checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
-                color="secondary"
-                name="saveAddress"
-                value="yes"
-              />
-            }
-            label="I have read Flint Energy Privacy Policy"
-          />
         </Grid>
       </Grid>
     </React.Fragment>

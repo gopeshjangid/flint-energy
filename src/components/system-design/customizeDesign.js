@@ -5,20 +5,20 @@ import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-import {useRouter} from  "next/router";
+import { useRouter } from "next/router";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import CALC_VARIABLES from "../../../app.config"
+import CALC_VARIABLES from "../../../app.config";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Image from "next/image";
 import { Typography } from "@material-ui/core";
-import StandardImage from  "../../assets/images/standard.png";
-import ElevationImage from  "../../assets/images/elevation.png";
+import StandardImage from "../../assets/images/standard.png";
+import ElevationImage from "../../assets/images/elevation.png";
 import _ from "lodash";
-import { Field ,Label, Select as TSelect } from 'theme-ui';
+import { Field, Label, Select as TSelect } from "theme-ui";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -28,50 +28,49 @@ import { getCategories } from "../service/services";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    [theme.breakpoints.up('sm')]: {}
-    },
+    [theme.breakpoints.up("sm")]: {},
+  },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
-  sizeLogoBox : {
-    minHeight : '300px',
-    textAlign : 'center',
-    padding : '20px'
+  sizeLogoBox: {
+    minHeight: "300px",
+    textAlign: "center",
+    padding: "20px",
   },
-  box : {
-    border : '1px solid '+theme.palette.border,
-    minHeight : '170px',
-    padding : '20px',
-    display : 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    borderRadius: '23px'
+  box: {
+    border: "1px solid " + theme.palette.border,
+    minHeight: "170px",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    borderRadius: "23px",
   },
-  radioGroup : {
-    flexDirection : 'row'
+  radioGroup: {
+    flexDirection: "row",
   },
-  label : {
-    textAlign : 'left',
-    borderBottom : '0px'
+  label: {
+    textAlign: "left",
+    borderBottom: "0px",
   },
-  leftBottomBox : {
-    display : 'flex',
-
+  leftBottomBox: {
+    display: "flex",
   },
-  infoBox : {
-    padding : '12px',
-    display : 'flex',
-    flexDirection : 'column',
-    justifyContent : 'space-around'
+  infoBox: {
+    padding: "12px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
-  lastBox : {
-    padding : '12px',
-    display : 'flex',
-    flexDirection : 'column',
-    justifyContent : 'space-around'
-  }
+  lastBox: {
+    padding: "12px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+  },
 }));
 
 export default function CenteredGrid(props) {
@@ -81,30 +80,23 @@ export default function CenteredGrid(props) {
   const [systemSize, setSystemSize] = useState(props.systemDesign.systemSize);
   const [structure, setStructure] = useState(props.systemDesign.structure);
   const [solar, setSolar] = useState(props.systemDesign.solar);
-  const  bill = router.query ? router.query.bill : 0;
+  const bill = router.query ? router.query.bill : 0;
+  const [avgbill, setAvgbill] = useState(localStorage.getItem("bill"));
+  const [areaRequired, setareaRequired] = useState(0);
+  const [systemCost, setsystemCost] = useState(CALC_VARIABLES.SYSTEM_COST);
+  const [netCost, setnetCost] = useState(0);
+  const [emiFor12, setemiFor12] = useState(0);
+  const [emiFor18, setemiFor18] = useState(0);
 
-  const [avgbill, setAvgbill] = useState(bill);
-  const [areaRequired,setareaRequired] = useState(0);
-  const [systemCost,setsystemCost] = useState(CALC_VARIABLES.SYSTEM_COST);
-  const [netCost,setnetCost] = useState(0);
-  const [emiFor12,setemiFor12] = useState(0);
-  const [emiFor18,setemiFor18] = useState(0);
-
-  useEffect(() => {
-    setAvgbill(bill)
-  },[]);
-  
   useEffect(() => {
     const getSystemSizeList = async () => {
       const res = await getCategories();
       setSystemSizeList(res["syslist"]);
-    }
+    };
 
     // ---- Uncomment whem API is working ----
     getSystemSizeList();
-
   }, []);
-
 
   useEffect(() => {
     const obj = {
@@ -115,106 +107,136 @@ export default function CenteredGrid(props) {
       areaRequired,
       netCost,
       emiFor12,
-      emiFor18
-    }
+      emiFor18,
+    };
     props.handler(obj);
   }, [systemSize, structure, solar, avgbill]);
 
-  const getImage = (type) =>{
+  const getImage = (type) => {
     switch (type) {
-      case 'Standard':
-        return StandardImage
+      case "Standard":
+        return StandardImage;
         break;
-      case 'Elevated':
-      case 'Customize':
-        return ElevationImage
-        break;  
+      case "Elevated":
+      case "Customize":
+        return ElevationImage;
+        break;
       default:
-        return '/no.png'
+        return "/no.png";
         break;
     }
-  }
+  };
 
-      const onChangeHandler = (e) => {
-      setSystemSize(e.target.value)
-      setareaRequired(e.target.value / 10 );
-      let  meterCharge = e.target.value > 6000 ? 15166.51 : 4045.08;
-      let {SYSTEM_COST, SUBSIDY, STRUCTURE_COST} = CALC_VARIABLES
-      setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
-      let cost = (SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
-      let downPayment = cost * 0.30;
-      setemiFor12(((cost - downPayment) * 1.12 / 12).toFixed(2))
-      setemiFor18(((cost - downPayment) * 1.18 / 18).toFixed(2))
-    }
+  const onChangeHandler = (e) => {
+    setSystemSize(e.target.value);
+    setareaRequired(e.target.value);
+    let meterCharge = e.target.value > 6000 ? 15166.51 : 4045.08;
+    let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = CALC_VARIABLES;
+    setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
+    let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+    let downPayment = cost * 0.3;
+    setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
+    setemiFor18((((cost - downPayment) * 1.18) / 18).toFixed(2));
+  };
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={7} md={7}>
-            <Grid container spacing={3} direction="column">
-              <Box className={classes.sizeLogoBox} m={4}>
-               {structure ?  <Image src={getImage(structure)} height={250} width={320} />
-                   : <Typography variant="h4" component="h4" align="center"  >Select System Size</Typography>
-                  }
+          <Grid container spacing={3} direction="column">
+            <Box className={classes.sizeLogoBox} m={4}>
+              {structure ? (
+                <Image src={getImage(structure)} height={250} width={320} />
+              ) : (
+                <Typography variant="h4" component="h4" align="center">
+                  Select System Size
+                </Typography>
+              )}
+            </Box>
+            <Box
+              className={classes.leftBottomBox}
+              alignContent="center"
+              justifyContent="space-around"
+            >
+              <Box className={classes.infoBox}>
+                <Typography variant="h5" component="h3">
+                  {areaRequired} Sq. Feet
+                </Typography>
+                <Typography component="h6">Rooftop Area</Typography>
               </Box>
-              <Box className={classes.leftBottomBox} alignContent="center" justifyContent="space-around">
-                 <Box className={classes.infoBox} > 
-                     <Typography variant="h5" component="h3">{areaRequired} SF</Typography>
-                     <Typography  component="h6">Rooftop Area</Typography>
-                  </Box>
-                 <Box className={classes.infoBox}>
-                    <Typography variant="h5" component="h3">&#x20B9; {systemCost}</Typography>
-                     <Typography component="h6">System Cost</Typography>
-                 </Box>
-                 <Box className={classes.lastBox}>
-                    <Typography variant="h5" component="h3">&#x20B9; {netCost} </Typography>
-                     <Typography component="h6">Net Cost</Typography>
-                 </Box>
-                   
+              <Box className={classes.infoBox}>
+                <Typography variant="h5" component="h3">
+                  &#x20B9; {systemCost}
+                </Typography>
+                <Typography component="h6">System Cost</Typography>
               </Box>
-            </Grid>
+              <Box className={classes.lastBox}>
+                <Typography variant="h5" component="h3">
+                  &#x20B9; {netCost}{" "}
+                </Typography>
+                <Typography component="h6">Net Cost</Typography>
+              </Box>
+            </Box>
+          </Grid>
         </Grid>
         <Grid item xs={12} sm={5} md={5}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12}>
               <Box className={classes.box} m={2}>
                 <Grid container spacing={2}>
-                  
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl required variant="outlined" fullWidth={true}>
-                      <Label htmlFor='Suggested System Size (in KWp)'>Suggested System Size (in KWP)</Label>
-                        <TSelect name='systemSize' mb={3} mt={3}
-                          id="systemSize"
-                          fullWidth={true}
-                          value={systemSize}
-                          onChange={onChangeHandler}
+                      <Label htmlFor="Suggested System Size (in KWp)">
+                        Suggested System Size (in KWP)
+                      </Label>
+                      <TSelect
+                        name="systemSize"
+                        mb={3}
+                        mt={3}
+                        id="systemSize"
+                        fullWidth={true}
+                        value={systemSize}
+                        onChange={onChangeHandler}
                       >
-                      <option>Select System Size</option>
-                       {_.map(systemSizeLIst, (cat,index) => <option key={cat.id} value={cat}>{cat}</option> )}
-                       
+                        <option>Select System Size</option>
+                        {_.map(systemSizeLIst, (cat, index) => (
+                          <option key={cat.id} value={cat / 1000}>
+                            {cat / 1000}
+                          </option>
+                        ))}
                       </TSelect>
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
-
-                  <FormControl required variant="outlined" fullWidth={true}>
-                      <Label htmlFor='Structure Type'>Structure Type</Label>
-                      <TSelect name='structureType' mb={3} mt={3}
-                          id="structureType"
-                          fullWidth={true}
-                          value={structure}
-                          onChange={(e) => setStructure(e.target.value)}
+                    <FormControl required variant="outlined" fullWidth={true}>
+                      <Label htmlFor="StructureType">Structure Type</Label>
+                      <TSelect
+                        name="structureType"
+                        mb={3}
+                        mt={3}
+                        id="structureType"
+                        fullWidth={true}
+                        value={structure}
+                        onChange={(e) => setStructure(e.target.value)}
                       >
-                       <option key="size-1" value="">Choose Structure Type </option>
-                       <option key="size-2" value="Standard">Standard</option>
-                       <option key="size-3" value="Elevated">Elevated</option>
-                       <option key="size-4" value="Customize">Customize</option>
+                        <option key="size-1" value="">
+                          Choose Structure Type{" "}
+                        </option>
+                        <option key="size-2" value="Standard">
+                          Standard
+                        </option>
+                        <option key="size-3" selected value="Elevated">
+                          Elevated
+                        </option>
+                        <option key="size-4" value="Customize">
+                          Customize
+                        </option>
                       </TSelect>
                     </FormControl>
-                    </Grid>
+                  </Grid>
                   <Grid item xs={12} sm={12} md={12}>
                     <FormControl fullWidth={true}>
-                    <Label htmlFor='Solar Panel'>Solar Panel</Label>
+                      <Label htmlFor="Solar Panel">Solar Panel</Label>
                       <RadioGroup
                         aria-label="gender"
                         name="solar"
@@ -225,20 +247,20 @@ export default function CenteredGrid(props) {
                         <FormControlLabel
                           value="standard"
                           control={<Radio />}
+                          selected
                           label="Standard"
                         />
                         <FormControlLabel
                           value="ac"
                           control={<Radio />}
-                          label="AC"
+                          label="AC Module"
                         />
                       </RadioGroup>
                     </FormControl>
                   </Grid>
-
                 </Grid>
-            </Box>
-          </Grid>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

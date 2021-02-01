@@ -17,7 +17,7 @@ export default function Banner(props) {
 
   const [open, setOpen] = useState(false);
   const [bill, setBill] = useState(0);
-  const [city, setCity] = useState({ id: -1, city: "Vadodara" });
+  const [city, setCity] = useState({ id: -1, city: "Ahmedabad" });
 
   const [cardInfo, setCardInfo] = useState({
     monthlySaving: 0,
