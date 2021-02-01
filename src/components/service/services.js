@@ -94,15 +94,18 @@ export const verifyOtp = async (obj) => {
   return res.data;
 };
 
-export const finalSubmission = async (obj) => {
+export const paymentVerify = async (obj) => {
   const payload = {
-    razorpay_payment_id: Number(obj.paymentId),
-    razorpay_invoice_id: Number(obj.invoiceId),
-    razorpay_invoice_status: Number(obj.invoiceStatus),
-    razorpay_invoice_receipt: Number(obj.invoiceReceipt),
-    razorpay_signature: Number(obj.signature),
+    razorpay_payment_id: obj.razorpay_payment_id,
+    razorpay_invoice_id: obj.razorpay_invoice_id,
+    razorpay_invoice_status: obj.razorpay_invoice_status,
+    razorpay_invoice_receipt: obj.razorpay_invoice_receipt,
+    razorpay_signature: obj.razorpay_signature,
   };
-  console.log(payload);
-  const res = await axios.post(BASE_URI + "lp/paycheck", payload);
+  const res = await axios.post(BASE_URI + "lp/paycheck", payload, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   return res.data;
 };
