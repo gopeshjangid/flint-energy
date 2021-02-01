@@ -17,9 +17,9 @@ export const referral = async (a, b) => {
       b,
     },
   });
-  console.log(res);
   return res.data;
 };
+
 export const postSystemDetails = async (activeStep, obj, sessionId) => {
   let payload = {};
 

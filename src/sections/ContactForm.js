@@ -6,7 +6,7 @@ import SectionHeading from 'components/section-heading';
 import { makeStyles } from '@material-ui/core/styles'
 import StarIcon from '@material-ui/icons/Star';
 import AnimatedGif from 'assets/images/sasksolar.gif';
-import {submitLeadDetails, verifyOtp} from "components/service/services";
+import {submitLeadDetails, verifyOtp,referral} from "components/service/services";
 import { useRouter } from 'next/router'
 import messages from "../../messages";
 import Alert from  "../components/common/Alert";
