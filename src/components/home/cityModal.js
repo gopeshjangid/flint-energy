@@ -1,6 +1,6 @@
-import React ,{useEffect} from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import React, { useEffect } from "react";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 import Cities from "../data/district.json";
 import {
   Button,
@@ -13,39 +13,40 @@ import {
   FormControl,
   Select,
   NativeSelect,
-  InputBase } from '@material-ui/core';
+  InputBase,
+} from "@material-ui/core";
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
-    'label + &': {
+    "label + &": {
       marginTop: theme.spacing(3),
     },
   },
   input: {
     borderRadius: 4,
-    position: 'relative',
+    position: "relative",
     backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
+    border: "1px solid #ced4da",
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    padding: "10px 26px 10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
+    ].join(","),
+    "&:focus": {
       borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      borderColor: "#80bdff",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     },
   },
 }))(InputBase);
@@ -53,11 +54,11 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
-    width : '100%'
+    width: "100%",
   },
-  select : {
-    width :'100%'
-  }
+  select: {
+    width: "100%",
+  },
 }));
 export default function Forms(props) {
   const [open, setOpen] = React.useState(false);
@@ -65,84 +66,90 @@ export default function Forms(props) {
   const classes = useStyles();
 
   const onCityChange = (e) => {
-    const district = Cities.districts.filter(city => city.id == e.target.value);
-    setCity({id: e.target.value ,city : district.length ? district[0].city : ''})
+    const district = Cities.districts.filter(
+      (city) => city.id == e.target.value
+    );
+    setCity({
+      id: e.target.value,
+      city: district.length ? district[0].city : "",
+    });
   };
 
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setOpen(props.open);
-  },[props.open])
-  
-  const selectCity = () =>{ 
+  }, [props.open]);
+
+  const selectCity = () => {
     props.selectCity(city);
-    props.modalHandler(false)
+    props.modalHandler(false);
     setOpen(false);
-  }
+  };
 
   const handleClose = () => {
-    props.modalHandler(false)
+    props.modalHandler(false);
     setOpen(false);
   };
 
   return (
-    
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Choose City"}</DialogTitle>
-        <DialogContent>
-         
-      <Grid container >   
-       <Grid item xs={12} sm={12} > 
-      <FormControl variant="filled" className={classes.margin}>
-        <InputLabel id="demo-customized-select-label">State</InputLabel>
-        <Select
-          labelId="demo-customized-select-label"
-          value="Gujrat"
-          onChange={handleChange}
-          className={classes.select}
-          input={<BootstrapInput />}
-        >
-          <option value="Gujrat">Gujrat</option>
-        </Select>
-      </FormControl>
-      </Grid>
-      <Grid item xs={12} sm={12}>
-      <FormControl variant="filled" className={classes.margin}>
-        <InputLabel htmlFor="demo-customized-select-native">City</InputLabel>
-        <NativeSelect
-          id="demo-customized-select-native"
-          value={city.id}
-          className={classes.select}
-          onChange={onCityChange}
-          input={<BootstrapInput />}
-        >
-           <option value="">Select City</option>
-           {
-             Cities.districts.map( (city ,index) => <option key={"city"+index} value={city.id}>{city.city}</option>)
-           }
-        </NativeSelect>
-      </FormControl>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">{"Choose City"}</DialogTitle>
+      <DialogContent>
+        <Grid container>
+          <Grid item xs={12} sm={12}>
+            <FormControl variant="filled" className={classes.margin}>
+              <InputLabel id="demo-customized-select-label">State</InputLabel>
+              <Select
+                labelId="demo-customized-select-label"
+                value="Gujarat"
+                onChange={handleChange}
+                className={classes.select}
+                input={<BootstrapInput />}
+              >
+                <option value="Gujarat">Gujarat</option>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <FormControl variant="filled" className={classes.margin}>
+              <InputLabel htmlFor="demo-customized-select-native">
+                City
+              </InputLabel>
+              <NativeSelect
+                id="demo-customized-select-native"
+                value={city.id}
+                className={classes.select}
+                onChange={onCityChange}
+                input={<BootstrapInput />}
+              >
+                <option value="">Select City</option>
+                {Cities.districts.map((city, index) => (
+                  <option key={"city" + index} value={city.id}>
+                    {city.city}
+                  </option>
+                ))}
+              </NativeSelect>
+            </FormControl>
+          </Grid>
         </Grid>
-        </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-          <Button onClick={selectCity} color="primary" autoFocus>
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-   
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Close
+        </Button>
+        <Button onClick={selectCity} color="primary" autoFocus>
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

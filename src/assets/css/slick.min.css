@@ -8,6 +8,10 @@
 .slick-loading .slick-track {
   visibility: hidden;
 }
+#billAmount::placeholder {
+    color: #ff0000;
+    opacity: 1;
+}
 .slick-slider {
   box-sizing: border-box;
   -webkit-user-select: none;
