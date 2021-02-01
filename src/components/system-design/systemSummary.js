@@ -55,6 +55,7 @@ export default function Review(props) {
     if (reason === "clickaway") {
       return;
     }
+    window.location.href = "/";
     setOpen(false);
   };
 
