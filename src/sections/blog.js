@@ -1,35 +1,35 @@
 /** @jsx jsx */
-import { jsx, Box, Container, Button } from 'theme-ui';
-import Slider from 'react-slick';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import SectionHeading from 'components/section-heading';
-import BlogPost from 'components/cards/blog-card';
+import { jsx, Box, Container, Button } from "theme-ui";
+import Slider from "react-slick";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import SectionHeading from "components/section-heading";
+import BlogPost from "components/cards/blog-card";
 
-import thumb1 from 'assets/images/blog/1.png';
-import thumb2 from 'assets/images/blog/2.png';
-import thumb3 from 'assets/images/blog/3.png';
+import thumb1 from "assets/images/blog/1.png";
+import thumb2 from "assets/images/blog/2.png";
+import thumb3 from "assets/images/blog/3.png";
 
 const data = [
   {
     id: 1,
     thumb: thumb1,
     commentCount: 22,
-    link: '#!',
-    title: `How to work with prototype design with adobe xd featuring tools`,
+    link: "#!",
+    title: `End to end solution provider:`,
   },
   {
     id: 2,
     thumb: thumb2,
     commentCount: 15,
-    link: '#!',
-    title: `Create multiple artboard by using figma prototyping development`,
+    link: "#!",
+    title: `Promoter of renewable adoption:`,
   },
   {
     id: 3,
     thumb: thumb3,
     commentCount: 18,
-    link: '#!',
-    title: `Convert your web layout theming easily with sketch zeplin extension`,
+    link: "#!",
+    title: `Single Market Enabler;`,
   },
 ];
 
@@ -41,7 +41,7 @@ function SlickArrow({ className, onClick, control }) {
       className={className}
       sx={styles.paginationButton}
     >
-      {control === 'prev' ? (
+      {control === "prev" ? (
         <BsArrowLeft size="32px" />
       ) : (
         <BsArrowRight size="32px" />
@@ -59,7 +59,7 @@ const settings = {
   responsive: [
     {
       breakpoint: 100000,
-      settings: 'unslick',
+      settings: "unslick",
     },
     {
       breakpoint: 768,
@@ -71,7 +71,7 @@ const settings = {
     },
     {
       breakpoint: 767,
-      settings: 'unslick',
+      settings: "unslick",
     },
   ],
 };
@@ -80,11 +80,7 @@ const Blog = () => {
   return (
     <Box id="blog" as="section" sx={styles.section}>
       <Container>
-        <SectionHeading
-          sx={styles.heading}
-          slogan="Blog Post"
-          title="Popular blog post we update everyday"
-        />
+        <SectionHeading sx={styles.heading} slogan="Blog Post" title="We Are" />
         <Slider sx={styles.blogWrapper} {...settings}>
           {data?.map((post) => (
             <BlogPost key={post.id} post={post} />
@@ -107,40 +103,40 @@ const styles = {
   },
   blogWrapper: {
     gap: 30,
-    display: ['grid', 'grid', 'grid', 'block', 'grid'],
+    display: ["grid", "grid", "grid", "block", "grid"],
     gridTemplateColumns: [
-      'repeat(1, 1fr)',
-      'repeat(1, 1fr)',
-      'repeat(2, 1fr)',
-      'repeat(2, 1fr)',
-      'repeat(3, 1fr)',
+      "repeat(1, 1fr)",
+      "repeat(1, 1fr)",
+      "repeat(2, 1fr)",
+      "repeat(2, 1fr)",
+      "repeat(3, 1fr)",
     ],
-    m: [0, 0, 0, '0 -15px', 0],
+    m: [0, 0, 0, "0 -15px", 0],
   },
   paginationButton: {
-    minHeight: '30px',
+    minHeight: "30px",
     padding: 0,
-    position: 'absolute',
-    bottom: '-60px',
-    ':focus': {
-      outline: '0 none',
+    position: "absolute",
+    bottom: "-60px",
+    ":focus": {
+      outline: "0 none",
     },
     svg: {
-      transition: 'all 0.2s ease-in-out 0s',
+      transition: "all 0.2s ease-in-out 0s",
     },
-    '&.slick-disabled': {
-      color: '#BBC7D7',
+    "&.slick-disabled": {
+      color: "#BBC7D7",
       svg: {
-        transform: 'scale(0.8)',
+        transform: "scale(0.8)",
       },
     },
-    '&.slick-prev': {
-      left: 'calc(50% - 16px)',
-      transform: 'translateX(-50%)',
+    "&.slick-prev": {
+      left: "calc(50% - 16px)",
+      transform: "translateX(-50%)",
     },
-    '&.slick-next': {
-      transform: 'translateX(50%)',
-      right: 'calc(50% - 16px)',
+    "&.slick-next": {
+      transform: "translateX(50%)",
+      right: "calc(50% - 16px)",
     },
   },
 };

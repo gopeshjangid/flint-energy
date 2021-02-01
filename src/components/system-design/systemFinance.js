@@ -132,8 +132,9 @@ export default function Review(props) {
               value={dob}
               defaultValue="2017-05-24"
               format="dd/MM/yyyy"
+              variant="outlined"
+              fullWidth
               onChange={(e) => setDob(e.target.value)}
-              className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}

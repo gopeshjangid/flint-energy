@@ -104,7 +104,8 @@ export default function Review(props) {
                 onClose={handleClose}
               >
                 <Alert onClose={handleClose} severity="success">
-                  Details Successfully Submitted!!
+                  Thanks for submitting the details, Our team shall reach back
+                  to you shortly.
                 </Alert>
               </Snackbar>
             </div>
