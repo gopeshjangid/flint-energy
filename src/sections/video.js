@@ -15,7 +15,7 @@ const AutomaticPlayer = function (props) {
   return (
     <Waypoint onEnter={handleEnterViewport} onLeave={handleExitViewport}>
       <div>
-        <ReactPlayer loop={true} playing={shouldPlay} url="1.mp4" />
+        <ReactPlayer loop={true} playing={shouldPlay} url="homepagevideo.mp4" />
       </div>
     </Waypoint>
   );
