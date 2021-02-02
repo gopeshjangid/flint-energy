@@ -14,22 +14,22 @@ const data = [
     id: 1,
     thumb: thumb1,
     commentCount: 22,
-    link: "#!",
-    title: `End to end solution provider:`,
+    link: "#",
+    title: `End to end solution provider`,
   },
   {
     id: 2,
     thumb: thumb2,
     commentCount: 15,
     link: "#!",
-    title: `Promoter of renewable adoption:`,
+    title: `Promoter of renewable adoption`,
   },
   {
     id: 3,
     thumb: thumb3,
     commentCount: 18,
     link: "#!",
-    title: `Single Market Enabler;`,
+    title: `Single Market Enabler`,
   },
 ];
 

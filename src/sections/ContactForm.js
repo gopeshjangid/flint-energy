@@ -315,15 +315,8 @@ const ContactForm = (props) => {
                         id="otp"
                       />
                       &nbsp;&nbsp;
-                      <Link onClick={leadSubmitHandler}>Resend OTP</Link>
                     </Grid>
                   )}
-                  {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
                 </Grid>
                 <Button
                   type="button"
@@ -347,6 +340,18 @@ const ContactForm = (props) => {
                 >
                   {!isOtpSent ? "Get OTP" : "Verify OTP"}
                 </Button>
+                {isOtpSent && (
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    onClick={leadSubmitHandler}
+                    className={classes.submit}
+                  >
+                    {"Resend OTP"}
+                  </Button>
+                )}
               </form>
             </MBox>
           </Grid>
