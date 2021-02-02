@@ -82,6 +82,7 @@ export default function Banner(props) {
                 value={bill}
                 type="number"
                 id="billAmount"
+                sx={styles.billAmount}
                 placeholder="Enter Your Bill Amount"
               />
               <Box sx={styles.cityWrapper}>
@@ -150,6 +151,15 @@ export default function Banner(props) {
 }
 
 const styles = {
+  billAmount: {
+    "&::placeholder": {
+      color: "pink",
+      "font-size": "21px",
+      "font-weight": "normal",
+    },
+    "font-weight": "bold",
+    "font-size": "28px",
+  },
   section: {
     background: `url(${bannerBg}) no-repeat center top / cover ,linear-gradient(180deg, rgba(255, 255, 255, 0) 12.92%, #0057FF 34.86%, #0057FF 53.44%, #0157FF 84.3%)`,
     backgroundSize: ["100%", null, null, null, "cover"],
