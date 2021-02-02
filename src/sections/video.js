@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Waypoint } from "react-waypoint";
 import ReactPlayer from "react-player";
-
+import { Box } from "theme-ui";
 const AutomaticPlayer = function (props) {
   let [shouldPlay, updatePlayState] = useState(false);
 
@@ -13,11 +12,17 @@ const AutomaticPlayer = function (props) {
   };
 
   return (
-    <Waypoint onEnter={handleEnterViewport} onLeave={handleExitViewport}>
-      <div>
-        <ReactPlayer loop={true} playing={shouldPlay} url="homepagevideo.mp4" />
-      </div>
-    </Waypoint>
+      <Box sx={style.wrapper} >
+        <ReactPlayer width="100%"
+      height="100%" loop={true}   playing={true} url="homepagevideo.mp4" />
+      </Box>
   );
 };
 export default AutomaticPlayer;
+
+const style={
+  wrapper  :{
+    margin : '20px',
+    maxWidth : '465px'
+  }  
+}

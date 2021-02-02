@@ -21,11 +21,8 @@ export default function IndexPage() {
         <SEO title="FlinTech" />
         <Banner setBillAmount ={setBill} />
         <ContactForm bill={bill} />
-        <FeaturedSpace />
-        <Gallery />
-        <OurCustomer />
         <Blog />
-        <Subscription />
+      
       </Layout>
     </ThemeProvider>
   );

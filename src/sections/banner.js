@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useEffect, useState } from "react";
-import { jsx, Box, Container, Heading, Text, Button, Link } from "theme-ui";
+import { jsx, Box, Container, Heading, Text, Button, Link, Card } from "theme-ui";
 import { rgba } from "polished";
 import Input from "components/input";
 import bannerBg from "assets/images/banner-bg.png";
@@ -87,8 +87,8 @@ export default function Banner(props) {
               />
               <Box sx={styles.cityWrapper}>
                 <Text as="h2" sx={styles.city}>
-                  {" "}
-                  {city.city || "Select City"} - &nbsp;{" "}
+                 The Location: {" "}
+                  {city.city || "Select City"} 
                 </Text>
               </Box>
               <Box sx={styles.cityWrapper}>
@@ -105,6 +105,7 @@ export default function Banner(props) {
                 </Text>
               </Box>
               <Box sx={styles.featureWrapper}>
+                <Card>
                 <Feature
                   data={{
                     title: "Suggested System",
@@ -116,6 +117,8 @@ export default function Banner(props) {
                     } KWP`,
                   }}
                 />
+                </Card>
+                <Card>
                 <Feature
                   data={{
                     title: "Monthly Savings",
@@ -125,6 +128,8 @@ export default function Banner(props) {
                     }`,
                   }}
                 />
+                </Card>
+                <Card>
                 <Feature
                   data={{
                     title: "EMI Starting at",
@@ -133,6 +138,7 @@ export default function Banner(props) {
                       String.fromCharCode("0x20b9") + " " + cardInfo.emiStarts,
                   }}
                 />
+                </Card>
               </Box>
               <Button
                 type="submit"
@@ -159,6 +165,9 @@ const styles = {
     },
     "font-weight": "bold",
     "font-size": "28px",
+    "@media only screen and (min-width: 320px) and (max-width: 420px)" : {
+      padding : '5px !important'
+    }
   },
   section: {
     background: `url(${bannerBg}) no-repeat center top / cover ,linear-gradient(180deg, rgba(255, 255, 255, 0) 12.92%, #0057FF 34.86%, #0057FF 53.44%, #0157FF 84.3%)`,
@@ -173,17 +182,20 @@ const styles = {
     textAlign: "center",
   },
   featureWrapper: {
-    gap: ["40px 20px", null, null, null, "30px"],
-    display: "grid",
+    display: "flex",
     padding: "10px",
+    justifyContent : 'space-around',
+    "@media only screen and (min-width: 320px) and (max-width: 420px)" : {
+      flexDirection : 'column',
+      justifyContent : 'space-around'
+    },
     gridTemplateColumns: [
       "repeat(2,1fr)",
       null,
       null,
       "repeat(3,180px)",
       "repeat(3,1fr)",
-    ],
-    justifyContent: ["unset", null, null, "center", "flex-start"],
+    ]
   },
   cityWrapper: {
     padding: "10px",
