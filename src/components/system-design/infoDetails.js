@@ -10,6 +10,7 @@ import _ from "lodash";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Cities from "../data/district.json";
+
 export default function AddressForm(props) {
   const [firstName, setFirstName] = useState(props.personalDetails.firstName);
   const [lastName, setLastName] = useState(props.personalDetails.lastName);
@@ -22,6 +23,24 @@ export default function AddressForm(props) {
     props.personalDetails.electricityProvider
   );
   const [consent, setConsent] = useState(props.personalDetails.consent);
+  const [error, seterror] = useState({
+    errorField: "",
+    errorMsg: "",
+  });
+
+  const onChangeHandler = (value, fieldName, fieldValue) => {
+    if (!value) {
+      seterror({
+        errorMsg: `Please enter ${fieldName}`,
+        errorField: fieldValue,
+      });
+    }
+    if (value)
+      seterror({
+        errorMsg: ``,
+        errorField: ``,
+      });
+  };
 
   const providersList = [
     "UGVCL",
@@ -75,7 +94,12 @@ export default function AddressForm(props) {
             inputProps={{ maxLength: 50 }}
             fullWidth
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+              onChangeHandler(e.target.value, "First name", "firstName");
+            }}
+            error={error.errorField === "firstName"}
+            helperText={error.errorField === "firstName" && error.errorMsg}
             autoComplete="given-name"
           />
         </Grid>
@@ -90,7 +114,12 @@ export default function AddressForm(props) {
             inputProps={{ maxLength: 50 }}
             fullWidth
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => {
+              setLastName(e.target.value);
+              onChangeHandler(e.target.value, "Last name", "lastName");
+            }}
+            error={error.errorField === "lastName"}
+            helperText={error.errorField === "lastName" && error.errorMsg}
             autoComplete="family-name"
           />
         </Grid>
@@ -105,7 +134,12 @@ export default function AddressForm(props) {
             multiline
             rows={2}
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => {
+              setAddress(e.target.value);
+              onChangeHandler(e.target.value, "Address", "address");
+            }}
+            error={error.errorField === "address"}
+            helperText={error.errorField === "address" && error.errorMsg}
             autoComplete="shipping address-line2"
           />
         </Grid>
@@ -118,7 +152,12 @@ export default function AddressForm(props) {
             label="Email"
             fullWidth
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              onChangeHandler(e.target.value, "Email", "email");
+            }}
+            error={error.errorField === "email"}
+            helperText={error.errorField === "email" && error.errorMsg}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -132,7 +171,12 @@ export default function AddressForm(props) {
             inputProps={{ maxLength: 6 }}
             fullWidth
             value={pincode}
-            onChange={(e) => setPincode(e.target.value)}
+            onChange={(e) => {
+              setPincode(e.target.value);
+              onChangeHandler(e.target.value, "PinCode", "pincode");
+            }}
+            error={error.errorField === "pincode"}
+            helperText={error.errorField === "pincode" && error.errorMsg}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -145,7 +189,16 @@ export default function AddressForm(props) {
               label="Electricity Provider"
               fullWidth
               value={electricityProvider}
-              onChange={(e) => setElectricityProvider(e.target.value)}
+              onChange={(e) => {
+                setElectricityProvider(e.target.value);
+                onChangeHandler(
+                  e.target.value,
+                  "Electricity Provider",
+                  "provider"
+                );
+              }}
+              error={error.errorField === "provider"}
+              helperText={error.errorField === "provider" && error.errorMsg}
             >
               {_.map(providersList, (cat) => (
                 <MenuItem key={cat} value={cat}>
