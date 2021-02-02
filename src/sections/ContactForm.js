@@ -36,6 +36,7 @@ import { useRouter } from "next/router";
 import messages from "../../messages";
 import Alert from "../components/common/Alert";
 import cookie from "js-cookie";
+import AutomaticPlayer from "./video.js";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -204,7 +205,7 @@ const ContactForm = (props) => {
         <SectionHeading title="Let the Sun Pay Your Bills" />
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} style={{ textAlign: "center" }}>
-            <Image src={AnimatedGif} height={215} width={500} />
+            <AutomaticPlayer />
             <List
               component="nav"
               className={classes.root}
