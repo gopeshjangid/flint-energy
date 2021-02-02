@@ -220,8 +220,8 @@ export default function AddressForm(props) {
               value={state}
               onChange={(e) => setState(e.target.value)}
             >
-              <MenuItem selected={1} value={"Gujarat"}>
-                {"Gujarat"}
+              <MenuItem selected={1} value={"Gujrat"}>
+                {"Gujrat"}
               </MenuItem>
             </Select>
           </FormControl>

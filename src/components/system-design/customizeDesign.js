@@ -81,7 +81,7 @@ export default function CenteredGrid(props) {
   const [structure, setStructure] = useState(props.systemDesign.structure);
   const [solar, setSolar] = useState(props.systemDesign.solar);
   const bill = router.query ? router.query.bill : 0;
-  const [avgbill, setAvgbill] = useState(localStorage.getItem("bill"));
+  const [avgbill, setAvgbill] = useState(0);
   const [areaRequired, setareaRequired] = useState(0);
   const [systemCost, setsystemCost] = useState(CALC_VARIABLES.SYSTEM_COST);
   const [netCost, setnetCost] = useState(0);
@@ -98,6 +98,10 @@ export default function CenteredGrid(props) {
     // ---- Uncomment whem API is working ----
     getSystemSizeList();
   }, []);
+
+  useEffect(()=>{
+    setAvgbill(localStorage.getItem("bill"));
+  },[])
 
   useEffect(() => {
     const obj = {
@@ -123,7 +127,7 @@ export default function CenteredGrid(props) {
         return ElevationImage;
         break;
       default:
-        return "/no.png";
+        return ElevationImage;
         break;
     }
   };

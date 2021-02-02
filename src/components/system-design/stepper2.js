@@ -188,6 +188,9 @@ const useStyles1 = makeStyles((theme) => ({
     padding: "15px",
     marginBottom: "10px",
   },
+  stepper : {
+    justifyContent: 'center'
+  }
 }));
 
 function getSteps() {
@@ -232,7 +235,8 @@ const style = {
   },
   bottomBar: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    marginRight : '10px'
   },
   wrapper: {
     width: "100%",
@@ -347,6 +351,7 @@ export default function CustomizedSteppers() {
       <Stepper
         alternativeLabel
         activeStep={activeStep}
+        className={classes.stepper}
         connector={<ColorlibConnector />}
       >
         {steps.map((label, index) => (

@@ -49,7 +49,7 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
   const res = await axios.post(BASE_URI + "lp/submit", {
     sessionid: sessionId, // handle later
     form_part: activeStep,
-    payload: payload,
+    ...payload,
   });
   return res;
 };
