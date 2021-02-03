@@ -77,7 +77,6 @@ export default function Review(props) {
                 display : "flex",
                 flexDirection : 'column',
                 alignItems: "center",
-                width: "100%",
                 padding: "10px 10px",
               }}
               m={3}
@@ -98,7 +97,7 @@ export default function Review(props) {
             </Box>
           </Grid>
         </Grid>
-        <Grid container spacing={2} xs={12} sm={6}>
+        <Grid container style={{marginLeft:'1px'}} spacing={2} xs={12} sm={6}>
           <Grid item xs={12} p={4}>
             <FormControl required variant="outlined" fullWidth={true}>
               <InputLabel htmlFor="payment mode">Payment Mode</InputLabel>
