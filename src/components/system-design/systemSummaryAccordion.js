@@ -61,10 +61,10 @@ export default function CustomizedAccordions(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography style={{textAlign : 'justify'}}>
-            Name   : {personalDetails.firstName} {personalDetails.lastName}<br/>
-            Address: {personalDetails.address}, {personalDetails.district}, {personalDetails.pincode}, {personalDetails.state}<br/>
-            Electricity Provider: {personalDetails.electricityProvider}<br/>
-            Email Address: {personalDetails.email}
+            <b>Name</b>   : {personalDetails.firstName} {personalDetails.lastName}<br/>
+            <b>Address</b>: {personalDetails.address}, {personalDetails.district}, {personalDetails.pincode}, {personalDetails.state}<br/>
+            <b>Electricity Provider</b>: {personalDetails.electricityProvider}<br/>
+            <b>Email Address</b>: {personalDetails.email}
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -74,8 +74,8 @@ export default function CustomizedAccordions(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography style={{textAlign : 'justify'}}>
-            Solar System Size   : {systemDesign.systemSize}<br/>
-            System Structure    : {systemDesign.structure}<br/> 
+            <b>Solar System Size</b>   : {systemDesign.systemSize}<br/>
+            <b>System Structure</b>    : {systemDesign.structure}<br/> 
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -85,12 +85,12 @@ export default function CustomizedAccordions(props) {
         </AccordionSummary>
         <AccordionDetails>
          <Typography style={{textAlign : 'justify'}}>
-            Solar System Size   : {systemDesign.systemSize}<br/>
-            System Area Required    : {systemDesign.areaRequired} Square Feet<br/> 
-            Net Cost : &nbsp;  &#x20B9; {systemDesign.netCost}<br/>
-            Down Payment for EMI : {(systemDesign.netCost * 0.30).toFixed(2) }<br/>
-            EMI @ 12 : &nbsp;  &#x20B9; {systemDesign.emiFor12}<br/>
-            EMI @ 18 : &nbsp;  &#x20B9; {systemDesign.emiFor18}<br/>
+            <b>Solar System Size  </b> : {systemDesign.systemSize}<br/>
+            <b>System Area Required   </b> : {systemDesign.areaRequired} Square Feet<br/> 
+            <b>Net Cost</b> : &nbsp;  &#x20B9; {systemDesign.netCost}<br/>
+            <b>Down Payment for EMI</b> : {(systemDesign.netCost * 0.30).toFixed(2) }<br/>
+            <b>EMI @ 12</b> : &nbsp;  &#x20B9; {systemDesign.emiFor12}<br/>
+            <b>EMI @ 18</b> : &nbsp;  &#x20B9; {systemDesign.emiFor18}<br/>
           </Typography>
         </AccordionDetails>
       </Accordion>

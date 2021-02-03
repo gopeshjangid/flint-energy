@@ -204,7 +204,7 @@ export default function CenteredGrid(props) {
                         value={systemSize}
                         onChange={onChangeHandler}
                       >
-                        <option>Select System Size</option>
+                        <option value="">Select System Size</option>
                         {_.map(systemSizeLIst, (cat, index) => (
                           <option key={index} value={cat / 1000}>
                             {cat / 1000}
@@ -228,13 +228,13 @@ export default function CenteredGrid(props) {
                         <option key="size-1" value="">
                           Choose Structure Type{" "}
                         </option>
-                        <option key="size-2" value="Standard">
+                        <option key="size-2" value="0">
                           Standard
                         </option>
-                        <option key="size-3"  value="Elevated">
+                        <option key="size-3"  value="1">
                           Elevated
                         </option>
-                        <option key="size-4" value="Customize">
+                        <option key="size-4" value="2">
                           Customize
                         </option>
                       </TSelect>

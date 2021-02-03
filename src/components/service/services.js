@@ -27,9 +27,9 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
     // ----- make payload object according to format given for API------
     const { systemSize, structure, avgbill, solar } = obj;
     payload = {
-      system_size: Number(systemSize),
-      structure_type: structure,
-      avg_bill: avgbill,
+      system_size: parseInt(systemSize),
+      structure_type: parseInt(structure),
+      avg_bill: parseInt(avgbill),
     };
     payload["ac_module"] = solar === "ac";
   } else if (activeStep === 1) {
@@ -39,7 +39,7 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
       electricityProvider: electricity_provider,
       ...rest
     } = obj;
-    payload = { first_name, last_name, electricity_provider, ...rest };
+    payload = { first_name, last_name,consent:true, electricity_provider, ...rest };
   } else if (activeStep === 2) {
     const { payment, panNo: pan_number } = obj;
     payload = { payment_mode: payment === "directonlinepayments", pan_number };
@@ -49,9 +49,9 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
   const res = await axios.post(BASE_URI + "lp/submit", {
     sessionid: sessionId, // handle later
     form_part: activeStep,
-    ...payload,
+    payload:payload,
   });
-  return res;
+  return res.data;
 };
 
 export const submitLeadDetails = async (obj) => {

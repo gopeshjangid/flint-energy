@@ -202,29 +202,6 @@ function getSteps() {
   ];
 }
 
-const isValidSystemDesign = (obj) => {
-  if (!obj["systemSize"] || !obj["structure"]) return false;
-  return true;
-};
-
-const isValidPersonalDetails = (obj) => {
-  if (
-    !obj["firstName"] ||
-    !obj["lastName"] ||
-    !obj["address"] ||
-    obj["pincode"].length < 6 ||
-    !obj["electricityProvider"] ||
-    !obj["state"] ||
-    obj["district"] === ""
-  )
-    return false;
-  return true;
-};
-
-const isValidFinancialDetails = (obj) => {
-  if (!obj["payment"] || !obj["dob"]) return false;
-  return true;
-};
 
 const style = {
   box: {
@@ -249,7 +226,7 @@ export default function CustomizedSteppers() {
   const steps = getSteps();
   const [systemDesign, setSystemDesign] = useState({
     systemSize: "",
-    structure: "Elevated",
+    structure: "1",
     solar: "standard",
     avgbill: 0,
     areaRequired: 0,
@@ -289,45 +266,81 @@ export default function CustomizedSteppers() {
     signature: "",
   });
   const sessionId = cookie.getJSON("sessionId");
-
-  const apiHandler = async () => {
+  const [FieldError,setFieldError] = useState('');
+  const handleNext = async (e) => {
+    let res;
     toast.info(messages.FORM_SUBMITING);
     try {
-      let res;
       if (activeStep === 0) {
-        res = await postSystemDetails(activeStep, systemDesign, sessionId);
+        if (!systemDesign["systemSize"])
+        {
+          setFieldError("Please Enter System Size") 
+        }
+        else if (!systemDesign["structure"])
+        {
+          setFieldError("Please Enter System Structure");
+        }
+        else{
+          setFieldError('');
+          res = await postSystemDetails(activeStep, systemDesign, sessionId);
+        }
       } else if (activeStep === 1) {
-        res = await postSystemDetails(activeStep, personalDetails, sessionId);
+        if(!personalDetails["firstName"])
+        {
+          setFieldError("Please Enter First Name");
+        }
+        else if(!personalDetails["lastName"])
+        {
+          setFieldError("Please Enter Last Name");          
+        }
+        else if(!personalDetails["address"])
+        {
+          setFieldError("Please Enter Address");
+        }
+        else if(!personalDetails["pincode"])
+        {
+          setFieldError("Please Enter Pincode");          
+        }
+        else if(!personalDetails["electricityProvider"])
+        {
+          setFieldError("Please Enter Electricity Provide");          
+        }
+        else if(!personalDetails["state"])
+        {
+          setFieldError("Please Enter State");          
+        }
+        else if(!personalDetails["district"])
+        {
+          setFieldError("Please Enter District");          
+        }
+        else
+        {
+          res = await postSystemDetails(activeStep, personalDetails, sessionId);
+          setFieldError('');
+        }
       } else if (activeStep === 2) {
+        if(!financeDetails["payment"])
+        {
+          setFieldError("Please Enter Payment Mode");          
+        }
+        else if(!financeDetails["dob"])
+        {
+          setFieldError("Please Enter Date of Birth"); 
+        }
+        else
+        {
         res = await postSystemDetails(activeStep, financeDetails, sessionId);
-      } else {
-        // res = await
+          setFieldError('');
+        }
       }
-      if (res["all_ok"]) {
-        toast.success(messages.FORM_SUBMIT_SUCCESS);
-      } else {
-        toast.error(res["error_msg"]);
+      if(res && res["all_ok"])
+      {
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  };
-
-  const handleNext = async () => {
-    toast.info(messages.FORM_SUBMITING);
-    try {
-      let res;
-      if (activeStep === 0) {
-        res = await postSystemDetails(activeStep, systemDesign, sessionId);
-      } else if (activeStep === 1) {
-        res = await postSystemDetails(activeStep, personalDetails, sessionId);
-      } else if (activeStep === 2) {
-        res = await postSystemDetails(activeStep, financeDetails, sessionId);
-      } else {
-        // res = await
+      else if(res&&!res["all_ok"]){
+        alert(res["error_msg"])
+        console.log(res["error_msg"])
       }
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } catch (err) {
       console.log(err);
       throw err;
@@ -416,6 +429,7 @@ export default function CustomizedSteppers() {
               md={12}
               className={classes.stepBtnContainer}
             >
+              <div style={{ color: '#D8000C',marginBottom:'25px',fontSize:'18px'}}>  {FieldError}</div>
               <Box sx={style.bottomBar}>
                 <Button
                   variant="primary"
@@ -425,19 +439,8 @@ export default function CustomizedSteppers() {
                 >
                   Back
                 </Button>
-
                 {activeStep < steps.length - 1 && (
                   <Button
-                    disabled={
-                      !(
-                        (activeStep === 0 &&
-                          isValidSystemDesign(systemDesign)) ||
-                        (activeStep === 1 &&
-                          isValidPersonalDetails(personalDetails)) ||
-                        (activeStep === 2 &&
-                          isValidFinancialDetails(financeDetails))
-                      )
-                    }
                     variant="primary"
                     onClick={handleNext}
                   >
