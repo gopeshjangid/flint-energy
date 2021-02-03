@@ -57,7 +57,7 @@ export default function CustomizedAccordions(props) {
     <div>
       <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Customer Details {personalDetails.firstName}</Typography>
+          <Typography>Customer Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
