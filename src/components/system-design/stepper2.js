@@ -352,8 +352,8 @@ export default function CustomizedSteppers() {
     });
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-      else if(res&&!res["all_ok"]){
-        setMessage({ message: res["error_msg"], severity: "error", open: true });
+      else if(!res&&!res["all_ok"]){
+        alert(res["error_msg"])
       }
     } catch (err) {
       console.log(err);
