@@ -19,9 +19,6 @@ const Accordion = withStyles({
       margin: 'auto',
     },
   },
-  textAlignP : {
-   textAlign: 'justify'
-  },
   expanded: {},
 })(MuiAccordion);
 
