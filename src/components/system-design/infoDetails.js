@@ -79,7 +79,7 @@ export default function AddressForm(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h5" gutterBottom={6}>
+      <Typography variant="h5" gutterBottom>
         Personal Details
       </Typography>
       <Grid container spacing={3}>
@@ -220,8 +220,8 @@ export default function AddressForm(props) {
               value={state}
               onChange={(e) => setState(e.target.value)}
             >
-              <MenuItem selected={1} value={"Gujrat"}>
-                {"Gujrat"}
+              <MenuItem value={"Gujarat"}>
+                {"Gujarat"}
               </MenuItem>
             </Select>
           </FormControl>
@@ -236,7 +236,16 @@ export default function AddressForm(props) {
               label="District"
               fullWidth
               value={district}
-              onChange={(e) => setDistrict(e.target.value)}
+              onChange={(e) => {
+                setDistrict(e.target.value);
+                onChangeHandler(
+                  e.target.value,
+                  "District",
+                  "district"
+                );
+              }}
+              error={error.errorField === "district"}
+              helperText={error.errorField === "district" && error.errorMsg}
             >
               <option value="">Select District</option>
               {Cities.districts.map((city, index) => (

@@ -130,7 +130,6 @@ export default function Review(props) {
               label="Birthday"
               type="date"
               value={dob}
-              defaultValue="2017-05-24"
               format="dd/MM/yyyy"
               variant="outlined"
               fullWidth

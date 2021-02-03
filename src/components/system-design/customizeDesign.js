@@ -231,7 +231,7 @@ export default function CenteredGrid(props) {
                         <option key="size-2" value="Standard">
                           Standard
                         </option>
-                        <option key="size-3" selected value="Elevated">
+                        <option key="size-3"  value="Elevated">
                           Elevated
                         </option>
                         <option key="size-4" value="Customize">
@@ -253,7 +253,7 @@ export default function CenteredGrid(props) {
                         <FormControlLabel
                           value="standard"
                           control={<Radio />}
-                          selected
+                          
                           label="Standard"
                         />
                         <FormControlLabel
