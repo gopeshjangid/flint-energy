@@ -78,6 +78,9 @@ export default function Review(props) {
 
   const handleOpen = () => {
     setOpen(true);
+        setTimeout(function(){ 
+        window.location.href = "/";
+    }, 2000)
   };
 
   const handleClose = () => {
