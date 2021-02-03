@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import {
   jsx,
   Box,
@@ -27,12 +27,19 @@ export default function Banner(props) {
   const [open, setOpen] = useState(false);
   const [bill, setBill] = useState();
   const [city, setCity] = useState({ id: -1, city: "Ahmedabad" });
-
+  const myRef = useRef(null)
   const [cardInfo, setCardInfo] = useState({
     monthlySaving: 0,
     suggestedSystem: 0,
     emiStarts: 0,
   });
+
+  useEffect(() => {
+    if(typeof window !== undefined){
+      window.scrollTo(0, 0);
+    }
+    
+  },[])
 
   const onChangeHandler = (e) => {
     setBill(e.target.value);
@@ -72,7 +79,7 @@ export default function Banner(props) {
   };
 
   return (
-    <Box as="section" id="home" sx={styles.section}>
+    <Box as="section" id="home" sx={styles.section} ref={myRef}>
       <Container>
         <Box sx={styles.contentWrapper}>
           <Modal

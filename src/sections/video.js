@@ -33,5 +33,9 @@ const style = {
   wrapper: {
     margin: "20px",
     maxWidth: "465px",
+    marginTop : '85px',
+    "@media only screen and (min-width: 320px) and (max-width: 420px)  ": {
+      marginTop : '-20px !important',
+    },
   },
 };

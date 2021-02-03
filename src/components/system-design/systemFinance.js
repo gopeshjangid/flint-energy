@@ -17,6 +17,11 @@ import DateFnsUtils from "@date-io/date-fns";
 const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(0),
+      fontSize : '25px'
+    },
   },
   systemCost: {
     border: "1px solid " + theme.palette.border,
@@ -34,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-around",
   },
+  input: {
+    "&:invalid": {
+      border: "red solid 2px"
+    }
+  }
 }));
 
 export default function Review(props) {
@@ -54,9 +64,17 @@ export default function Review(props) {
     props.handler(obj);
   }, [payment, panNo, dob]);
 
+  const panHandler= (e) =>{
+    var regexp = new RegExp(/^[a-zA-Z0-9 ]*$/);
+    if(regexp.test(e.target.value)){
+      setPanNo(e.target.value)
+    }
+   
+  }
+
   return (
     <React.Fragment>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" className={classes.title}>
         Choose your finance
       </Typography>
       <Grid container spacing={2}>
@@ -97,7 +115,7 @@ export default function Review(props) {
             </Box>
           </Grid>
         </Grid>
-        <Grid container style={{marginLeft:'1px'}} spacing={2} xs={12} sm={6}>
+        <Grid container style={{marginLeft:'1px'}} spacing={2} xs={10} sm={6} >
           <Grid item xs={12} p={4}>
             <FormControl required variant="outlined" fullWidth={true}>
               <InputLabel htmlFor="payment mode">Payment Mode</InputLabel>
@@ -124,7 +142,7 @@ export default function Review(props) {
               variant="outlined"
               fullWidth
               value={panNo}
-              onChange={(e) => setPanNo(e.target.value)}
+              onChange={panHandler}
               autoComplete="family-name"
             />
           </Grid>

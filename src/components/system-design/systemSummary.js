@@ -5,19 +5,13 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Accordion from "./systemSummaryAccordion";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-
+import {useRouter} from "next/router";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -57,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '10px'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -64,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 200,
+    backgroundSize: 'contain'
   },
 }));
 
@@ -75,12 +71,12 @@ export default function Review(props) {
   const [invoiceReceipt, setInvoiceReceipt] = useState("");
   const [signature, setSignature] = useState("");
   const [open, setOpen] = React.useState(false);
-
+  const router = useRouter();
   const handleOpen = () => {
     setOpen(true);
         setTimeout(function(){ 
-        window.location.href = "/";
-    }, 2000)
+          router.push("/");
+    }, 3000)
   };
 
   const handleClose = () => {
@@ -112,7 +108,7 @@ export default function Review(props) {
           <Box className={classes.Box}>
             <div className={classes.root}>
                <div>
-      <Button
+             <Button
                 variant="contained"
                 color="primary"
                 className={classes.button}
@@ -120,34 +116,30 @@ export default function Review(props) {
               >
                 Submit
               </Button>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+           >
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Details Submitted</h2>
-            <p id="transition-modal-description">Thanks for submitting the details, Our team shall reach back
+             <p id="transition-modal-description">Thanks for submitting the details, Our team shall reach back
                   to you shortly.</p>
-                      <Card>
-        <CardMedia
-          className={classes.media}
-          image="/thankyou.jpg"
-          title="Contemplative Reptile"
-        />
-    </Card>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
+                        <CardMedia
+                          className={classes.media}
+                          image="/thankyou.jpg"
+                          title="Contemplative Reptile"
+                        />
+                          </div>
+                  </Modal>
+                    </div>
             </div>
           </Box>
         </Grid>

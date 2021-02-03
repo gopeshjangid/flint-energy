@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { ThemeProvider } from "theme-ui";
 import theme from "theme";
 import SEO from "components/seo";
@@ -13,7 +13,7 @@ import Subscription from "sections/subscription";
 
 export default function IndexPage() {
   const [bill, setBill] = useState(3500);
-
+  
   return (
     <ThemeProvider theme={theme}>
       <Layout>

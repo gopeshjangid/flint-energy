@@ -79,10 +79,10 @@ export default function AddressForm(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom  >
         Personal Details
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} >
         <Grid item xs={12} sm={6}>
           <TextField
             required

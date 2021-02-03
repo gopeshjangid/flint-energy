@@ -4,7 +4,7 @@ import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-
+import Grid from '@material-ui/core/Grid';
 const Accordion = withStyles({
   root: {
     border: '1px solid rgba(0, 0, 0, .125)',
@@ -61,10 +61,38 @@ export default function CustomizedAccordions(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography style={{textAlign : 'justify'}}>
-            <b>Name</b>   : {personalDetails.firstName} {personalDetails.lastName}<br/>
-            <b>Address</b>: {personalDetails.address}, {personalDetails.district}, {personalDetails.pincode}, {personalDetails.state}<br/>
-            <b>Electricity Provider</b>: {personalDetails.electricityProvider}<br/>
-            <b>Email Address</b>: {personalDetails.email}
+          <Grid container spacing={2}>
+            <Grid item xs={6} >
+              <Typography >
+                <b>Name :</b>
+              </Typography>
+              </Grid> <Grid item xs={6} >
+              <Typography>
+                 {personalDetails.firstName} {' '} {personalDetails.lastName}
+              </Typography>
+            </Grid> 
+            <Grid item xs={6} >
+              <Typography ><b>Address</b>:</Typography> 
+            </Grid> 
+            <Grid item xs={6} >
+              <Typography variant="p">
+              {personalDetails.address}, {' '} {personalDetails.district},{' '} <br/>{personalDetails.pincode},{' '} {personalDetails.state}
+              </Typography>
+              </Grid>
+            <Grid item xs={6} >
+              <Typography><b>Electricity Provider</b>: </Typography>
+            </Grid>
+
+            <Grid item xs={6} >
+              <Typography> {personalDetails.electricityProvider}</Typography>
+              </Grid>
+              <Grid item xs={6} >
+              <Typography><b>Email Address</b>:</Typography> 
+            </Grid>
+            <Grid item xs={6} >
+              <Typography noWrap={false} variant="p" style={{overflowWrap: 'break-word'}}>{personalDetails.email}</Typography>
+              </Grid>
+            </Grid>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -73,10 +101,30 @@ export default function CustomizedAccordions(props) {
           <Typography style={{textAlign : 'justify'}}>System Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography style={{textAlign : 'justify'}}>
-            <b>Solar System Size</b>   : {systemDesign.systemSize}<br/>
-            <b>System Structure</b>    : {systemDesign.structure}<br/> 
-          </Typography>
+        <Grid container spacing={2}>
+            <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                 <b>Solar System Size</b>
+                </Typography>
+                </Grid>
+
+                <Grid item xs={6} >
+                <Typography >
+                  {systemDesign.systemSize}
+                </Typography>
+                </Grid>
+
+                <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                   <b>System Structure:</b>
+                </Typography>
+                </Grid>
+                <Grid item xs={6} >
+                <Typography >
+                   {systemDesign.structure}
+                </Typography>
+                </Grid>
+          </Grid>
         </AccordionDetails>
       </Accordion>
       <Accordion square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -84,14 +132,75 @@ export default function CustomizedAccordions(props) {
           <Typography style={{textAlign : 'justify'}}>Payment Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-         <Typography style={{textAlign : 'justify'}}>
-            <b>Solar System Size  </b> : {systemDesign.systemSize}<br/>
-            <b>System Area Required   </b> : {systemDesign.areaRequired} Square Feet<br/> 
-            <b>Net Cost</b> : &nbsp;  &#x20B9; {systemDesign.netCost}<br/>
-            <b>Down Payment for EMI</b> : {(systemDesign.netCost * 0.30).toFixed(2) }<br/>
-            <b>EMI @ 12</b> : &nbsp;  &#x20B9; {systemDesign.emiFor12}<br/>
-            <b>EMI @ 18</b> : &nbsp;  &#x20B9; {systemDesign.emiFor18}<br/>
-          </Typography>
+        <Grid container spacing={2}>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                  <b>Solar System Size  </b> :
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                    {systemDesign.systemSize}
+                 </Typography>
+              </Grid>
+              
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                   <b>System Area Required   </b> :
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                     {systemDesign.areaRequired} Square Feet
+                 </Typography>
+              </Grid>
+
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                    <b>Net Cost</b> :  
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                    &#x20B9; {systemDesign.netCost}
+                 </Typography>
+              </Grid>
+
+
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                     <b>Down Payment for EMI</b> : 
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                    {(systemDesign.netCost * 0.30).toFixed(2) }
+                 </Typography>
+              </Grid>
+
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                     <b>EMI @ 12</b> :  
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                    &#x20B9; {systemDesign.emiFor12}
+                 </Typography>
+              </Grid>
+
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                     <b>EMI @ 18</b> :  
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography variant="subtitle2">
+                   &#x20B9; {systemDesign.emiFor18}
+                 </Typography>
+              </Grid>
+
+          </Grid>        
         </AccordionDetails>
       </Accordion>
     </div>

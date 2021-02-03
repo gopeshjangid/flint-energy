@@ -42,7 +42,7 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
     payload = { first_name, last_name,consent:true, electricity_provider, ...rest };
   } else if (activeStep === 2) {
     const { payment, panNo: pan_number } = obj;
-    payload = { payment_mode: payment === "directonlinepayments", pan_number };
+    payload = { payment_mode: payment === "easyemi", pan_number };
     payload["dob"] = new Date(obj.dob).getTime().toString();
   } else {
   }

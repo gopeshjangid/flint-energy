@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -22,7 +22,7 @@ import SystemSummary from "./systemSummary";
 import { postSystemDetails } from "../service/services";
 import messages from "../../../messages";
 import { Grid } from "@material-ui/core";
-import { Box, Radio, Button } from "theme-ui";
+import { Box,  Button } from "theme-ui";
 import Alert from "../common/Alert";
 
 const useQontoStepIconStyles = makeStyles((theme) => ({
@@ -336,6 +336,9 @@ export default function CustomizedSteppers() {
         else if(!financeDetails["dob"])
         {
           setFieldError("Please Enter Date of Birth"); 
+        } else if(!financeDetails["panNo"] || financeDetails["panNo"] && financeDetails.panNo.length !== 10)
+        {
+          setFieldError("Please Enter a valid PAN No."); 
         }
         else
         {
@@ -352,7 +355,7 @@ export default function CustomizedSteppers() {
     });
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-      else if(!res&&!res["all_ok"]){
+      else if(res &&!res["all_ok"]){
         alert(res["error_msg"])
       }
     } catch (err) {
