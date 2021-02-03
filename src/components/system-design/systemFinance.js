@@ -67,29 +67,34 @@ export default function Review(props) {
           justify="center"
           xs={12}
           sm={6}
+          style={{
+            paddingTop: "10px",
+          }}
         >
           <Grid item xs={12}>
             <Box
               style={{
+                display : "flex",
+                flexDirection : 'column',
                 alignItems: "center",
-                width: "500px",
-                padding: "10px 40px",
+                width: "100%",
+                padding: "10px 10px",
               }}
               m={3}
               p={4}
             >
-              <Typography variant="h5" component="h4">
+              <Box variant="h4" component="h4">
                 Total System Cost- &nbsp; &#x20B9; {netCost}
-              </Typography>
-              <Typography variant="h5" component="h4">
+              </Box>
+              <Box variant="h4" component="h4">
                 Down Payment* - &nbsp; &#x20B9; {netCost * 0.3}
-              </Typography>
-              <Typography variant="h5" component="h4">
+              </Box>
+              <Box variant="h4" component="h4">
                 EMI for 12 Months- &nbsp; &#x20B9; {emiFor12}
-              </Typography>
-              <Typography variant="h5" component="h4">
+              </Box>
+              <Box variant="h4" component="h4">
                 EMI for 18 Months- &nbsp; &#x20B9; {emiFor18}
-              </Typography>
+              </Box>
             </Box>
           </Grid>
         </Grid>

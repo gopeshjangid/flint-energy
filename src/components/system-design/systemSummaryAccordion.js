@@ -19,6 +19,9 @@ const Accordion = withStyles({
       margin: 'auto',
     },
   },
+  textAlignP : {
+   textAlign: 'justify'
+  },
   expanded: {},
 })(MuiAccordion);
 
@@ -60,7 +63,7 @@ export default function CustomizedAccordions(props) {
           <Typography>Customer Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography style={{textAlign : 'justify'}}>
             Name   : {personalDetails.firstName} {personalDetails.lastName}<br/>
             Address: {personalDetails.address}, {personalDetails.district}, {personalDetails.pincode}, {personalDetails.state}<br/>
             Electricity Provider: {personalDetails.electricityProvider}<br/>
@@ -70,10 +73,10 @@ export default function CustomizedAccordions(props) {
       </Accordion>
       <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>System Details</Typography>
+          <Typography style={{textAlign : 'justify'}}>System Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography style={{textAlign : 'justify'}}>
             Solar System Size   : {systemDesign.systemSize}<br/>
             System Structure    : {systemDesign.structure}<br/> 
           </Typography>
@@ -81,10 +84,10 @@ export default function CustomizedAccordions(props) {
       </Accordion>
       <Accordion square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Payment Details</Typography>
+          <Typography style={{textAlign : 'justify'}}>Payment Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-         <Typography>
+         <Typography style={{textAlign : 'justify'}}>
             Solar System Size   : {systemDesign.systemSize}<br/>
             System Area Required    : {systemDesign.areaRequired} Square Feet<br/> 
             Net Cost : &nbsp;  &#x20B9; {systemDesign.netCost}<br/>
