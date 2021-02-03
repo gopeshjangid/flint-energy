@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CenteredGrid(props) {
   const classes = useStyles();
-  const [systemSizeLIst, setSystemSizeList] = useState(["dummy1", "dummy2"]);
+  const [systemSizeLIst, setSystemSizeList] = useState([]);
   const router = useRouter();
   const [systemSize, setSystemSize] = useState(props.systemDesign.systemSize);
   const [structure, setStructure] = useState(props.systemDesign.structure);
@@ -99,9 +99,9 @@ export default function CenteredGrid(props) {
     getSystemSizeList();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setAvgbill(localStorage.getItem("bill"));
-  },[])
+  }, []);
 
   useEffect(() => {
     const obj = {
@@ -206,7 +206,7 @@ export default function CenteredGrid(props) {
                       >
                         <option>Select System Size</option>
                         {_.map(systemSizeLIst, (cat, index) => (
-                          <option key={cat.id} value={cat / 1000}>
+                          <option key={index} value={cat / 1000}>
                             {cat / 1000}
                           </option>
                         ))}

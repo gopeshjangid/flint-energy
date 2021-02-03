@@ -10,10 +10,7 @@ const Feature = ({ data: feature, type }) => {
         <Image loading="lazy" src={feature.icon} alt={feature.title} />
       )}
       <Heading as="h3">{feature.title}</Heading>
-      <Text
-        style={{ "font-weight": "bold", "margin-left": "30px" }}
-        as={type || "p"}
-      >
+      <Text style={{ fontWeight: "bold", marginLeft: "30px" }} as={type || "p"}>
         {feature.description}
       </Text>
     </Box>

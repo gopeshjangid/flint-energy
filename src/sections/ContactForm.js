@@ -211,19 +211,19 @@ const ContactForm = (props) => {
               className={classes.root}
               aria-label="contacts"
             >
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon>
                   <CheckIcon />
                 </ListItemIcon>
                 <ListItemText primary="Generate Electricity using solar panel." />
               </ListItem>
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon>
                   <CheckIcon />
                 </ListItemIcon>
                 <ListItemText primary="Feed the extra Electricity into grid." />
               </ListItem>
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon>
                   <CheckIcon />
                 </ListItemIcon>
