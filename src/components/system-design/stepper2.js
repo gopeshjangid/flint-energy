@@ -23,6 +23,7 @@ import { postSystemDetails } from "../service/services";
 import messages from "../../../messages";
 import { Grid } from "@material-ui/core";
 import { Box, Radio, Button } from "theme-ui";
+import Alert from "../common/Alert";
 
 const useQontoStepIconStyles = makeStyles((theme) => ({
   root: {
@@ -265,6 +266,11 @@ export default function CustomizedSteppers() {
     invoiceReceipt: "",
     signature: "",
   });
+  const [message, setMessage] = useState({
+    open: false,
+    message: "",
+    type: "error",
+  });
   const sessionId = cookie.getJSON("sessionId");
   const [FieldError,setFieldError] = useState('');
   const handleNext = async (e) => {
@@ -301,6 +307,10 @@ export default function CustomizedSteppers() {
         {
           setFieldError("Please Enter Pincode");          
         }
+        else if(personalDetails["pincode"].length<6)
+        {
+          setFieldError("Pincode length should be Greater than 6.");  
+        }
         else if(!personalDetails["electricityProvider"])
         {
           setFieldError("Please Enter Electricity Provide");          
@@ -335,11 +345,15 @@ export default function CustomizedSteppers() {
       }
       if(res && res["all_ok"])
       {
+        setMessage({  
+          open: false,
+    message: "",
+    type: "error"
+    });
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
       else if(res&&!res["all_ok"]){
-        alert(res["error_msg"])
-        console.log(res["error_msg"])
+        setMessage({ message: res["error_msg"], severity: "error", open: true });
       }
     } catch (err) {
       console.log(err);
@@ -361,6 +375,7 @@ export default function CustomizedSteppers() {
 
   return (
     <Box as="div" id="systemDesign" sx={style.wrapper}>
+      <Alert {...message} />
       <Stepper
         alternativeLabel
         activeStep={activeStep}
