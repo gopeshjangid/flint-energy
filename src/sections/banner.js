@@ -17,13 +17,13 @@ import Modal from "../components/home/cityModal";
 import { useRouter } from "next/router";
 import CALC_VARIABLES from "../../app.config";
 import Feature from "components/cards/feature";
-
+import { getCategories } from "../components/service/services";
 export default function Banner(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitting...");
   };
-
+  const [systemInfo, setSystemInfo] = useState([]);
+  const [systemSizeLIst, setSystemSizeList] = useState([]);
   const [open, setOpen] = useState(false);
   const [bill, setBill] = useState();
   const [city, setCity] = useState({ id: -1, city: "Ahmedabad" });
@@ -33,48 +33,84 @@ export default function Banner(props) {
     emiStarts: 0,
   });
 
+  const getClosestValue =(input) =>{
+    const array = systemSizeLIst;
+    var tempArray = array;
+    var index = tempArray.sort().findIndex((item) => {
+      return input < item;
+    });
+    if(index >= 0) {
+      return array[index] && (array[index]/1000); 
+    } else {
+      return null; // no answer
+    }
+  }
+
+  useEffect(() => {
+        const getSystemSizeList = async () => {
+          const res = await getCategories();
+          setSystemSizeList(res["syslist"]);
+          setSystemInfo(res.systeminfo || []);
+        };
+
+    // ---- Uncomment whem API is working ----
+      getSystemSizeList();
+   
+  }, []);
+
   useEffect(() => {
     if(typeof window !== undefined){
       window.scrollTo(0, 0);
     }
   },[])
-
   const onChangeHandler = (e) => {
     setBill(e.target.value);
     if (props.setBillAmount) {
       props.setBillAmount(e.target.value);
     }
   };
+
+  const getSystemInfo = (size ) =>{
+    let sysInfo = systemInfo;
+     sysInfo  = sysInfo.filter(item => item.size === size)
+     return  { 
+         SYSTEM_COST : sysInfo.length && sysInfo[0].cost || 0,
+          SUBSIDY: sysInfo.length && sysInfo[0].subsidy || 0,
+           STRUCTURE_COST: sysInfo.length && sysInfo[0].struct || 0
+     }
+  }
   useEffect(() => {
     // --- CALCULATION ---
-    const suggestedSystemSize = bill / (720 * 2);
-
-    const meterCharge =
-      suggestedSystemSize > 6000
-        ? city.city.toLowerCase() === "torrentahmedabad" ||
-          city.city.toLowerCase() === "torrentsurat"
-          ? 16835.74
-          : 15166.51
-        : city.city.toLowerCase() === "torrentahmedabad" ||
-          city.city.toLowerCase() === "torrentsurat"
-        ? 5396.86
-        : 4045.08;
-
-    const { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = CALC_VARIABLES;
-    const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
-    const downPayment = netCost * 0.3;
-
-    setCardInfo({
-      monthlySaving: (suggestedSystemSize * 720).toFixed(2),
-      suggestedSystem: suggestedSystemSize.toFixed(2),
-      emiStarts: (((netCost - downPayment) * 1.18) / 18).toFixed(2),
-    });
+    if(bill){
+        let suggestedSystemSize = (bill / (720 * 2)) * 1000;
+        const meterCharge =
+          suggestedSystemSize > 6000
+            ? city.city.toLowerCase() === "torrentahmedabad" ||
+              city.city.toLowerCase() === "torrentsurat"
+              ? 16835.74
+              : 15166.51
+            : city.city.toLowerCase() === "torrentahmedabad" ||
+              city.city.toLowerCase() === "torrentsurat"
+            ? 5396.86
+            : 4045.08;
+        suggestedSystemSize = getClosestValue(suggestedSystemSize);
+        const { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = getSystemInfo(suggestedSystemSize *1000);
+        const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+        const downPayment = netCost * 0.3;
+        setCardInfo({
+          monthlySaving: (suggestedSystemSize * 720).toFixed(2),
+          suggestedSystem: suggestedSystemSize.toFixed(2),
+          emiStarts: (((netCost - downPayment) * 1.18) / 18).toFixed(2),
+        });
+   }
   }, [bill]);
 
   const router = useRouter();
   const BookNowHandler = () => {
     if(localStorage){
-      localStorage.setItem("systemSize" ,cardInfo.suggestedSystem)
+      localStorage.setItem("systemSize" ,cardInfo.suggestedSystem);
+      localStorage.setItem("city" ,city.city);
+      localStorage.setItem("systemInfo" ,JSON.stringify(systemInfo));
     }
     router.push("/#verification");
   };

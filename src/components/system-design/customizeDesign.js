@@ -122,12 +122,9 @@ export default function CenteredGrid(props) {
 
   const saveSystemInfo = (systemList ) =>{
     const actualSize = localStorage.getItem("systemSize")*1000;
-    console.log("actualSize" ,actualSize)
     const list = systemList.map(item => item.size);
     const size = getClosestValue(actualSize, list);
-    console.log("systemList" ,systemList ,"size" ,size);
     const sysInfo  = systemList.filter(item => item.size === size)
-    console.log("sysInfo" ,sysInfo)
      const info =   { 
          SYSTEM_COST : sysInfo.length && sysInfo[0].cost || 0,
           SUBSIDY: sysInfo.length && sysInfo[0].subsidy || 0,
@@ -140,8 +137,8 @@ export default function CenteredGrid(props) {
   }
 
   const getSystemInfo = (size ) =>{
-    let sysInfo = systemInfo;
-    console.log("systemInfo" ,systemInfo);
+    let sysInfo =  localStorage.getItem("systemInfo");
+    sysInfo = sysInfo && JSON.parse(sysInfo) || [];
      sysInfo  = sysInfo.filter(item => item.size === size)
      return  { 
          SYSTEM_COST : sysInfo.length && sysInfo[0].cost || 0,
@@ -152,11 +149,8 @@ export default function CenteredGrid(props) {
 
   useEffect(() => {
     setAvgbill(localStorage.getItem("bill"));
-    const systemSize = (localStorage.getItem("systemSize")*1000);
-    const selectedValue  = getClosestValue(systemSize, systemSizeLIst);
-    if(selectedValue){
-      const size = (selectedValue)/1000;
-      setCalculation(size);
+    if(localStorage.getItem("systemSize")){
+      setCalculation(localStorage.getItem("systemSize"));
     }
   }, [systemSizeLIst]);
 
@@ -189,19 +183,32 @@ export default function CenteredGrid(props) {
     }
   };
 
+  const getMeterCharge = (size) =>{
+    const city = localStorage.getItem("city");
+    const meterCharge =
+    size > 6000
+      ? city && city.toLowerCase() === "torrentahmedabad" ||
+       city && city.toLowerCase() === "torrentsurat"
+        ? 16835.74
+        : 15166.51
+      : city && city.toLowerCase() === "torrentahmedabad" ||
+        city && city.toLowerCase() === "torrentsurat"
+      ? 5396.86
+      : 4045.08;
+      return meterCharge;
+  }
   const setCalculation = async (value)=>{
     setSystemSize(value);
     setareaRequired(value);
-    console.log("value" ,value);
-    let meterCharge = value > 6000 ? 15166.51 : 4045.08;
-    const SYSTEM_COST = Number(localStorage.getItem("SYSTEM_COST"))
-    const  SUBSIDY = Number(localStorage.getItem("SUBSIDY"))
-    const STRUCTURE_COST =  Number(localStorage.getItem("STRUCTURE_COST"))
-    console.log("SYSTEM_COST" ,SYSTEM_COST ,"STRUCTURE_COST" ,STRUCTURE_COST,"")
+    const actualSize = value*1000;
+    let meterCharge = getMeterCharge(actualSize);
+    // const SYSTEM_COST = Number(localStorage.getItem("SYSTEM_COST"))
+    // const  SUBSIDY = Number(localStorage.getItem("SUBSIDY"))
+    // const STRUCTURE_COST =  Number(localStorage.getItem("STRUCTURE_COST"))
+    const  {SYSTEM_COST,SUBSIDY,  STRUCTURE_COST} =  getSystemInfo(actualSize);
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
     setsystemCost(cost);
-    console.log("cost" ,cost)
     setmonthlySaving(Number(value * 720).toFixed(2));
     let downPayment = cost * 0.3;
     setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
@@ -211,12 +218,12 @@ export default function CenteredGrid(props) {
   const onChangeHandler = (e) => {
     setSystemSize(e.target.value);
     setareaRequired(e.target.value);
-    let meterCharge = e.target.value > 6000 ? 15166.51 : 4045.08;
+    const actualSize = e.target.value*1000;
+    let meterCharge = getMeterCharge(actualSize);
     let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = getSystemInfo(e.target.value*1000);
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
 
-    console.log("corretc  SYSTEM_COST" ,SYSTEM_COST)
     setsystemCost(cost);
     setmonthlySaving(Number(e.target.value * 720).toFixed(2));
     let downPayment = cost * 0.3;

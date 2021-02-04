@@ -104,7 +104,7 @@ export default function Review(props) {
                 Total System Cost- &nbsp; &#x20B9; {netCost}
               </Box>
               <Box variant="h4" component="h4">
-                Down Payment* - &nbsp; &#x20B9; {netCost * 0.3}
+                Down Payment* - &nbsp; &#x20B9; {(netCost * 0.3).toFixed(2)}
               </Box>
               <Box variant="h4" component="h4">
                 EMI for 12 Months- &nbsp; &#x20B9; {emiFor12}
@@ -152,7 +152,7 @@ export default function Review(props) {
               label="Birthday"
               type="date"
               value={dob}
-              format="dd/MM/yyyy"
+              format="yyyy/MM/dd"
               variant="outlined"
               fullWidth
               onChange={(e) => setDob(e.target.value)}
