@@ -72,12 +72,17 @@ export default function Review(props) {
   const [signature, setSignature] = useState("");
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-  const handleOpen = () => {
-    setOpen(true);
+
+  useEffect(() => {
+    if(props.isSubmitted){
+        setOpen(true);
         setTimeout(function(){ 
+          setOpen(false);
           router.push("/");
-    }, 3000)
-  };
+      }, 3000)
+    }
+   
+  },[props.isSubmitted]);
 
   const handleClose = () => {
     setOpen(false);
@@ -112,7 +117,7 @@ export default function Review(props) {
                 variant="contained"
                 color="primary"
                 className={classes.button}
-                onClick={handleOpen}
+                onClick={props.finalSubmitHandler}
               >
                 Submit
               </Button>

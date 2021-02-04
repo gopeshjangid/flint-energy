@@ -40,11 +40,10 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
       ...rest
     } = obj;
     payload = { first_name, last_name,consent:true, electricity_provider, ...rest };
-  } else if (activeStep === 2) {
+  } else if (activeStep === 3) {
     const { payment, panNo: pan_number } = obj;
     payload = { payment_mode: payment === "easyemi", pan_number };
     payload["dob"] = new Date(obj.dob).getTime().toString();
-  } else {
   }
   const res = await axios.post(BASE_URI + "lp/submit", {
     sessionid: sessionId, // handle later

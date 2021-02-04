@@ -25,6 +25,7 @@ function numberWithCommas(x) {
 }
 
 import { getCategories } from "../service/services";
+import { clearConfigCache } from "prettier";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CenteredGrid(props) {
   const classes = useStyles();
   const [systemSizeLIst, setSystemSizeList] = useState([]);
+  const [systemInfo, setSystemInfo] = useState([]);
   const router = useRouter();
   const [systemSize, setSystemSize] = useState(props.systemDesign.systemSize);
   const [structure, setStructure] = useState(props.systemDesign.structure);
@@ -105,11 +107,44 @@ export default function CenteredGrid(props) {
     const getSystemSizeList = async () => {
       const res = await getCategories();
       setSystemSizeList(res["syslist"]);
+      setSystemInfo(res.systeminfo || []);
+      saveSystemInfo(res.systeminfo)
+      localStorage.setItem("systemInfo" ,JSON.stringify(res.systeminfo));
     };
 
     // ---- Uncomment whem API is working ----
     getSystemSizeList();
   }, []);
+
+  const saveSystemInfo = (systemList ) =>{
+    const actualSize = localStorage.getItem("systemSize")*1000;
+    console.log("actualSize" ,actualSize)
+    const list = systemList.map(item => item.size);
+    const size = getClosestValue(actualSize, list);
+    console.log("systemList" ,systemList ,"size" ,size);
+    const sysInfo  = systemList.filter(item => item.size === size)
+    console.log("sysInfo" ,sysInfo)
+     const info =   { 
+         SYSTEM_COST : sysInfo.length && sysInfo[0].cost || 0,
+          SUBSIDY: sysInfo.length && sysInfo[0].subsidy || 0,
+           STRUCTURE_COST: sysInfo.length && sysInfo[0].struct || 0
+     }
+
+     localStorage.setItem("SYSTEM_COST",info.SYSTEM_COST)
+     localStorage.setItem("SUBSIDY",info.SUBSIDY)
+     localStorage.setItem("STRUCTURE_COST",info.STRUCTURE_COST)
+  }
+
+  const getSystemInfo = (size ) =>{
+    let sysInfo = systemInfo;
+    console.log("systemInfo" ,systemInfo);
+     sysInfo  = sysInfo.filter(item => item.size === size)
+     return  { 
+         SYSTEM_COST : sysInfo.length && sysInfo[0].cost || 0,
+          SUBSIDY: sysInfo.length && sysInfo[0].subsidy || 0,
+           STRUCTURE_COST: sysInfo.length && sysInfo[0].struct || 0
+     }
+  }
 
   useEffect(() => {
     setAvgbill(localStorage.getItem("bill"));
@@ -150,13 +185,19 @@ export default function CenteredGrid(props) {
     }
   };
 
-  const setCalculation = (value)=>{
+  const setCalculation = async (value)=>{
     setSystemSize(value);
     setareaRequired(value);
+    console.log("value" ,value);
     let meterCharge = value > 6000 ? 15166.51 : 4045.08;
-    let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = CALC_VARIABLES;
+    const SYSTEM_COST = Number(localStorage.getItem("SYSTEM_COST"))
+    const  SUBSIDY = Number(localStorage.getItem("SUBSIDY"))
+    const STRUCTURE_COST =  Number(localStorage.getItem("STRUCTURE_COST"))
+    console.log("SYSTEM_COST" ,SYSTEM_COST ,"STRUCTURE_COST" ,STRUCTURE_COST,"")
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+    setsystemCost(cost);
+    console.log("cost" ,cost)
     setmonthlySaving(Number(value * 720).toFixed(2));
     let downPayment = cost * 0.3;
     setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
@@ -167,13 +208,21 @@ export default function CenteredGrid(props) {
     setSystemSize(e.target.value);
     setareaRequired(e.target.value);
     let meterCharge = e.target.value > 6000 ? 15166.51 : 4045.08;
-    let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = CALC_VARIABLES;
+    let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = getSystemInfo(e.target.value*1000);
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+
+    console.log("corretc  SYSTEM_COST" ,SYSTEM_COST)
+    setsystemCost(cost);
     setmonthlySaving(Number(e.target.value * 720).toFixed(2));
     let downPayment = cost * 0.3;
     setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
     setemiFor18((((cost - downPayment) * 1.18) / 18).toFixed(2));
+    if(localStorage){
+      localStorage.setItem("SYSTEM_COST" ,SYSTEM_COST);
+      localStorage.setItem("SUBSIDY" ,SUBSIDY);
+      localStorage.setItem("STRUCTURE_COST" ,STRUCTURE_COST);
+    }
   };
 
   return (

@@ -24,7 +24,7 @@ import messages from "../../../messages";
 import { Grid } from "@material-ui/core";
 import { Box,  Button } from "theme-ui";
 import Alert from "../common/Alert";
-
+import {useRouter} from "next/router";
 const useQontoStepIconStyles = makeStyles((theme) => ({
   root: {
     color: "#eaeaf0",
@@ -225,6 +225,8 @@ export default function CustomizedSteppers() {
   const classes = useStyles1();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+  const [isSubmitted , setSubmitted] = useState(false);
+  const router = useRouter();
   const [systemDesign, setSystemDesign] = useState({
     systemSize: "",
     structure: "1",
@@ -339,24 +341,24 @@ export default function CustomizedSteppers() {
         } else if(!financeDetails["panNo"] || financeDetails["panNo"] && financeDetails.panNo.length !== 10)
         {
           setFieldError("Please Enter a valid PAN No."); 
+        } else {
+          setFieldError("");
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
-        else
-        {
-        res = await postSystemDetails(activeStep, financeDetails, sessionId);
-          setFieldError('');
-        }
-      }
+        
+      } 
       if(res && res["all_ok"])
       {
         setMessage({  
-          open: false,
-    message: "",
-    type: "error"
-    });
+            open: false,
+            message: "",
+            type: "error"
+        });
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
       else if(res &&!res["all_ok"]){
-        alert(res["error_msg"])
+        alert(res["error_msg"]);
+        router.push("/");
       }
     } catch (err) {
       console.log(err);
@@ -372,9 +374,14 @@ export default function CustomizedSteppers() {
     setActiveStep(0);
   };
 
-  // if(!sessionId){
-  //   return
-  // }
+  const  finalSubmitHandler = async ()=>{
+    const res = await postSystemDetails(3, financeDetails, sessionId);
+    if(res && res["all_ok"])
+    {
+      setFieldError('');
+      setSubmitted(true);
+    }
+  }
 
   return (
     <Box as="div" id="systemDesign" sx={style.wrapper}>
@@ -431,11 +438,13 @@ export default function CustomizedSteppers() {
                 )}
                 {activeStep === 3 && (
                   <SystemSummary
+                    finalSubmitHandler ={finalSubmitHandler}
                     handler={(obj) => setRazorpayDetails(obj)}
                     systemDesign={systemDesign}
                     financeDetails={financeDetails}
                     personalDetails={personalDetails}
                     razorpayDetails={razorpayDetails}
+                    isSubmitted={isSubmitted}
                   />
                 )}
               </Box>
