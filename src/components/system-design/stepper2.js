@@ -380,6 +380,8 @@ export default function CustomizedSteppers() {
     {
       setFieldError('');
       setSubmitted(true);
+      localStorage.setItem("systemSize" , 0);
+      localStorage.setItem("bill" ,0);
     }
   }
 
@@ -438,7 +440,7 @@ export default function CustomizedSteppers() {
                 )}
                 {activeStep === 3 && (
                   <SystemSummary
-                    finalSubmitHandler ={finalSubmitHandler}
+                    
                     handler={(obj) => setRazorpayDetails(obj)}
                     systemDesign={systemDesign}
                     financeDetails={financeDetails}
@@ -466,14 +468,21 @@ export default function CustomizedSteppers() {
                 >
                   Back
                 </Button>
-                {activeStep < steps.length - 1 && (
+                {activeStep < steps.length - 1 ? (
                   <Button
                     variant="primary"
                     onClick={handleNext}
                   >
                     Next
                   </Button>
-                )}
+                ) :  (
+                  <Button
+                    variant="primary"
+                    onClick={finalSubmitHandler}
+                  >
+                    Submit
+                  </Button>
+                ) }
               </Box>
             </Grid>
           </Grid>

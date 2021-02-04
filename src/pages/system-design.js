@@ -10,10 +10,10 @@ import bannerBg from 'assets/images/banner-bg.png';
 const styles = {
   section: {
     '@media only screen and (min-width: 320px) and (max-width: 420px) ' : {
-      height : '1240px'
+      height : '1000px'
     },
     '@media only screen and (min-width: 430px) ' : {
-      height : '840px'
+      height : '890px'
     },
     background: `url(${bannerBg}) no-repeat center top / cover ,linear-gradient(180deg, rgb(0 0 0 / 12%) 12.92%, rgb(0 0 0 / 12%) 34.86%, rgb(0 0 0 / 12%) 53.44%, rgb(0 0 0 / 12%) 84.3%)`,
     backgroundSize: ['100%', null, null, null, 'cover'],

@@ -99,29 +99,7 @@ export default function Review(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom className={classes.title}>
-        System Summary
-      </Typography>
-
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={9}>
-          <Box className={classes.infoBox}>
-            <Accordion SystemSummary={props} />
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <Box className={classes.Box}>
-            <div className={classes.root}>
-               <div>
-             <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                onClick={props.finalSubmitHandler}
-              >
-                Submit
-              </Button>
-          <Modal
+       <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
@@ -143,9 +121,15 @@ export default function Review(props) {
                           title="Contemplative Reptile"
                         />
                           </div>
-                  </Modal>
-                    </div>
-            </div>
+       </Modal>
+      <Typography variant="h6" gutterBottom className={classes.title}>
+        System Summary
+      </Typography>
+
+      <Grid container spacing={4} alignContent="center" justify="center" >
+        <Grid item xs={12} sm={10} alignContent="center" justify="center">
+          <Box className={classes.infoBox}>
+            <Accordion SystemSummary={props} />
           </Box>
         </Grid>
       </Grid>

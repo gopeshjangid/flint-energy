@@ -104,16 +104,20 @@ export default function CenteredGrid(props) {
   }
   
   useEffect(() => {
-    const getSystemSizeList = async () => {
-      const res = await getCategories();
-      setSystemSizeList(res["syslist"]);
-      setSystemInfo(res.systeminfo || []);
-      saveSystemInfo(res.systeminfo)
-      localStorage.setItem("systemInfo" ,JSON.stringify(res.systeminfo));
-    };
+    if(localStorage.getItem("systemSize") && localStorage.getItem("bill")){
+        const getSystemSizeList = async () => {
+          const res = await getCategories();
+          setSystemSizeList(res["syslist"]);
+          setSystemInfo(res.systeminfo || []);
+          saveSystemInfo(res.systeminfo)
+          localStorage.setItem("systemInfo" ,JSON.stringify(res.systeminfo));
+        };
 
     // ---- Uncomment whem API is working ----
-    getSystemSizeList();
+      getSystemSizeList();
+    }  else {
+      router.push("/");
+    }
   }, []);
 
   const saveSystemInfo = (systemList ) =>{

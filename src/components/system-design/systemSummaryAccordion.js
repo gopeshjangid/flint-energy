@@ -101,9 +101,9 @@ export default function CustomizedAccordions(props) {
           <Typography style={{textAlign : 'justify'}}>System Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justify="flex-start">
             <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                  <b>Solar System Size</b>
                 </Typography>
                 </Grid>
@@ -115,7 +115,7 @@ export default function CustomizedAccordions(props) {
                 </Grid>
 
                 <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                    <b>System Structure:</b>
                 </Typography>
                 </Grid>
@@ -134,7 +134,7 @@ export default function CustomizedAccordions(props) {
         <AccordionDetails>
         <Grid container spacing={2}>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                   <b>Solar System Size  </b> :
                  </Typography>
               </Grid>
@@ -145,7 +145,7 @@ export default function CustomizedAccordions(props) {
               </Grid>
               
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                    <b>System Area Required   </b> :
                  </Typography>
               </Grid>
@@ -156,7 +156,7 @@ export default function CustomizedAccordions(props) {
               </Grid>
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                     <b>Net Cost</b> :  
                  </Typography>
               </Grid>
@@ -168,7 +168,7 @@ export default function CustomizedAccordions(props) {
 
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                      <b>Down Payment for EMI</b> : 
                  </Typography>
               </Grid>
@@ -179,7 +179,7 @@ export default function CustomizedAccordions(props) {
               </Grid>
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                      <b>EMI @ 12</b> :  
                  </Typography>
               </Grid>
@@ -190,7 +190,7 @@ export default function CustomizedAccordions(props) {
               </Grid>
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
                      <b>EMI @ 18</b> :  
                  </Typography>
               </Grid>
