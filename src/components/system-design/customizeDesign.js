@@ -88,7 +88,19 @@ export default function CenteredGrid(props) {
   const [monthlySaving, setmonthlySaving] = useState(0);
   const [emiFor12, setemiFor12] = useState(0);
   const [emiFor18, setemiFor18] = useState(0);
-
+  
+  function getClosestValue(input, array){
+    var tempArray = array;
+    var index = tempArray.sort().findIndex((item) => {
+      return input < item;
+    });
+    if(index >= 0) {
+      return array[index]; 
+    } else {
+      return null; // no answer
+    }
+  }
+  
   useEffect(() => {
     const getSystemSizeList = async () => {
       const res = await getCategories();
@@ -101,7 +113,13 @@ export default function CenteredGrid(props) {
 
   useEffect(() => {
     setAvgbill(localStorage.getItem("bill"));
-  }, []);
+    const systemSize = (localStorage.getItem("systemSize")*1000);
+    const selectedValue  = getClosestValue(systemSize, systemSizeLIst);
+    if(selectedValue){
+      const size = (selectedValue)/1000;
+      setCalculation(size);
+    }
+  }, [systemSizeLIst]);
 
   useEffect(() => {
     const obj = {
@@ -131,6 +149,19 @@ export default function CenteredGrid(props) {
         break;
     }
   };
+
+  const setCalculation = (value)=>{
+    setSystemSize(value);
+    setareaRequired(value);
+    let meterCharge = value > 6000 ? 15166.51 : 4045.08;
+    let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = CALC_VARIABLES;
+    setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
+    let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+    setmonthlySaving(Number(value * 720).toFixed(2));
+    let downPayment = cost * 0.3;
+    setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
+    setemiFor18((((cost - downPayment) * 1.18) / 18).toFixed(2));
+  }
 
   const onChangeHandler = (e) => {
     setSystemSize(e.target.value);

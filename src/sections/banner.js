@@ -73,6 +73,9 @@ export default function Banner(props) {
 
   const router = useRouter();
   const BookNowHandler = () => {
+    if(localStorage){
+      localStorage.setItem("systemSize" ,cardInfo.suggestedSystem)
+    }
     router.push("/#verification");
   };
 
