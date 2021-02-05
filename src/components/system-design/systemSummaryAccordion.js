@@ -162,7 +162,7 @@ export default function CustomizedAccordions(props) {
               </Grid>
               <Grid item xs={6} >
                 <Typography variant="subtitle2">
-                    &#x20B9; {systemDesign.netCost}
+                    &#x20B9; {systemDesign.netCost && systemDesign.netCost.toFixed(2) || '0.00'}
                  </Typography>
               </Grid>
 
@@ -174,7 +174,7 @@ export default function CustomizedAccordions(props) {
               </Grid>
               <Grid item xs={6} >
                 <Typography variant="subtitle2">
-                    {(systemDesign.netCost * 0.30).toFixed(2) }
+                    {(systemDesign.netCost * 0.30) && (systemDesign.netCost * 0.30).toFixed(2) || '0.00' }
                  </Typography>
               </Grid>
 

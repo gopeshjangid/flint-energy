@@ -141,6 +141,9 @@ export default function Review(props) {
               label="PAN No"
               variant="outlined"
               fullWidth
+              inputProps={{
+                maxlength: 10
+              }}
               value={panNo}
               onChange={panHandler}
               autoComplete="family-name"
