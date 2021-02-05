@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "300px",
     textAlign: "center",
     padding: "20px",
+    [theme.breakpoints.down('xs')]: {
+      padding: "0px",
+      margin: '10px'
+    },
   },
   box: {
     border: "1px solid " + theme.palette.border,
@@ -64,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
+    [theme.breakpoints.down('xs')]: {
+      fontSize : '12px'
+    },
   },
   lastBox: {
     padding: "12px",
@@ -71,6 +78,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-around",
   },
+
+  priceTitle1 : {
+    [theme.breakpoints.down('xs')]: {
+      fontSize : '14px',
+      fontWeight : 800
+    },
+  },
+  priceTitle2 : {
+    [theme.breakpoints.down('xs')]: {
+      fontSize : '12px',
+      fontWeight : 400
+    },
+  }
 }));
 
 export default function CenteredGrid(props) {
@@ -206,9 +226,7 @@ export default function CenteredGrid(props) {
     setareaRequired(value);
     const actualSize = value*1000;
     let meterCharge = getMeterCharge(actualSize);
-    // const SYSTEM_COST = Number(localStorage.getItem("SYSTEM_COST"))
-    // const  SUBSIDY = Number(localStorage.getItem("SUBSIDY"))
-    // const STRUCTURE_COST =  Number(localStorage.getItem("STRUCTURE_COST"))
+   
     const  {SYSTEM_COST,SUBSIDY,  STRUCTURE_COST} =  getSystemInfo(actualSize);
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
@@ -260,22 +278,22 @@ export default function CenteredGrid(props) {
               justifyContent="space-around"
             >
               <Box className={classes.infoBox}>
-                <Typography variant="h5" component="h3">
+                <Typography variant="h5" component="h3" className={classes.priceTitle1}>
                   {areaRequired} Sq. Feet
                 </Typography>
-                <Typography component="h6">Rooftop Area</Typography>
+                <Typography component="h6" className={classes.priceTitle2}>Rooftop Area</Typography>
               </Box>
               <Box className={classes.infoBox}>
-                <Typography variant="h5" component="h3">
+                <Typography variant="h5" component="h3" className={classes.priceTitle1} >
                   &#x20B9; {systemCost}
                 </Typography>
-                <Typography component="h6">System Cost</Typography>
+                <Typography component="h6" className={classes.priceTitle2}>System Cost</Typography>
               </Box>
               <Box className={classes.lastBox}>
-                <Typography variant="h5" component="h3">
+                <Typography variant="h5" component="h3" className={classes.priceTitle1}>
                   &#x20B9; {monthlySaving}{" "}
                 </Typography>
-                <Typography component="h6">Monthly Saving</Typography>
+                <Typography component="h6" className={classes.priceTitle2}>Monthly Saving</Typography>
               </Box>
             </Box>
           </Grid>

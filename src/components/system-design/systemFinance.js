@@ -43,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
     "&:invalid": {
       border: "red solid 2px"
     }
+  },
+  priceTitle : {
+    [theme.breakpoints.down('xs')]: {
+      fontSize : '14px'
+    },
   }
 }));
 
@@ -77,7 +82,7 @@ export default function Review(props) {
       <Typography variant="h4" className={classes.title}>
         Choose your finance
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} justify="center">
         <Grid
           container
           spacing={2}
@@ -100,17 +105,17 @@ export default function Review(props) {
               m={3}
               p={4}
             >
-              <Box variant="h4" component="h4">
-                Total System Cost- &nbsp; &#x20B9; {netCost}
+              <Box variant="h4" component="h4" className={classes.priceTitle}>
+            Total System Cost {' '}- &nbsp; &#x20B9; {netCost}
               </Box>
-              <Box variant="h4" component="h4">
-                Down Payment* - &nbsp; &#x20B9; {(netCost * 0.3).toFixed(2)}
+              <Box variant="h4" component="h4" className={classes.priceTitle}>
+                Down Payment* &nbsp; {' '} - &nbsp; &#x20B9; {(netCost * 0.3).toFixed(2)}
               </Box>
-              <Box variant="h4" component="h4">
-                EMI for 12 Months- &nbsp; &#x20B9; {emiFor12}
+              <Box variant="h4" component="h4" className={classes.priceTitle}>
+                EMI for 12 Months {' '} - &nbsp; &#x20B9; {emiFor12}
               </Box>
-              <Box variant="h4" component="h4">
-                EMI for 18 Months- &nbsp; &#x20B9; {emiFor18}
+              <Box variant="h4" component="h4" className={classes.priceTitle}>
+                EMI for 18 Months {' '} - &nbsp; &#x20B9; {emiFor18}
               </Box>
             </Box>
           </Grid>

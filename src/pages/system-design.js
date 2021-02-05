@@ -10,7 +10,7 @@ import bannerBg from 'assets/images/banner-bg.png';
 const styles = {
   section: {
     '@media only screen and (min-width: 320px) and (max-width: 420px) ' : {
-      height : '1000px'
+      height : '1250px'
     },
     '@media only screen and (min-width: 430px) ' : {
       height : '890px'
