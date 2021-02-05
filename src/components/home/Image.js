@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Image from "next/image";
 const useStyles = makeStyles((theme) => ({
     root: {
         textAlign : 'center',
@@ -19,6 +18,6 @@ export default function CustomImage(props) {
     const classes = useStyles();
    
     return (
-        <Image src={src}  height={height} width={width} layout={"responsive"} />
+        <img src={src}   height={height} width={width} layout={"responsive"} />
       )
 }

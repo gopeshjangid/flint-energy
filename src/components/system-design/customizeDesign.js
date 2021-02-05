@@ -13,7 +13,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import Image from "next/image";
 import { Typography } from "@material-ui/core";
 import StandardImage from "../../assets/images/standard.png";
 import ElevationImage from "../../assets/images/elevation.png";
@@ -170,11 +169,11 @@ export default function CenteredGrid(props) {
 
   const getImage = (type) => {
     switch (type) {
-      case "Standard":
+      case "0":
         return StandardImage;
         break;
-      case "Elevated":
-      case "Customize":
+      case "1":
+      case "2":
         return ElevationImage;
         break;
       default:
@@ -243,7 +242,7 @@ export default function CenteredGrid(props) {
           <Grid container spacing={3} direction="column">
             <Box className={classes.sizeLogoBox} m={4}>
               {structure ? (
-                <Image src={getImage(structure)} height={250} width={320} />
+                <img  src={getImage(structure)} height={250} width={320} />
               ) : (
                 <Typography variant="h4" component="h4" align="center">
                   Select System Size
