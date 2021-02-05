@@ -135,6 +135,11 @@ export default function CenteredGrid(props) {
      localStorage.setItem("STRUCTURE_COST",info.STRUCTURE_COST)
   }
 
+  const getFormattedPrice = (price) =>{
+    const value = Number(price);
+    return value.toFixed(2);
+  }
+
   const getSystemInfo = (size ) =>{
     let sysInfo =  localStorage.getItem("systemInfo");
     sysInfo = sysInfo && JSON.parse(sysInfo) || [];
@@ -210,8 +215,8 @@ export default function CenteredGrid(props) {
     setsystemCost(cost);
     setmonthlySaving(Number(value * 720).toFixed(2));
     let downPayment = cost * 0.3;
-    setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
-    setemiFor18((((cost - downPayment) * 1.18) / 18).toFixed(2));
+    setemiFor12(getFormattedPrice((((cost - downPayment) * 1.12) / 12)));
+    setemiFor18(getFormattedPrice((((cost - downPayment) * 1.18) / 18)));
   }
 
   const onChangeHandler = (e) => {
@@ -223,11 +228,11 @@ export default function CenteredGrid(props) {
     setnetCost(SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
     let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
 
-    setsystemCost(cost);
-    setmonthlySaving(Number(e.target.value * 720).toFixed(2));
+    setsystemCost(getFormattedPrice(cost));
+    setmonthlySaving(getFormattedPrice(Number(e.target.value * 720)));
     let downPayment = cost * 0.3;
-    setemiFor12((((cost - downPayment) * 1.12) / 12).toFixed(2));
-    setemiFor18((((cost - downPayment) * 1.18) / 18).toFixed(2));
+    setemiFor12(getFormattedPrice((((cost - downPayment) * 1.12) / 12)));
+    setemiFor18(getFormattedPrice((((cost - downPayment) * 1.18) / 18)));
     if(localStorage){
       localStorage.setItem("SYSTEM_COST" ,SYSTEM_COST);
       localStorage.setItem("SUBSIDY" ,SUBSIDY);

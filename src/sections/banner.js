@@ -33,6 +33,11 @@ export default function Banner(props) {
     emiStarts: 0,
   });
 
+  const getFormattedPrice = (price) =>{
+    const value = Number(price);
+    return value.toFixed(2);
+  }
+
   const getClosestValue =(input) =>{
     const array = systemSizeLIst;
     var tempArray = array;
@@ -98,9 +103,9 @@ export default function Banner(props) {
         const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
         const downPayment = netCost * 0.3;
         setCardInfo({
-          monthlySaving: (suggestedSystemSize * 720).toFixed(2),
-          suggestedSystem: suggestedSystemSize.toFixed(2),
-          emiStarts: (((netCost - downPayment) * 1.18) / 18).toFixed(2),
+          monthlySaving: getFormattedPrice(suggestedSystemSize * 720),
+          suggestedSystem: getFormattedPrice(suggestedSystemSize),
+          emiStarts: getFormattedPrice(((netCost - downPayment) * 1.18) / 18),
         });
    }
   }, [bill]);
