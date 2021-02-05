@@ -27,7 +27,7 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
     // ----- make payload object according to format given for API------
     const { systemSize, structure, avgbill, solar } = obj;
     payload = {
-      system_size: parseInt(systemSize),
+      system_size: parseInt(systemSize*1000),
       structure_type: parseInt(structure),
       avg_bill: parseInt(avgbill),
     };
