@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles , makeStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
@@ -46,8 +46,18 @@ const AccordionDetails = withStyles((theme) => ({
   },
 }))(MuiAccordionDetails);
 
+const useStyles = makeStyles((theme) => ({
+  summaryTitle: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize : '.710rem'
+    },
+  },
+
+}));
+
 export default function CustomizedAccordions(props) {
   const [expanded, setExpanded] = React.useState('panel1');
+  const classes  = useStyles();
   const {personalDetails,financeDetails,systemDesign} = props.SystemSummary;
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -63,34 +73,34 @@ export default function CustomizedAccordions(props) {
           <Typography style={{textAlign : 'justify'}}>
           <Grid container spacing={2}>
             <Grid item xs={6} >
-              <Typography >
+              <Typography className={classes.summaryTitle}>
                 <b>Name :</b>
               </Typography>
               </Grid> <Grid item xs={6} >
-              <Typography>
+              <Typography className={classes.summaryTitle}>
                  {personalDetails.firstName} {' '} {personalDetails.lastName}
               </Typography>
             </Grid> 
             <Grid item xs={6} >
-              <Typography ><b>Address</b>:</Typography> 
+              <Typography className={classes.summaryTitle}><b>Address</b>:</Typography> 
             </Grid> 
             <Grid item xs={6} >
-              <Typography variant="p">
+              <Typography variant="p" className={classes.summaryTitle}>
               {personalDetails.address}, {' '} {personalDetails.district},{' '} <br/>{personalDetails.pincode},{' '} {personalDetails.state}
               </Typography>
               </Grid>
             <Grid item xs={6} >
-              <Typography><b>Electricity Provider</b>: </Typography>
+              <Typography className={classes.summaryTitle}><b>Electricity Provider</b>: </Typography>
             </Grid>
 
             <Grid item xs={6} >
-              <Typography> {personalDetails.electricityProvider}</Typography>
+              <Typography className={classes.summaryTitle}> {personalDetails.electricityProvider}</Typography>
               </Grid>
               <Grid item xs={6} >
-              <Typography><b>Email Address</b>:</Typography> 
+              <Typography className={classes.summaryTitle}><b>Email Address</b>:</Typography> 
             </Grid>
             <Grid item xs={6} >
-              <Typography noWrap={false} variant="p" style={{overflowWrap: 'break-word'}}>{personalDetails.email}</Typography>
+              <Typography className={classes.summaryTitle} noWrap={false} variant="p" style={{overflowWrap: 'break-word'}}>{personalDetails.email}</Typography>
               </Grid>
             </Grid>
           </Typography>
@@ -103,24 +113,24 @@ export default function CustomizedAccordions(props) {
         <AccordionDetails>
         <Grid container spacing={2} justify="flex-start">
             <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                  <b>Solar System Size</b>
                 </Typography>
                 </Grid>
 
                 <Grid item xs={6} >
-                <Typography >
+                <Typography  className={classes.summaryTitle}>
                   {systemDesign.systemSize}
                 </Typography>
                 </Grid>
 
                 <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                    <b>System Structure:</b>
                 </Typography>
                 </Grid>
                 <Grid item xs={6} >
-                <Typography >
+                <Typography className={classes.summaryTitle} >
                    {systemDesign.structure}
                 </Typography>
                 </Grid>
@@ -129,73 +139,73 @@ export default function CustomizedAccordions(props) {
       </Accordion>
       <Accordion square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography style={{textAlign : 'justify'}}>Payment Details</Typography>
+          <Typography  style={{textAlign : 'justify'}}>Payment Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
         <Grid container spacing={2}>
               <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                   <b>Solar System Size  </b> :
                  </Typography>
               </Grid>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography className={classes.summaryTitle} variant="subtitle2">
                     {systemDesign.systemSize}
                  </Typography>
               </Grid>
               
               <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                    <b>System Area Required   </b> :
                  </Typography>
               </Grid>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography className={classes.summaryTitle} variant="subtitle2">
                      {systemDesign.areaRequired} Square Feet
                  </Typography>
               </Grid>
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                     <b>Net Cost</b> :  
                  </Typography>
               </Grid>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography className={classes.summaryTitle} variant="subtitle2">
                     &#x20B9; {systemDesign.netCost && systemDesign.netCost.toFixed(2) || '0.00'}
                  </Typography>
               </Grid>
 
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                      <b>Down Payment for EMI</b> : 
                  </Typography>
               </Grid>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography className={classes.summaryTitle} variant="subtitle2">
                     {(systemDesign.netCost * 0.30) && (systemDesign.netCost * 0.30).toFixed(2) || '0.00' }
                  </Typography>
               </Grid>
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                      <b>EMI @ 12</b> :  
                  </Typography>
               </Grid>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography className={classes.summaryTitle} variant="subtitle2">
                     &#x20B9; {systemDesign.emiFor12}
                  </Typography>
               </Grid>
 
               <Grid item xs={6} >
-                <Typography variant="subtitle2" style={{textAlign : 'justify'}}>
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                      <b>EMI @ 18</b> :  
                  </Typography>
               </Grid>
               <Grid item xs={6} >
-                <Typography variant="subtitle2">
+                <Typography className={classes.summaryTitle} variant="subtitle2">
                    &#x20B9; {systemDesign.emiFor18}
                  </Typography>
               </Grid>
