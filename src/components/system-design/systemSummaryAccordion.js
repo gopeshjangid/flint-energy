@@ -132,7 +132,7 @@ export default function CustomizedAccordions(props) {
                 </Grid>
                 <Grid item xs={6} >
                 <Typography className={classes.summaryTitle} >
-                   {systemDesign.structure}
+                   {systemDesign.structure ==='0' ? "Standard" : (systemDesign.structure === '1' ? 'Elevated' : 'Customize')}
                 </Typography>
                 </Grid>
           </Grid>

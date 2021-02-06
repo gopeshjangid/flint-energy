@@ -310,6 +310,7 @@ const ContactForm = (props) => {
                         fullWidth
                         name="otp"
                         value={otp}
+                        inputProps={{maxlength :6}}
                         onChange={(e) => setOtp(e.target.value)}
                         label="6 Digit OTP"
                         type="tel"

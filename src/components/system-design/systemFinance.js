@@ -73,7 +73,6 @@ export default function Review(props) {
     }
    
   }
-console.log("=============dob" ,new Date(dob).getTime().toString())
   return (
     <React.Fragment>
       <Typography variant="h4" className={classes.title}>
