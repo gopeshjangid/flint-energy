@@ -9,11 +9,8 @@ import Select from "@material-ui/core/Select";
 import _ from "lodash";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import { DatePicker } from "@material-ui/pickers";
-import moment from "moment";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-
+import { MuiPickersUtilsProvider,DatePicker } from "material-ui-pickers";
+import MomentUtils from "@date-io/moment";
 const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(2),
@@ -55,7 +52,7 @@ export default function Review(props) {
   const classes = useStyles();
   const [payment, setPayment] = useState(props.financeDetails.payment);
   const [panNo, setPanNo] = useState(props.financeDetails.panNo);
-  const [dob, setDob] = useState(moment(new Date()).format("YYYY-MM-DD"));
+  const [dob, setDob] = useState(new Date());
   const [emiFor12, setemiFor12] = useState(props.systemFinanceDetails.emiFor12);
   const [emiFor18, setemiFor18] = useState(props.systemFinanceDetails.emiFor18);
   const [netCost, setnetCost] = useState(props.systemFinanceDetails.netCost);
@@ -76,7 +73,7 @@ export default function Review(props) {
     }
    
   }
-
+console.log("=============dob" ,new Date(dob).getTime().toString())
   return (
     <React.Fragment>
       <Typography variant="h4" className={classes.title}>
@@ -155,19 +152,24 @@ export default function Review(props) {
             />
           </Grid>
           <Grid item xs={12} p={4}>
-            <TextField
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <DatePicker
               id="date"
+              keyboard
               label="Birthday"
-              type="date"
               value={dob}
-              format="yyyy/MM/dd"
-              variant="outlined"
+              placeholder="YYYY/MM/DD"
+              format={"YYYY/MM/DD"}
+              variant={"outlined"}
               fullWidth
-              onChange={(e) => setDob(e.target.value)}
+              clearable
+              maxDate={new Date()}
+              onChange={(date) =>setDob(date)}
               InputLabelProps={{
                 shrink: true,
               }}
             />
+            </MuiPickersUtilsProvider>
           </Grid>
         </Grid>
       </Grid>

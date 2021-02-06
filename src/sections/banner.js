@@ -47,7 +47,7 @@ export default function Banner(props) {
     if(index >= 0) {
       return array[index] && (array[index]/1000); 
     } else {
-      return null; // no answer
+      return (Math.max.apply(null, tempArray))/1000; // no answer
     }
   }
 
@@ -91,11 +91,11 @@ export default function Banner(props) {
         const meterCharge =
           suggestedSystemSize > 6000
             ? city.city.toLowerCase() === "torrentahmedabad" ||
-              city.city.toLowerCase() === "torrentsurat"
+              city.city.toLowerCase() === "torrent power surat"
               ? 16835.74
               : 15166.51
             : city.city.toLowerCase() === "torrentahmedabad" ||
-              city.city.toLowerCase() === "torrentsurat"
+              city.city.toLowerCase() === "torrent power surat"
             ? 5396.86
             : 4045.08;
         suggestedSystemSize = getClosestValue(suggestedSystemSize);

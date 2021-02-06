@@ -5,6 +5,7 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import moment from "moment";
 const Accordion = withStyles({
   root: {
     border: '1px solid rgba(0, 0, 0, .125)',
@@ -145,26 +146,37 @@ export default function CustomizedAccordions(props) {
         <Grid container spacing={2}>
               <Grid item xs={6} >
                 <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
-                  <b>Solar System Size  </b> :
+                  <b>Payment Mode  </b> :
                  </Typography>
               </Grid>
               <Grid item xs={6} >
                 <Typography className={classes.summaryTitle} variant="subtitle2">
-                    {systemDesign.systemSize}
-                 </Typography>
-              </Grid>
-              
-              <Grid item xs={6} >
-                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
-                   <b>System Area Required   </b> :
-                 </Typography>
-              </Grid>
-              <Grid item xs={6} >
-                <Typography className={classes.summaryTitle} variant="subtitle2">
-                     {systemDesign.areaRequired} Square Feet
+                    {financeDetails.payment === 'easyemi' ? 'Easy EMI(s)'  : 'Direct Online Payments'}
                  </Typography>
               </Grid>
 
+              <Grid item xs={6} >
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
+                  <b>PAN No.  </b> :
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography className={classes.summaryTitle} variant="subtitle2">
+                    {financeDetails.panNo}
+                 </Typography>
+              </Grid>
+
+              <Grid item xs={6} >
+                <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
+                  <b>Date Of Birth  </b> :
+                 </Typography>
+              </Grid>
+              <Grid item xs={6} >
+                <Typography className={classes.summaryTitle} variant="subtitle2">
+                    {financeDetails.dob && moment(financeDetails.dob).format("YYYY/MM/DD") ||''}
+                 </Typography>
+              </Grid>
+              
               <Grid item xs={6} >
                 <Typography className={classes.summaryTitle} variant="subtitle2" style={{textAlign : 'justify'}}>
                     <b>Net Cost</b> :  

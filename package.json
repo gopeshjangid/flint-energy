@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
     "serve": "next start",
     "export": "next export"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.10.6",
+    "@date-io/moment": "^1.1.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
@@ -18,6 +19,7 @@
     "date-fns": "^2.16.1",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.20",
+    "material-ui-pickers": "^2.2.4",
     "moment": "^2.29.1",
     "next": "^10.0.6",
     "next-compose-plugins": "^2.2.0",

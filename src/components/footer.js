@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Box, Flex, Text, Container } from 'theme-ui';
-import { Link } from 'components/link';
+import Link from 'next/link';
 import { rgba } from 'polished';
 
 const navItems = [
@@ -11,8 +11,18 @@ const navItems = [
   },
   {
     id: 5,
-    link: '#!',
+    link: '/#about-us',
     title: 'About Us',
+  },
+  {
+    id: 6,
+    link: '/terms-and-condition',
+    title: 'Terms And Conditions',
+  },
+  {
+    id: 7,
+    link: '/privacy-policy',
+    title: 'Privacy Policy',
   },
 ];
 
@@ -23,14 +33,14 @@ export default function Footer() {
         <Flex sx={styles.content}>
           <Flex sx={styles.copyright}>
             <Text as="span">
-              All right reserved  &amp; Flintech
+              All right reserved.
             </Text>
           </Flex>
 
           <Flex as="ul" sx={styles.nav}>
             {navItems?.map((item) => (
               <li key={item.id}>
-                <Link path={item.link}>{item.title}</Link>
+                <Link href={item.link}>{item.title}</Link>
               </li>
             ))}
           </Flex>

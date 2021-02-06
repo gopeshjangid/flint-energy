@@ -1,14 +1,23 @@
 import React from 'react';
-
+import { ThemeProvider ,Box } from "theme-ui";
 import Layout from  "../components/layout";
+import theme from "theme";
+const styles = {
+   container : {
+     maxWidth : '1100px',
+     margin : '0 auto',
+     padding: '100px 50px'
+   }
+}
 class Terms extends React.Component {
 
   render() {
     return (
-        
+     <ThemeProvider theme={theme}>
         <Layout >
+        <Box sx={styles.container}>
         <h2 class="mt-5">Terms and conditions</h2>
-        <div class="container mt-4" style={{fontSize: '19px', textAlign: 'justify'}}>
+        <div class="container mt-4" style={{textAlign: 'justify'}}>
 
         The acceptance of all orders for execution by us shall be subject to
         the following terms and conditions unless otherwise specifically
@@ -271,7 +280,10 @@ class Terms extends React.Component {
             </li>
             </ul>
          </div>
-         </Layout>)
+         </Box>
+         </Layout>
+         </ThemeProvider>
+         )
       
   }
 }

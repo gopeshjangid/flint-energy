@@ -106,7 +106,7 @@ export default function CenteredGrid(props) {
   const [monthlySaving, setmonthlySaving] = useState(0);
   const [emiFor12, setemiFor12] = useState(0);
   const [emiFor18, setemiFor18] = useState(0);
-  
+  const [provider, setProvider] = useState("")
   function getClosestValue(input, array){
     var tempArray = array;
     var index = tempArray.sort().findIndex((item) => {
@@ -115,7 +115,7 @@ export default function CenteredGrid(props) {
     if(index >= 0) {
       return array[index]; 
     } else {
-      return null; // no answer
+      return (Math.max.apply(null, tempArray))/1000; // no answer
     }
   }
   
@@ -135,6 +135,14 @@ export default function CenteredGrid(props) {
       router.push("/");
     }
   }, []);
+
+  useEffect(()=>{
+    if(props.personalDetails.electricityProvider){
+      setProvider(props.personalDetails.electricityProvider);
+      setCalculation(localStorage.getItem("systemSize"));
+    }
+    
+  },[props.personalDetails])
 
   const saveSystemInfo = (systemList ) =>{
     const actualSize = localStorage.getItem("systemSize")*1000;
@@ -205,15 +213,15 @@ export default function CenteredGrid(props) {
   };
 
   const getMeterCharge = (size) =>{
-    const city = localStorage.getItem("city");
+    const city = provider ||localStorage.getItem("city");
     const meterCharge =
     size > 6000
       ? city && city.toLowerCase() === "torrentahmedabad" ||
-       city && city.toLowerCase() === "torrentsurat"
+       city && city.toLowerCase() === "torrent power surat"
         ? 16835.74
         : 15166.51
       : city && city.toLowerCase() === "torrentahmedabad" ||
-        city && city.toLowerCase() === "torrentsurat"
+        city && city.toLowerCase() === "torrent power surat"
       ? 5396.86
       : 4045.08;
       return meterCharge;
@@ -237,6 +245,7 @@ export default function CenteredGrid(props) {
   const onChangeHandler = (e) => {
     setSystemSize(e.target.value);
     setareaRequired(e.target.value);
+    localStorage.setItem("systemSize" ,e.target.value);
     const actualSize = e.target.value*1000;
     let meterCharge = getMeterCharge(actualSize);
     let { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = getSystemInfo(e.target.value*1000);
@@ -276,7 +285,7 @@ export default function CenteredGrid(props) {
             >
               <Box className={classes.infoBox}>
                 <Typography variant="h5" component="h3" className={classes.priceTitle1}>
-                  {areaRequired} Sq. Feet
+                  {areaRequired && Number(areaRequired)*100} Sq. Feet
                 </Typography>
                 <Typography component="h6" className={classes.priceTitle2}>Rooftop Area</Typography>
               </Box>

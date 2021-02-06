@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -275,6 +275,64 @@ export default function CustomizedSteppers() {
   });
   const sessionId = cookie.getJSON("sessionId");
   const [FieldError,setFieldError] = useState('');
+
+  
+  const getMeterCharge = (size) =>{
+    const city = personalDetails.electricityProvider ||localStorage.getItem("city");
+    const meterCharge =
+    size > 6000
+      ? city && city.toLowerCase() === "torrent power ahmedabad" ||
+       city && city.toLowerCase() === "torrent power surat"
+        ? 16835.74
+        : 15166.51
+      : city && city.toLowerCase() === "torrent power ahmedabad" ||
+        city && city.toLowerCase() === "torrent power surat"
+      ? 5396.86
+      : 4045.08;
+      return meterCharge;
+  }
+
+  const getFormattedPrice = (price) =>{
+    const value = Number(price);
+    return value.toFixed(2);
+  }
+
+  const getSystemInfo = (size ) =>{
+    let sysInfo =  localStorage.getItem("systemInfo");
+    sysInfo = sysInfo && JSON.parse(sysInfo) || [];
+     sysInfo  = sysInfo.filter(item => item.size === size)
+     return  { 
+         SYSTEM_COST : sysInfo.length && sysInfo[0].cost || 0,
+          SUBSIDY: sysInfo.length && sysInfo[0].subsidy || 0,
+           STRUCTURE_COST: sysInfo.length && sysInfo[0].struct || 0
+     }
+  }
+
+  const setCalculation = async (value)=>{
+    const actualSize = value*1000;
+    let meterCharge = getMeterCharge(actualSize);
+   
+    const  {SYSTEM_COST,SUBSIDY,  STRUCTURE_COST} =  getSystemInfo(actualSize);
+    const netCost = (SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge);
+    
+    let cost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
+    let downPayment = cost * 0.3;
+    const setemiFor12 = getFormattedPrice((((cost - downPayment) * 1.12) / 12));
+    const setemiFor18 = getFormattedPrice((((cost - downPayment) * 1.18) / 18));
+    setSystemDesign({
+      ...systemDesign,
+      netCost : netCost,
+      emiFor12: setemiFor12,
+      emiFor18 :setemiFor18,
+    })
+  }
+
+  useEffect(() => {
+    setCalculation(localStorage.getItem("systemSize"));
+    return () => {
+    }
+  }, [personalDetails.electricityProvider])
+
   const handleNext = async (e) => {
     let res;
     toast.info(messages.FORM_SUBMITING);
@@ -422,6 +480,7 @@ export default function CustomizedSteppers() {
                 {activeStep === 0 && (
                   <CustomDesign
                     systemDesign={systemDesign}
+                    personalDetails={personalDetails}
                     handler={(obj) => setSystemDesign(obj)}
                   />
                 )}
@@ -435,6 +494,7 @@ export default function CustomizedSteppers() {
                   <SystemFinance
                     systemFinanceDetails={systemDesign}
                     financeDetails={financeDetails}
+                   
                     handler={(obj) => setFinanceDetails(obj)}
                   />
                 )}

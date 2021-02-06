@@ -1,14 +1,23 @@
 import React from 'react';
-
+import { ThemeProvider ,Box } from "theme-ui";
 import Layout from  "../components/layout";
+import theme from "theme";
+const styles = {
+   container : {
+     maxWidth : '1100px',
+     margin : '0 auto',
+     padding: '100px 50px'
+   }
+}
 class Privacy extends React.Component {
 
   render() {
     return (
-       
+        <ThemeProvider theme={theme}>
         <Layout >
+      <Box sx={styles.container}>
         <h2 class="mt-5">Privacy Policy</h2>
-    <div class="container mt-4" >
+        <div class="container mt-4" >
         All Flintech® products are owned and operated by Flint Energy (“Flintech”) and will be referred to as "we", "our" and "us" in this Privacy Policy. By using Flintech® products which
         includes website you agree to the Internet Privacy Policy of website ("the Website"), and privacy
         policy of all Flintech® products.
@@ -209,8 +218,9 @@ class Privacy extends React.Component {
         Flint Energy retains rights to modify the privacy policy as need arise. You will be
         informed about the changes through email.
        </div>
-        </Layout>
-        
+       </Box>
+       </Layout>
+      </ThemeProvider>
     );
   }
 }
