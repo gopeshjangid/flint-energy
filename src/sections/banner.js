@@ -306,6 +306,13 @@ const styles = {
       margin: "0 auto",
       marginTop: "8% !important",
     },
+    "@media only screen and (min-height: 2400px) and (max-height: 2401px), (min-width: 1080px) and (max-width: 1080px) ": {
+      maxWidth: "80%",
+      mt: 70,
+      padding: "30px 50px 65px",
+      margin: "0 auto",
+      marginTop: "12% !important",
+    },
     "@media only screen and (min-width: 320px) and (max-width: 420px) and (max-height: 760px)": {
       maxWidth: "100%",
       marginTop: "30% !important",
