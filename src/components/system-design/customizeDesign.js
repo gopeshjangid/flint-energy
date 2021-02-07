@@ -93,6 +93,11 @@ const useStyles = makeStyles((theme) => ({
       width : '280px',
       height : '220px'
     }
+  },
+  mainContainer : {
+    [theme.breakpoints.down('xs')]: {
+      flexDirection : 'column-reverse'
+    }
   }
 }));
 
@@ -272,7 +277,7 @@ export default function CenteredGrid(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className={classes.mainContainer}>
         <Grid item xs={12} sm={7} md={7}>
           <Grid container spacing={3} direction="column">
             <Box className={classes.sizeLogoBox} m={4}>
@@ -297,7 +302,7 @@ export default function CenteredGrid(props) {
               </Box>
               <Box className={classes.infoBox}>
                 <Typography variant="h5" component="h3" className={classes.priceTitle1} >
-                  &#x20B9; {systemCost}
+                  &#x20B9; {Number(systemCost).toFixed(2)}
                 </Typography>
                 <Typography component="h6" className={classes.priceTitle2}>System Cost</Typography>
               </Box>

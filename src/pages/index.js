@@ -12,7 +12,7 @@ import Blog from "sections/blog";
 import Subscription from "sections/subscription";
 
 export default function IndexPage() {
-  const [bill, setBill] = useState(3500);
+  const [bill, setBill] = useState(0);
   
   return (
     <ThemeProvider theme={theme}>

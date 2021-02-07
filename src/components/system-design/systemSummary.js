@@ -3,10 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Accordion from "./systemSummaryAccordion";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import {Button} from  "theme-ui";
 import CardMedia from '@material-ui/core/CardMedia';
 
 import Modal from '@material-ui/core/Modal';
@@ -76,10 +75,6 @@ export default function Review(props) {
   useEffect(() => {
     if(props.isSubmitted){
         setOpen(true);
-        setTimeout(function(){ 
-          setOpen(false);
-          router.push("/");
-      }, 3000)
     }
    
   },[props.isSubmitted]);
@@ -96,6 +91,11 @@ export default function Review(props) {
       signature,
     });
   }, [paymentId, invoiceId, invoiceStatus, invoiceReceipt, signature]);
+
+  const okHandler = () =>{
+    setOpen(false);
+    router.push("/");
+  }
 
   return (
     <React.Fragment>
@@ -120,7 +120,8 @@ export default function Review(props) {
                           image="/thankyou.jpg"
                           title="Contemplative Reptile"
                         />
-                          </div>
+                        <div style={{textAlign : 'center'}}><Button onClick={okHandler}>Ok</Button></div>
+                      </div>
        </Modal>
       <Typography variant="h6" gutterBottom className={classes.title}>
         System Summary

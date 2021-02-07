@@ -309,6 +309,14 @@ const styles = {
     "@media only screen and (min-width: 320px) and (max-width: 420px) and (max-height: 760px)": {
       maxWidth: "100%",
       marginTop: "30% !important",
+      padding: "30px 2px 5px",
+    },
+    "@media only screen and (min-height: 620px) and (max-height: 860px) and (min-width: 375px) and (max-width: 376px) ": {
+      maxWidth: "100%",
+      mt: 70,
+      padding: "30px 2px 5px",
+      margin: "0 auto",
+      marginTop: "28% !important",
     },
   },
   heroTitle: {

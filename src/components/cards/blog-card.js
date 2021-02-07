@@ -2,7 +2,6 @@
 import { jsx, Box, Flex, Image, Heading, Text } from 'theme-ui';
 import { Link } from 'components/link';
 import { rgba } from 'polished';
-import chat from 'assets/images/icons/chat.png';
 
 const BlogPost = ({ post }) => {
   return (
@@ -14,6 +13,9 @@ const BlogPost = ({ post }) => {
         <Heading as="h4">
           <Link path={post.link}>{post?.title}</Link>
         </Heading>
+        <Text as="span" sx={styles.commentCount}>
+            {post.data}
+          </Text>
       </Box>
     </Box>
   );

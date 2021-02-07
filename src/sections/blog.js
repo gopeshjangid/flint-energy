@@ -15,21 +15,24 @@ const data = [
     thumb: thumb1,
     commentCount: 22,
     link: "#",
-    title: `End to end solution provider`,
+    title: `End to End Solution Provider`,
+    data: "We help you to monitor your process, starting from order booking to installation through our platform. That makes your experience smooth, transparent and hassle free."
   },
   {
     id: 2,
     thumb: thumb2,
     commentCount: 15,
     link: "#!",
-    title: `Promoter of renewable adoption`,
+    title: `Renewable Energy Promoter`,
+    data: "We believe renewable energy usage is must necessary towards our sustainable future. This will help us to deal with issues like global warming, environment pollution and fossil-resource’s depletion. Flint Energy is stern headed to achieve our country’s set targets towards the adoption of  renewable energy."
   },
   {
     id: 3,
     thumb: thumb3,
     commentCount: 18,
     link: "#!",
-    title: `Single Market Enabler`,
+    title: `Single Market-Place Enabler`,
+    data: "We bring all stakeholders ex: installer, financer, epc etc on a single platform to make the process seamless. In this way it makes the communication fast and expedite the process."
   },
 ];
 

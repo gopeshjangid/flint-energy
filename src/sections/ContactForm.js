@@ -170,7 +170,6 @@ const ContactForm = (props) => {
         otp: otp,
       };
       const res = await verifyOtp(obj);
-      console.log("res" ,res)
       if (res["all_ok"]) {
         setMessage({
           message: messages.OTP_VERIFIED,
@@ -199,6 +198,7 @@ const ContactForm = (props) => {
       console.log(err);
     }
   };
+
   return (
     <Box id="verification" as="section" sx={styles.section}>
       <Alert {...message} />
@@ -272,7 +272,7 @@ const ContactForm = (props) => {
                           variant="outlined"
                           required
                           fullWidth
-                          type="tel"
+                          type="number"
                           value={mobile}
                           onChange={(e) =>
                             e.target.value.length <= 10
@@ -297,7 +297,7 @@ const ContactForm = (props) => {
                             value="yes"
                           />
                           <Text sx={styles.checkboxLabel}>
-                            <NLink href="/privacy-policy"> have read Flint Energy Privacy Policy</NLink>
+                            <NLink href="/privacy-policy"><a target="_blank"> have read Flint Energy Privacy Policy</a></NLink>
                           </Text>
                         </Label>
                       </Grid>
@@ -311,8 +311,8 @@ const ContactForm = (props) => {
                         fullWidth
                         name="otp"
                         value={otp}
-                        inputProps={{maxlength :6}}
-                        onChange={(e) => setOtp(e.target.value)}
+                        inputProps={{maxlength :6 ,pattern: "[0-9]*"}}
+                        onChange={(e) => !isNaN(Number(e.target.value)) && setOtp(e.target.value)}
                         label="6 Digit OTP"
                         type="tel"
                         id="otp"
@@ -335,7 +335,7 @@ const ContactForm = (props) => {
                   }
                   className={classes.submit}
                   disabled={
-                    !(
+                    !bill || !(
                       (!isOtpSent && isValidLeadForm()) ||
                       (isOtpSent && isValidOtp())
                     )
