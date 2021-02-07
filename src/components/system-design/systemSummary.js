@@ -120,7 +120,7 @@ export default function Review(props) {
                           image="/thankyou.jpg"
                           title="Contemplative Reptile"
                         />
-                        <div style={{textAlign : 'center'}}><Button onClick={okHandler}>Ok</Button></div>
+                        <div style={{ textAlign : 'center', marginTop : '20px'}}><Button onClick={okHandler}>Ok</Button></div>
                       </div>
        </Modal>
       <Typography variant="h6" gutterBottom className={classes.title}>
