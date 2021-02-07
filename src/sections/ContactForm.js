@@ -170,6 +170,7 @@ const ContactForm = (props) => {
         otp: otp,
       };
       const res = await verifyOtp(obj);
+      console.log("res" ,res)
       if (res["all_ok"]) {
         setMessage({
           message: messages.OTP_VERIFIED,
@@ -188,7 +189,8 @@ const ContactForm = (props) => {
         setMessage({
           message: res["error_msg"],
           severity: "error",
-          open: true,
+          open: !message.open,
+          force : !message.force || true
         });
       }
       // console.log(cookie.getJSON('sessionId'))
@@ -197,7 +199,6 @@ const ContactForm = (props) => {
       console.log(err);
     }
   };
-
   return (
     <Box id="verification" as="section" sx={styles.section}>
       <Alert {...message} />

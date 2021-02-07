@@ -102,6 +102,9 @@ export default function Banner(props) {
         const { SYSTEM_COST, SUBSIDY, STRUCTURE_COST } = getSystemInfo(suggestedSystemSize *1000);
         const netCost = SYSTEM_COST - SUBSIDY + STRUCTURE_COST + meterCharge;
         const downPayment = netCost * 0.3;
+        if(suggestedSystemSize){
+          localStorage.setItem("systemSize" ,getFormattedPrice(suggestedSystemSize));
+        }
         setCardInfo({
           monthlySaving: getFormattedPrice(suggestedSystemSize * 720),
           suggestedSystem: getFormattedPrice(suggestedSystemSize),
