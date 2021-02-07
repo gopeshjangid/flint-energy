@@ -41,6 +41,7 @@ export const postSystemDetails = async (activeStep, obj, sessionId) => {
     } = obj;
     payload = { first_name, last_name,consent:true, electricity_provider, ...rest };
   } else if (activeStep === 3) {
+    activeStep = 2;
     const { payment, panNo: pan_number } = obj;
     payload = { payment_mode: payment === "easyemi", pan_number };
     payload["dob"] = obj.dob && moment(obj.dob).format("YYYY-MM-DD") || '';
