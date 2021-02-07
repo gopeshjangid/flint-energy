@@ -6,10 +6,10 @@ import Sticky from 'react-stickynode';
 import Logo from 'components/logo';
 import { NavLink } from 'components/link';
 import menuItems from './header.data';
-
+import {useRouter} from  "next/router";
 export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
-
+  const router = useRouter();
   const toggleMobileMenu = () => {
     setMobileMenu(!mobileMenu);
   };
@@ -21,6 +21,10 @@ export default function Header() {
   const closeMobileMenu = () => {
     setMobileMenu(false);
   };
+
+  const onLogin = () =>{
+    router.push("https://selfcare.flintech.co")
+  }
 
   return (
     <Box sx={styles.headerWrapper}>
@@ -53,10 +57,11 @@ export default function Header() {
                       />
                     </li>
                   ))}
-                </Box>
-                <Button sx={styles.joinNow} variant="primaryMd">
+                  <li> <Button sx={styles.joinNow} onClick={onLogin} variant="primaryMd">
                   Login
-                </Button>
+                </Button></li>
+                </Box>
+               
               </Flex>
 
               {mobileMenu ? (
@@ -93,6 +98,7 @@ const styles = {
     left: 0,
     right: 0,
     py: [20],
+    backgroundColor: '#fff',
     transition: 'all 0.3s ease-in-out 0s',
     '&.is-mobile-menu': {
       backgroundColor: '#fff',
@@ -141,6 +147,7 @@ const styles = {
     display: ['flex'],
     listStyle: 'none',
     marginLeft: 'auto',
+    alignItems : 'center',
     p: 0,
     '.nav-item': {
       cursor: 'pointer',

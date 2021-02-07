@@ -14,10 +14,6 @@ const BlogPost = ({ post }) => {
         <Heading as="h4">
           <Link path={post.link}>{post?.title}</Link>
         </Heading>
-        <Text as="span" sx={styles.commentCount}>
-          <Image loading="lazy" src={chat} alt="chat icon" />
-          {post?.commentCount} Comments
-        </Text>
       </Box>
     </Box>
   );

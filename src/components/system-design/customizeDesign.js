@@ -87,6 +87,12 @@ const useStyles = makeStyles((theme) => ({
       fontSize : '12px',
       fontWeight : 400
     },
+  },
+  systemImage : {
+    [theme.breakpoints.down('xs')]: {
+      width : '280px',
+      height : '220px'
+    }
   }
 }));
 
@@ -271,7 +277,7 @@ export default function CenteredGrid(props) {
           <Grid container spacing={3} direction="column">
             <Box className={classes.sizeLogoBox} m={4}>
               {structure ? (
-                <img  src={getImage(structure)} height={250} width={320} />
+                <img className={classes.systemImage}  src={getImage(structure)} height={250} width={320} />
               ) : (
                 <Typography variant="h4" component="h4" align="center">
                   Select System Size

@@ -115,7 +115,7 @@ export default function Forms(props) {
                 className={classes.select}
                 input={<BootstrapInput />}
               >
-                <option value="Gujarat">Gujrat</option>
+                <option value="Gujarat">Gujarat</option>
               </Select>
             </FormControl>
           </Grid>

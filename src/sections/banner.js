@@ -149,7 +149,7 @@ export default function Banner(props) {
               />
               <Box sx={styles.cityWrapper}>
                 <Text as="h2" sx={styles.city}>
-                  The Location: {city.city || "Select City"}
+                  {city.city || "Select City"}
                 </Text>
               </Box>
               <Box sx={styles.cityWrapper}>
@@ -175,7 +175,7 @@ export default function Banner(props) {
                         isNaN(cardInfo.suggestedSystem)
                           ? 0
                           : cardInfo.suggestedSystem
-                      } KWP`,
+                      } kWp`,
                     }}
                   />
                 </Card>
@@ -242,6 +242,7 @@ const styles = {
   contentWrapper: {
     display: "flex",
     alignItems: "center",
+    justifyContent : 'center',
     minHeight: [null, null, null, null, "100vh", "100vh"],
     paddingBottom: "50px",
     textAlign: "center",
@@ -253,6 +254,7 @@ const styles = {
     "@media only screen and (min-width: 320px) and (max-width: 420px)": {
       flexDirection: "column",
       justifyContent: "space-around",
+      padding: '5px'
     },
     gridTemplateColumns: [
       "repeat(2,1fr)",
@@ -297,12 +299,12 @@ const styles = {
     borderRadius: 5,
     m: ["110px 0 0", null, null, "110px auto 0", "0px 0 0", null, 0],
     margin: "0 auto",
-    "@media only screen and (min-height: 720px) and (max-height: 760px), (min-width: 1501px) and (max-width: 1560px) ": {
+    "@media only screen and (min-height: 620px) and (max-height: 760px), (min-width: 1024px) and (max-width: 3060px) ": {
       maxWidth: "80%",
       mt: 70,
       padding: "30px 50px 65px",
       margin: "0 auto",
-      marginTop: "0% !important",
+      marginTop: "8% !important",
     },
     "@media only screen and (min-width: 320px) and (max-width: 420px) and (max-height: 760px)": {
       maxWidth: "100%",

@@ -88,6 +88,7 @@ export default function Review(props) {
           sm={6}
           style={{
             paddingTop: "10px",
+            lineHeight : '0px'
           }}
         >
           <Grid item xs={12}>

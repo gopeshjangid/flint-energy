@@ -80,7 +80,7 @@ const Blog = () => {
   return (
     <Box id="about-us" as="section" sx={styles.section}>
       <Container>
-        <SectionHeading sx={styles.heading} slogan="Blog Post" title="We Are" />
+        <SectionHeading sx={styles.heading}  title="We Are" />
         <Slider sx={styles.blogWrapper} {...settings}>
           {data?.map((post) => (
             <BlogPost key={post.id} post={post} />

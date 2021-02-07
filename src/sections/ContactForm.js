@@ -37,7 +37,7 @@ import messages from "../../messages";
 import Alert from "../components/common/Alert";
 import cookie from "js-cookie";
 import AutomaticPlayer from "./video.js";
-
+import NLink from  "next/link";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -297,7 +297,7 @@ const ContactForm = (props) => {
                             value="yes"
                           />
                           <Text sx={styles.checkboxLabel}>
-                            have read Flint Energy Privacy Policy
+                            <NLink href="/privacy-policy"> have read Flint Energy Privacy Policy</NLink>
                           </Text>
                         </Label>
                       </Grid>
@@ -371,8 +371,12 @@ const styles = {
     pt: [50, 50, 50, 70, 60, 80],
     pb: [30, 40, 50, 60, 50, 80],
     checkboxLabel: {
+      '& a' : {
+        color : (theme) =>theme.color
+      },
       paddingTop: "5px",
     },
+    
   },
   clients: {
     display: "flex",

@@ -10,7 +10,7 @@ const Feature = ({ data: feature, type }) => {
         <Image loading="lazy" src={feature.icon} alt={feature.title} />
       )}
       <Heading as="h3">{feature.title}</Heading>
-      <Text style={{ fontWeight: "bold", marginLeft: "30px" }} as={type || "p"}>
+      <Text style={{ fontWeight: "bold", marginLeft: "10px",textAlign : 'center' }} as={feature.type || type || "p"}>
         {feature.description}
       </Text>
     </Box>
@@ -32,6 +32,14 @@ const styles = {
       color: rgba("#343D48", 0.75),
       fontSize: [null, null, null, null, 14, 15],
       lineHeight: 1.47,
+    },
+    "@media only screen and (min-width: 320px) and (max-width: 420px) and (max-height: 760px)": {
+      h3: { 
+           fontSize : '15px'
+      },
+      p: {
+           fontSize : '13px'
+      }
     },
   },
 };
