@@ -42,9 +42,13 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   priceTitle : {
+    [theme.breakpoints.down('sm')]: {
+      fontSize : '15px'
+    },
     [theme.breakpoints.down('xs')]: {
       fontSize : '14px'
     },
+   
   }
 }));
 
@@ -102,7 +106,7 @@ export default function Review(props) {
               m={3}
               p={4}
             >
-              <Box variant="h4" component="h4" className={classes.priceTitle}>
+              <Box variant="h4" component="h4" style={{lineHeight: 'normal'}} className={classes.priceTitle}>
             Total System Cost {' '}- &nbsp; &#x20B9; {netCost}
               </Box>
               <Box variant="h4" component="h4" className={classes.priceTitle}>
